@@ -3,7 +3,6 @@
   <groupId>EECS3311-W</groupId>
   <artifactId>EECS3311-W</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
