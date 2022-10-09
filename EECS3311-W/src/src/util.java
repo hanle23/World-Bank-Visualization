@@ -31,8 +31,8 @@ public class util {
 	
 	public static void main(String[] args) throws Exception {
 		HashMap<String, String> test = jsonToDict("loginCredentials/credentials.json");
-		for (String i : test.keySet()) {
-			System.out.println(i + " value: " + test.get(i));
+		if (test.containsKey("admin")) {
+			System.out.println("Success");
 		}
 		
 

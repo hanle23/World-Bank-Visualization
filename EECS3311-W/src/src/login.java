@@ -1,6 +1,8 @@
 package src;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.HashMap;
+
 import javax.swing.*;
 
 public class login extends JFrame implements ActionListener {
@@ -10,7 +12,9 @@ public class login extends JFrame implements ActionListener {
 	JTextField userName_text;
 	JPasswordField password_text;
 	JButton submit, cancel;
+	private boolean isAuthenticated;
 	public login() {
+		this.isAuthenticated = false;
       // Username Label
 		user_label = new JLabel();
 		user_label.setText("User Name :");
@@ -37,17 +41,33 @@ public class login extends JFrame implements ActionListener {
 		setSize(450,350);
 		setVisible(true);
 	}
-	public static void main(String[] args) {
-		new login();
-	}
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		String userName = userName_text.getText();
-		String password = password_text.getText();
-		if (userName.trim().equals("admin") && password.trim().equals("admin")) {
-			message.setText(" Hello " + userName + "");
-		} else {
-			message.setText(" Invalid user.. ");
+		String userName = userName_text.getText().trim();
+		String password = password_text.getText().trim();
+		HashMap<String, String> credentials = null;
+		try {
+			credentials = util.jsonToDict("loginCredentials/credentials.json");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (credentials.containsKey(userName)) {
+				if (credentials.get(userName).equals(password)) {
+					message.setText(" Hello " + userName + "");
+					this.isAuthenticated = true;
+					
+				} else {
+					message.setText("Invalid username/password");
+				}
+			} else {
+				message.setText("Invalid username/password");
+			}
 		}
 	}
+	
+	public boolean isAuthenticated() {
+		return this.isAuthenticated;
+	}
+
 }
