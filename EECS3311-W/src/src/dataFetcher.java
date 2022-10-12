@@ -38,6 +38,6 @@ import com.google.gson.JsonObject;
 		return this.country;
 	}
 	
-	abstract public JsonObject getData(String country, String dataIndicator, int startDate, int endDate);
+	abstract public JsonArray getData(String dataIndicator);
 	
 }
