@@ -12,6 +12,6 @@ public class Adapter extends dataFetcher{
 	private adapteeDataFetcher adaptee = new adapteeDataFetcher();
 
 	public JsonArray getData(String dataIndicator) {
-		return adaptee.specificGetData(this.country, dataIndicator, this.startDate, this.endDate);
+		return adaptee.specificGetData(this.getCountry(), dataIndicator, this.getStartDate(), this.getEndDate());
 	}
 }
