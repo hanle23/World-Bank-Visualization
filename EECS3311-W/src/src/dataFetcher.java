@@ -1,6 +1,7 @@
 package src;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 	abstract public class dataFetcher {
@@ -10,7 +11,11 @@ import com.google.gson.JsonObject;
 	
 	public dataFetcher(int startDate, int endDate, String country) {
 		this.startDate = startDate;
-		this.endDate = endDate;
+		if (endDate < startDate) {
+			this.endDate = -1;
+		} else {
+			this.endDate = endDate;
+		}
 		this.country = country;
 	}
 	
