@@ -4,12 +4,14 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
 
 public class util {
+	public static final Set<String> COUNTRIES = Set.of("can");
 	private util() 
 	{	
 	}
