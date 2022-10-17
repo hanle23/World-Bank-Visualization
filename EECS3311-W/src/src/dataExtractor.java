@@ -22,7 +22,7 @@ public class dataExtractor {
 	}
 	
 	public static void main(String[] args) {
-		Adapter test = new Adapter(2000, 2001, "can");
+		dataFetcher test = new Adapter(2000, 2001, "can");
 		HashMap<Integer, Double> test1 = filter(test.getData("AG.LND.AGRI.ZS"));
 		System.out.println(test1);
 	}
