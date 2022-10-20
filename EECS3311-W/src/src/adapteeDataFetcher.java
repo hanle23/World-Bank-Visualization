@@ -43,7 +43,7 @@ public class adapteeDataFetcher {
 	}
 	
 	public static void main(String[] args) {
-		Adapter test = new Adapter(2000, 2001, "can");
+		Adapter test = new Adapter(2000, 2023, "can");
 		JsonArray test1 = test.getData("AG.LND.AGRI.ZS");
 		System.out.println(test1);
 	}

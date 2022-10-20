@@ -15,14 +15,19 @@ public class dataExtractor {
 		for (int i = 0; i < object.size(); i++) {
 			JsonObject test2 = (JsonObject) object.get(i);
 			int date = test2.get("date").getAsInt();
-			double value = test2.get("value").getAsDouble();
-			result.put(date, value);
+			if (test2.get("value").isJsonNull()) {
+				result.put(date, (double) 0);
+			} else {
+				double value = test2.get("value").getAsDouble();
+				result.put(date, value);
+			}
+			
 		}
 		return result;
 	}
 	
 	public static void main(String[] args) {
-		dataFetcher test = new Adapter(2000, 2001, "can");
+		dataFetcher test = new Adapter(2009, 2023, "can");
 		HashMap<Integer, Double> test1 = filter(test.getData("AG.LND.AGRI.ZS"));
 		System.out.println(test1);
 	}
