@@ -40,8 +40,9 @@ public class forestArea implements analyses {
 			  System.out.println("forest area percentage " + year + " is "+ forestPercent);
 			  System.out.println("percentage of the rest of the land used " + year + " is "+ (100-forestPercent));
 			  result.put(year, forestPercent);
-		return result;
 		}
+		
+		return result;
 }
 		
 	public static void main(String args[]) {
