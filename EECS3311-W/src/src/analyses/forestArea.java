@@ -1,11 +1,15 @@
-package src;
+package src.analyses;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Map.Entry;
 
-public class forestArea {
-	private dataFetcher jsonObject;
+import src.dataExtractor;
+import src.util;
+import src.concrete.analyses;
+import src.fetcher.Adapter;
+
+public class forestArea implements analyses {
+	private Adapter jsonObject;
 	
 	public forestArea(int startYear, int endYear, String countryCode) {
 		if (isValid(startYear, endYear, countryCode)) {
@@ -35,8 +39,9 @@ public class forestArea {
 			  Double forestPercent = temp.getValue();
 			  System.out.println("forest area percentage " + year + " is "+ forestPercent);
 			  System.out.println("percentage of the rest of the land used " + year + " is "+ (100-forestPercent));
-			  result.put(year, forestPercent)
+			  result.put(year, forestPercent);
 		return result;
+		}
 }
 		
 	public static void main(String args[]) {
@@ -44,4 +49,5 @@ public class forestArea {
 		System.out.println(test.analyzeData());
 	}
 	
+}
 
