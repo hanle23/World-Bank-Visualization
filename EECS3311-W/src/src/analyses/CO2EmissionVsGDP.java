@@ -1,9 +1,15 @@
-package src;
+package src.analyses;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-public class CO2EmissionVsGDP {
+import src.dataExtractor;
+import src.util;
+import src.concrete.analyses;
+import src.fetcher.Adapter;
+import src.fetcher.dataFetcher;
+
+public class CO2EmissionVsGDP implements analyses {
 	private dataFetcher jsonObject;
 	public CO2EmissionVsGDP(int startYear, int endYear, String countryCode) {
 		if (isValid(startYear, endYear, countryCode)) {

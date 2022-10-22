@@ -1,4 +1,4 @@
-package src;
+package src.fetcher;
 
 import com.google.gson.JsonArray;
 

@@ -1,4 +1,4 @@
-package src;
+package src.fetcher;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

@@ -1,4 +1,4 @@
-package src;
+package src.analyses;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,12 @@ import java.util.Map.Entry;
 
 import com.google.gson.JsonObject;
 
-public class healthVsBeds {
+import src.dataExtractor;
+import src.util;
+import src.concrete.analyses;
+import src.fetcher.Adapter;
+
+public class healthVsBeds implements analyses {
 	private Adapter jsonObject;
 	public healthVsBeds(int startYear, int endYear, String countryCode) {
 		if (isValid(startYear, endYear, countryCode)) {
@@ -14,7 +19,7 @@ public class healthVsBeds {
 		}
 	}
 	
-	public HashMap<Integer, Double> analyzeRatio() {
+	public HashMap<Integer, Double> analyzeData() {
 		if (jsonObject == null) {
 			return null;
 		}
@@ -59,6 +64,6 @@ public class healthVsBeds {
 	}
 	public static void main(String args[]) {
 		healthVsBeds test = new healthVsBeds(2000, 2004, "can");
-		System.out.println(test.analyzeRatio());
+		System.out.println(test.analyzeData());
 	}
 }

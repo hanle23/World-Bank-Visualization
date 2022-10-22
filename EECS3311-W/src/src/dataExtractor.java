@@ -3,6 +3,9 @@ package src;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import src.fetcher.Adapter;
+import src.fetcher.dataFetcher;
+
 import java.util.HashMap;
 
 public class dataExtractor {
