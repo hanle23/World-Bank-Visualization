@@ -5,9 +5,9 @@ import java.util.Map.Entry;
 
 import src.dataExtractor;
 import src.util;
-import src.concrete.analyses;
 import src.fetcher.Adapter;
 import src.fetcher.dataFetcher;
+import src.interfaces.analyses;
 
 public class CO2EmissionVsGDP implements analyses {
 	private dataFetcher jsonObject;

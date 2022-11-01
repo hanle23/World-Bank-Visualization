@@ -6,8 +6,8 @@ import java.util.Map.Entry;
 
 import src.dataExtractor;
 import src.util;
-import src.concrete.analyses;
 import src.fetcher.Adapter;
+import src.interfaces.analyses;
 
 public class healthVsBeds implements analyses {
 	private Adapter jsonObject;
