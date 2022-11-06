@@ -5,8 +5,10 @@ import java.util.Map.Entry;
 
 import src.dataExtractor;
 import src.util;
+import src.concrete.linkedList;
 import src.fetcher.Adapter;
 import src.fetcher.dataFetcher;
+import src.interfaces.Iterator;
 import src.interfaces.analyses;
 
 public class CO2EmissionVsGDP implements analyses {
@@ -28,11 +30,13 @@ public class CO2EmissionVsGDP implements analyses {
 		return result;
 	}
 	
-	public HashMap<Integer, Double> analyzeData() {
+	public linkedList analyzeData() {
 		if (jsonObject == null) {
 			return null;
 		}
-		HashMap<Integer, Double> result = new HashMap<Integer, Double>();
+		
+		linkedList result = new linkedList();
+		HashMap<Integer, Double> tempResult = new HashMap<Integer, Double>();
 		HashMap<Integer, Double> co2Emissions = dataExtractor.filter(jsonObject.getData("EN.ATM.CO2E.PC"));
 		HashMap<Integer, Double> GDP = dataExtractor.filter(jsonObject.getData("NY.GDP.PCAP.CD"));
 		for (Entry<Integer, Double> temp : co2Emissions.entrySet()) {
@@ -42,18 +46,28 @@ public class CO2EmissionVsGDP implements analyses {
 			  Double GDPAmount = GDP.get(year); 
 			  System.out.println("GDP for " + year + " is "+ GDPAmount);
 			  if(GDPAmount == 0) {
-				  result.put(year, 0.0);
+				  tempResult.put(year, 0.0);
 				  System.out.println("co2/GDP for " + year + " is 0");
 			  }
 			  else {
-				  result.put(year, co2Amount/GDPAmount);
+				  tempResult.put(year, co2Amount/GDPAmount);
 				  System.out.println("co2/GDP for " + year + " is " + co2Amount/GDPAmount);
 			  }
 			}
+		result.setdata(tempResult);
+		//result.setNext(null);
 		return result;
 	}
 	public static void main(String args[]) {
 		CO2EmissionVsGDP test = new CO2EmissionVsGDP(2000, 2004, "can");
-		System.out.println(test.analyzeData());
+		linkedList data = test.analyzeData();
+		Iterator dataIterator = data.getIterator();
+		while (data != null) {
+			HashMap<?,?> dataSet = data.getData();
+			for (Entry<?, ?> temp : dataSet.entrySet()) {
+				System.out.println("In result: co2/GDP for " + temp.getKey()+ " is " + temp.getValue());
+			}
+			data = (linkedList) dataIterator.next();
+		}
 	}
 }
