@@ -40,7 +40,7 @@ public class avgGovExpenditureOnEd implements analyses{
 			return null;
 		}
 		
-		linkedList result = new linkedList();
+		linkedList result = new linkedList(null, null);
 		HashMap<String, Double> tempResult = new HashMap<String, Double>();
 		HashMap<Integer, Double> govExpenditure = dataExtractor.filter(jsonObject.getData("SE.XPD.TOTL.GD.ZS"));
 		

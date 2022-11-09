@@ -1,6 +1,5 @@
 package src.interfaces;
 
-import java.util.HashMap;
 
 import src.concrete.linkedList;
 

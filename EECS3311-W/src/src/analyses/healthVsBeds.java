@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 
 import src.dataExtractor;
 import src.util;
+import src.concrete.linkedList;
 import src.fetcher.Adapter;
 import src.interfaces.analyses;
 
@@ -17,11 +18,11 @@ public class healthVsBeds implements analyses {
 		}
 	}
 	
-	public HashMap<Integer, Double> analyzeData() {
+	public linkedList analyzeData() {
 		if (jsonObject == null) {
 			return null;
 		}
-		HashMap<Integer, Double> result = new HashMap<Integer, Double>();
+		HashMap<Integer, Double> series1 = new HashMap<Integer, Double>();
 		HashMap<Integer, Double> bedData = dataExtractor.filter(jsonObject.getData("SH.MED.BEDS.ZS"));
 		HashMap<Integer, Double> expendData = dataExtractor.filter(jsonObject.getData("SH.XPD.CHEX.PC.CD"));
 		for (Entry<Integer, Double> temp : bedData.entrySet()) {
@@ -30,8 +31,9 @@ public class healthVsBeds implements analyses {
 			  System.out.println(bedAmount);
 			  Double expend = expendData.get(year) * 1000; 
 			  System.out.println(expend);
-			  result.put(year, expend/bedAmount);
+			  series1.put(year, expend/bedAmount);
 			}
+		linkedList result = new linkedList(series1, null);
 		return result;
 	}
 	

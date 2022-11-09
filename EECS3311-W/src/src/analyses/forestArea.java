@@ -2,6 +2,7 @@ package src.analyses;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
+import src.concrete.linkedList;
 
 import src.dataExtractor;
 import src.util;
@@ -28,19 +29,20 @@ public class forestArea implements analyses {
 		return result;
 	}
 	
-	public HashMap<Integer, Double> analyzeData() {
+	public linkedList analyzeData() {
 		if (jsonObject == null) {
 			return null;
 		}
-		HashMap<Integer, Double> result = new HashMap<Integer, Double>();
+		HashMap<Integer, Double> series1 = new HashMap<Integer, Double>();
 		HashMap<Integer, Double> forestArea = dataExtractor.filter(jsonObject.getData("AG.LND.FRST.ZS"));
 		for (Entry<Integer, Double> temp : forestArea.entrySet()) {
 			  Integer year = temp.getKey();
 			  Double forestPercent = temp.getValue();
 			  System.out.println("forest area percentage " + year + " is "+ forestPercent);
 			  System.out.println("percentage of the rest of the land used " + year + " is "+ (100-forestPercent));
-			  result.put(year, forestPercent);
+			  series1.put(year, forestPercent);
 		}
+		linkedList result = new linkedList(series1, null);
 		
 		return result;
 }

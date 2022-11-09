@@ -35,7 +35,7 @@ public class CO2EmissionVsGDP implements analyses {
 			return null;
 		}
 		
-		linkedList result = new linkedList();
+		
 		HashMap<Integer, Double> tempResult = new HashMap<Integer, Double>();
 		HashMap<Integer, Double> co2Emissions = dataExtractor.filter(jsonObject.getData("EN.ATM.CO2E.PC"));
 		HashMap<Integer, Double> GDP = dataExtractor.filter(jsonObject.getData("NY.GDP.PCAP.CD"));
@@ -54,8 +54,7 @@ public class CO2EmissionVsGDP implements analyses {
 				  System.out.println("co2/GDP for " + year + " is " + co2Amount/GDPAmount);
 			  }
 			}
-		result.setdata(tempResult);
-		//result.setNext(null);
+		linkedList result = new linkedList(tempResult, null);
 		return result;
 	}
 	public static void main(String args[]) {

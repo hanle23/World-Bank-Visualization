@@ -7,8 +7,12 @@ import src.interfaces.Iterator;
 
 public class linkedList implements Container {
 	private HashMap<?,?> data;
-	//private HashMap<?,?> next;
 	private linkedList next;
+	
+	public linkedList(HashMap<?,?> data, linkedList next) {
+		this.data = data;
+		this.next = next;
+	}
 	
 	public linkedList() {
 		this.data = null;
@@ -25,14 +29,12 @@ public class linkedList implements Container {
 	}
 	
 	public void setdata(HashMap<?,?> data) {
-		//if (data == null) {
-			this.data = data;
-		//}
+		this.data = data;
+
 	}
 	public void setNext(linkedList next) {
-		//if (next == null) {
-			this.next = next;
-		//}
+		this.next = next;
+
 	}
 	
 	private class hashMapIterator implements Iterator {
