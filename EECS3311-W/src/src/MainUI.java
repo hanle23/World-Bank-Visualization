@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.HashMap;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -39,6 +40,19 @@ import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.time.Year;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+
+import graphs.Graph;
+import graphs.bar;
+import graphs.lineGraph;
+import graphs.pie;
+import graphs.report;
+import graphs.scatter;
+import graphs.timeSeries;
+import src.analyses.CO2EmissionVsGDP;
+import src.analyses.HealthCareVsMortality;
+import src.analyses.avgGovExpenditureOnEd;
+import src.concrete.linkedList;
+import src.interfaces.analyses;
 
 public class MainUI extends JFrame {
 	/**
@@ -138,12 +152,92 @@ public class MainUI extends JFrame {
 	}
 
 	private void createCharts(JPanel west) {
-		createLine(west);
-		createTimeSeries(west);
-		createBar(west);
-		createPie(west);
-		createScatter(west);
-		createReport(west);
+		//NEED TO TEST 3 SERIES
+		//createLine(west);
+		//createTimeSeries(west);
+		
+		Graph line = new lineGraph();
+		Graph timeSeries = new timeSeries();
+		Graph scatter = new scatter();
+		Graph text = new report();
+		Graph pie = new pie();
+		Graph bar = new bar();
+	//	analyses test1 = new CO2EmissionVsGDP(2000, 2004, "can");
+	//	analyses test2 = new HealthCareVsMortality(2000, 2004, "can");
+	//	analyses pieTest = new avgGovExpenditureOnEd(2000, 2004, "can");
+	//	linkedList pieData = pieTest.analyzeData();
+		
+		//linkedList oneDataSeries = test1.analyzeData();
+		//linkedList twoDataSeries = test2.analyzeData();
+		HashMap<Integer,Double> map1=new HashMap<Integer,Double>();
+		HashMap<Integer,Double> map2=new HashMap<Integer,Double>();
+		HashMap<Integer,Double> map3=new HashMap<Integer,Double>();
+		//linkedList twoDataSeries = new linkedList();
+		linkedList firstSeries = new linkedList();
+		linkedList secondSeries = new linkedList();
+		linkedList threeSeries = new linkedList();
+		
+		map1.put(2018, 5.6);
+		map1.put(2017, 5.7);
+		map1.put(2016, 5.8);
+		map1.put(2015, 5.8);
+		map1.put(2014, 5.9);
+		map1.put(2013, 6.0);
+		map1.put(2012, 6.1);
+		map1.put(2011, 6.2);
+		map1.put(2010, 6.4);
+		threeSeries.setdata(map1);
+		threeSeries.setNext(secondSeries);
+
+		map2.put(2018, 2.92);
+		map2.put(2017, 2.87);
+		map2.put(2016, 2.77);
+		map2.put(2015, 2.8);
+		map2.put(2014, 2.83);
+		map2.put(2014, 2.83);
+		map2.put(2013, 2.89);
+		map2.put(2011, 2.97);
+		map2.put(2010, 3.05);
+		secondSeries.setdata(map2);
+		secondSeries.setNext(firstSeries);
+		
+		map3.put(2018, 10624.0);
+		map3.put(2017, 10209.0);
+		map3.put(2016, 9877.0);
+		map3.put(2015, 9491.0);
+		map3.put(2014, 9023.0);
+		map3.put(2013, 8599.0);
+		map3.put(2012, 8399.0);
+		map3.put(2011, 8130.0);
+		map3.put(2010, 7930.0);
+		firstSeries.setdata(map3);
+		
+		//line.update(oneDataSeries, west);
+		//line.update(twoDataSeries, west);
+		line.update(threeSeries, west);
+		//timeSeries.update(oneDataSeries, west);
+		//timeSeries.update(twoDataSeries, west);
+		timeSeries.update(threeSeries, west);
+		
+		//createBar(west);
+		//bar.update(oneDataSeries, west);
+		//bar.update(twoDataSeries, west);
+		bar.update(threeSeries, west);
+		
+		//createPie(west);
+		//pie.update(pieData, west);
+		
+		//createScatter(west);
+		//scatter.update(oneDataSeries, west);
+		//scatter.update(twoDataSeries, west);
+		scatter.update(threeSeries, west);
+		
+		//createReport(west);
+		//text.update(oneDataSeries, west);
+		//text.update(twoDataSeries, west);
+		text.update(threeSeries, west);
+		//text.update(pieData, west);
+
 
 	}
 
@@ -166,7 +260,7 @@ public class MainUI extends JFrame {
 				+ "\tEmployed: 96.054%\n" + "\tUnemployed: 3.946%\n" + "\n" + "Women=>\n" + "\tEmployed: 96.163%\n"
 				+ "\tUnemployed: 3.837%\n";
 
-		report.setText(reportMessage);
+		report.setText(reportMessage2);
 		JScrollPane outputScrollPane = new JScrollPane(report);
 		west.add(outputScrollPane);
 	}
@@ -297,6 +391,16 @@ public class MainUI extends JFrame {
 		dataset2.setValue(8399, "Health Expenditure per Capita", "2012");
 		dataset2.setValue(8130, "Health Expenditure per Capita", "2011");
 		dataset2.setValue(7930, "Health Expenditure per Capita", "2010");
+		
+		/*dataset2.setValue(20000, "Health Expenditure per Capita v2", "2018");
+		dataset2.setValue(15000, "Health Expenditure per Capita v2", "2017");
+		dataset2.setValue(9000, "Health Expenditure per Capita v2", "2016");
+		dataset2.setValue(8000, "Health Expenditure per Capita v2", "2015");
+		dataset2.setValue(7500, "Health Expenditure per Capita v2", "2014");
+		dataset2.setValue(7000, "Health Expenditure per Capita v2", "2013");
+		dataset2.setValue(6900, "Health Expenditure per Capita v2", "2012");
+		dataset2.setValue(6500, "Health Expenditure per Capita v2", "2011");
+		dataset2.setValue(6000, "Health Expenditure per Capita v2", "2010");*/
 
 		CategoryPlot plot = new CategoryPlot();
 		BarRenderer barrenderer1 = new BarRenderer();
@@ -358,7 +462,8 @@ public class MainUI extends JFrame {
 		series2.add(2012, 8399);
 		series2.add(2011, 8130);
 		series2.add(2010, 7930);
-
+		
+		//hospital beds doesn't look like it appears but that is because it is all on 1 y axis, the values of beds and mortality are very close so they over lap
 		XYSeries series3 = new XYSeries("Hospital Beds/1000 people");
 		series3.add(2018, 2.92);
 		series3.add(2017, 2.87);
@@ -371,7 +476,7 @@ public class MainUI extends JFrame {
 		series3.add(2010, 3.05);
 
 		XYSeriesCollection dataset = new XYSeriesCollection();
-		dataset.addSeries(series1);
+		//dataset.addSeries(series1);
 		dataset.addSeries(series2);
 		dataset.addSeries(series3);
 
@@ -428,8 +533,6 @@ public class MainUI extends JFrame {
 		series2.add(new Year(2012), 8399);
 		series2.add(new Year(2011), 8130);
 		series2.add(new Year(2010), 7930);
-		TimeSeriesCollection dataset2 = new TimeSeriesCollection();
-		dataset2.addSeries(series2);
 
 		TimeSeries series3 = new TimeSeries("Hospital Beds/1000 people");
 		series3.add(new Year(2018), 2.92);
@@ -444,11 +547,16 @@ public class MainUI extends JFrame {
 
 		TimeSeriesCollection dataset = new TimeSeriesCollection();
 		dataset.addSeries(series1);
-		dataset.addSeries(series3);
+		//dataset.addSeries(series3);
+		TimeSeriesCollection dataset2 = new TimeSeriesCollection();
+		dataset2.addSeries(series2);
+		TimeSeriesCollection dataset3 = new TimeSeriesCollection();
+		dataset3.addSeries(series3);
 
 		XYPlot plot = new XYPlot();
 		XYSplineRenderer splinerenderer1 = new XYSplineRenderer();
 		XYSplineRenderer splinerenderer2 = new XYSplineRenderer();
+		XYSplineRenderer splinerenderer3 = new XYSplineRenderer();
 
 		plot.setDataset(0, dataset);
 		plot.setRenderer(0, splinerenderer1);
@@ -458,10 +566,17 @@ public class MainUI extends JFrame {
 
 		plot.setDataset(1, dataset2);
 		plot.setRenderer(1, splinerenderer2);
-		plot.setRangeAxis(1, new NumberAxis("US$"));
+		plot.setRangeAxis(1, new NumberAxis("US$")); //1 is the 2nnd y axis
+		
+		plot.setDataset(2, dataset3);
+		plot.setRenderer(2, splinerenderer3);
+		//plot.setRangeAxis(2, new NumberAxis(""));
+	
 
 		plot.mapDatasetToRangeAxis(0, 0);// 1st dataset to 1st y-axis
 		plot.mapDatasetToRangeAxis(1, 1); // 2nd dataset to 2nd y-axis
+		//plot.mapDatasetToRangeAxis(2, 2); // 2nd dataset to 2nd y-axis
+		plot.mapDatasetToRangeAxis(2, 0); // 2nd dataset to 2nd y-axis
 
 		JFreeChart chart = new JFreeChart("Mortality vs Expenses & Hospital Beds",
 				new Font("Serif", java.awt.Font.BOLD, 18), plot, true);

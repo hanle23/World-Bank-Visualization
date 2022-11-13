@@ -60,7 +60,7 @@ public class avgGovExpenditureOnEd implements analyses{
 		else {
 			average = sumOfExpenditure/numOfYear;
 		}
-		System.out.println("Average govExpenditure for the selected years is "+ sumOfExpenditure/numOfYear);
+		System.out.println("Average govExpenditure for the selected years is "+ average);
 		
 		tempResult.put("Avg government expenditure on education", average);
 		tempResult.put("Expenditures for all other", 100 - average);
