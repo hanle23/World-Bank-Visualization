@@ -40,7 +40,7 @@ public class lineGraph implements Graph{
 		while (dataSets != null) {
 			Iterator dataIterator = dataSets.getIterator();
 			HashMap<?,?> dataSet = dataSets.getData();
-			series = new XYSeries(i++); //replace with a proper name for the data set
+			series = new XYSeries(i++); //replace with a proper name for the data se
 			for (Entry<?, ?> temp : dataSet.entrySet()) {
 				series.add((int) temp.getKey(), (double)temp.getValue());
 			}
