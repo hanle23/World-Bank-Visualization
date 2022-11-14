@@ -41,17 +41,17 @@ import org.jfree.data.time.Year;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-import graphs.Graph;
-import graphs.bar;
-import graphs.lineGraph;
-import graphs.pie;
-import graphs.report;
-import graphs.scatter;
-import graphs.timeSeries;
 import src.analyses.CO2EmissionVsGDP;
 import src.analyses.HealthCareVsMortality;
 import src.analyses.avgGovExpenditureOnEd;
 import src.concrete.linkedList;
+import src.graphs.Graph;
+import src.graphs.bar;
+import src.graphs.lineGraph;
+import src.graphs.pie;
+import src.graphs.report;
+import src.graphs.scatter;
+import src.graphs.timeSeries;
 import src.interfaces.analyses;
 
 public class MainUI extends JFrame {

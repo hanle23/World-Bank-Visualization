@@ -1,4 +1,4 @@
-package graphs;
+package src.graphs;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

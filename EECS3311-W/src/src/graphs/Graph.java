@@ -1,4 +1,4 @@
-package graphs;
+package src.graphs;
 
 import javax.swing.JPanel;
 
