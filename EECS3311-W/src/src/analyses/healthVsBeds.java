@@ -9,6 +9,7 @@ import src.util;
 import src.concrete.linkedList;
 import src.fetcher.Adapter;
 import src.interfaces.analyses;
+import src.interfaces.Iterator;
 
 public class healthVsBeds implements analyses {
 	private Adapter jsonObject;
@@ -22,17 +23,17 @@ public class healthVsBeds implements analyses {
 		if (jsonObject == null) {
 			return null;
 		}
-		HashMap<Integer, Double> series1 = new HashMap<Integer, Double>();
+		HashMap<Integer, Double> unsorted = new HashMap<Integer, Double>();
 		HashMap<Integer, Double> bedData = dataExtractor.filter(jsonObject.getData("SH.MED.BEDS.ZS"));
 		HashMap<Integer, Double> expendData = dataExtractor.filter(jsonObject.getData("SH.XPD.CHEX.PC.CD"));
 		for (Entry<Integer, Double> temp : bedData.entrySet()) {
 			  Integer year = temp.getKey();
 			  Double bedAmount = temp.getValue();
-			  System.out.println(bedAmount);
 			  Double expend = expendData.get(year) * 1000; 
-			  System.out.println(expend);
-			  series1.put(year, expend/bedAmount);
+			  unsorted.put(year, expend/bedAmount);
 			}
+		HashMap<Integer, Double> series1 = new HashMap<>();
+		series1.putAll(unsorted);
 		linkedList result = new linkedList(series1, null);
 		return result;
 	}
@@ -64,6 +65,14 @@ public class healthVsBeds implements analyses {
 	}
 	public static void main(String args[]) {
 		healthVsBeds test = new healthVsBeds(2000, 2004, "can");
-		System.out.println(test.analyzeData());
+		linkedList result = test.analyzeData();
+		while (result != null) {
+			Iterator print = result.getIterator();
+			System.out.println(result.getData());
+			result = (linkedList) print.next();
+		}
+		
+
+		
 	}
 }

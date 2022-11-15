@@ -6,7 +6,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.io.FileInputStream;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Properties;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -52,13 +55,13 @@ import src.graphs.pie;
 import src.graphs.report;
 import src.graphs.scatter;
 import src.graphs.timeSeries;
-import src.interfaces.analyses;
 
 public class MainUI extends JFrame {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static Properties props;
 
 	private static MainUI instance;
 
@@ -72,20 +75,25 @@ public class MainUI extends JFrame {
 	private MainUI() {
 		// Set window title
 		super("Country Statistics");
+		
+		// Get properties
+		try {
+			props = new Properties();
+			props.load(new FileInputStream("src/src/config.properties"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// Set top bar
-		JLabel chooseCountryLabel = new JLabel("Choose a country: ");
+		JLabel chooseCountryLabel = new JLabel(props.getProperty("CountriesLabel"));
 		Vector<String> countriesNames = new Vector<String>();
-		countriesNames.add("USA");
-		countriesNames.add("Canada");
-		countriesNames.add("France");
-		countriesNames.add("China");
-		countriesNames.add("Brazil");
+		countriesNames.addAll(Arrays.asList(props.getProperty("Countries").split(",")));
 		countriesNames.sort(null);
 		JComboBox<String> countriesList = new JComboBox<String>(countriesNames);
 
-		JLabel from = new JLabel("From");
-		JLabel to = new JLabel("To");
+		JLabel from = new JLabel(props.getProperty("fromLabel"));
+		JLabel to = new JLabel(props.getProperty("toLabel"));
 		Vector<String> years = new Vector<String>();
 		for (int i = 2021; i >= 2010; i--) {
 			years.add("" + i);
@@ -102,29 +110,21 @@ public class MainUI extends JFrame {
 		north.add(toList);
 
 		// Set bottom bar
-		JButton recalculate = new JButton("Recalculate");
+		JButton recalculate = new JButton(props.getProperty("recalculateLabel"));
 
-		JLabel viewsLabel = new JLabel("Available Views: ");
+		JLabel viewsLabel = new JLabel(props.getProperty("viewsLabel"));
 
 		Vector<String> viewsNames = new Vector<String>();
-		viewsNames.add("Pie Chart");
-		viewsNames.add("Line Chart");
-		viewsNames.add("Bar Chart");
-		viewsNames.add("Scatter Chart");
-		viewsNames.add("Report");
+		viewsNames.addAll(Arrays.asList(props.getProperty("Charts").split(",")));
 		JComboBox<String> viewsList = new JComboBox<String>(viewsNames);
 		JButton addView = new JButton("+");
 		JButton removeView = new JButton("-");
 
-		JLabel methodLabel = new JLabel("        Choose analysis method: ");
+		JLabel methodLabel = new JLabel(props.getProperty("methodLabel"));
 
 		Vector<String> methodsNames = new Vector<String>();
-		methodsNames.add("Mortality");
-		methodsNames.add("Mortality vs Expenses");
-		methodsNames.add("Mortality vs Expenses & Hospital Beds");
-		methodsNames.add("Mortality vs GDP");
-		methodsNames.add("Unemployment vs GDP");
-		methodsNames.add("Unemployment");
+		methodsNames.addAll(Arrays.asList(props.getProperty("Methods").split(",")));
+
 
 		JComboBox<String> methodsList = new JComboBox<String>(methodsNames);
 

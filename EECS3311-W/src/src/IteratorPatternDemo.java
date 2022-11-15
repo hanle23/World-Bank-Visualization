@@ -26,7 +26,7 @@ public class IteratorPatternDemo {
 			for (Entry<?, ?> temp : dataSet.entrySet()) {
 				System.out.println("In result: co2/GDP for " + temp.getKey()+ " is " + temp.getValue());
 			}
-			test = (linkedList) dataIterator.next();
+			test = dataIterator.next();
 			
 		}
 	}

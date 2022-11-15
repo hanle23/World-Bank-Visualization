@@ -1,8 +1,12 @@
 package src.interfaces;
 
+import java.util.HashMap;
+
+import src.concrete.linkedList;
+
 public interface Iterator {
 	public boolean hasNext();
-	public Object next();
+	public linkedList next();
 	public boolean hasCurrent();
-	public Object current();
+	public HashMap<?,?> current();
 }

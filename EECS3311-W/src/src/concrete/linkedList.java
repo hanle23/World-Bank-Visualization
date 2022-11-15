@@ -21,7 +21,7 @@ public class linkedList implements Container {
 	
 	@Override
 	public Iterator getIterator() {
-		return new hashMapIterator();
+		return new linkedListIterator();
 	}
 	
 	public HashMap<?,?> getData() {
@@ -37,7 +37,7 @@ public class linkedList implements Container {
 
 	}
 	
-	private class hashMapIterator implements Iterator {
+	private class linkedListIterator implements Iterator {
 		@Override
 		public boolean hasNext() {
 			if (next != null) {
@@ -47,7 +47,7 @@ public class linkedList implements Container {
 		}
 		
 		@Override
-		public Object next() {
+		public linkedList next() {
 			if (this.hasNext()) {
 				return next;
 			}
@@ -63,7 +63,7 @@ public class linkedList implements Container {
 		}
 		
 		@Override
-		public Object current() {
+		public HashMap<?,?> current() {
 			if (this.hasCurrent()) {
 				return data;
 			}
