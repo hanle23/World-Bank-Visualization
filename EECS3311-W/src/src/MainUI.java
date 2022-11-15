@@ -6,6 +6,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -55,12 +57,17 @@ import src.graphs.pie;
 import src.graphs.report;
 import src.graphs.scatter;
 import src.graphs.timeSeries;
+import src.interfaces.analyses;
 
-public class MainUI extends JFrame {
+public class MainUI extends JFrame implements ActionListener{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	public JPanel west;
+	private int i;
+	
 	private static Properties props;
 
 	private static MainUI instance;
@@ -75,6 +82,7 @@ public class MainUI extends JFrame {
 	private MainUI() {
 		// Set window title
 		super("Country Statistics");
+		this.i=0;
 		
 		// Get properties
 		try {
@@ -111,6 +119,7 @@ public class MainUI extends JFrame {
 
 		// Set bottom bar
 		JButton recalculate = new JButton(props.getProperty("recalculateLabel"));
+		recalculate.addActionListener(this);
 
 		JLabel viewsLabel = new JLabel(props.getProperty("viewsLabel"));
 
@@ -141,105 +150,110 @@ public class MainUI extends JFrame {
 		JPanel east = new JPanel();
 
 		// Set charts region
-		JPanel west = new JPanel();
+		west = new JPanel();
 		west.setLayout(new GridLayout(2, 0));
-		createCharts(west);
+		//createCharts(west);
 
 		getContentPane().add(north, BorderLayout.NORTH);
 		getContentPane().add(east, BorderLayout.EAST);
 		getContentPane().add(south, BorderLayout.SOUTH);
 		getContentPane().add(west, BorderLayout.WEST);
 	}
-
+	
 	private void createCharts(JPanel west) {
+
 		//NEED TO TEST 3 SERIES
-		//createLine(west);
-		//createTimeSeries(west);
-		
-		Graph line = new lineGraph();
-		Graph timeSeries = new timeSeries();
-		Graph scatter = new scatter();
-		Graph text = new report();
-		Graph pie = new pie();
-		Graph bar = new bar();
-	//	analyses test1 = new CO2EmissionVsGDP(2000, 2004, "can");
-	//	analyses test2 = new HealthCareVsMortality(2000, 2004, "can");
-	//	analyses pieTest = new avgGovExpenditureOnEd(2000, 2004, "can");
-	//	linkedList pieData = pieTest.analyzeData();
-		
-		//linkedList oneDataSeries = test1.analyzeData();
-		//linkedList twoDataSeries = test2.analyzeData();
-		HashMap<Integer,Double> map1=new HashMap<Integer,Double>();
-		HashMap<Integer,Double> map2=new HashMap<Integer,Double>();
-		HashMap<Integer,Double> map3=new HashMap<Integer,Double>();
-		//linkedList twoDataSeries = new linkedList();
-		linkedList firstSeries = new linkedList();
-		linkedList secondSeries = new linkedList();
-		linkedList threeSeries = new linkedList();
-		
-		map1.put(2018, 5.6);
-		map1.put(2017, 5.7);
-		map1.put(2016, 5.8);
-		map1.put(2015, 5.8);
-		map1.put(2014, 5.9);
-		map1.put(2013, 6.0);
-		map1.put(2012, 6.1);
-		map1.put(2011, 6.2);
-		map1.put(2010, 6.4);
-		threeSeries.setdata(map1);
-		threeSeries.setNext(secondSeries);
+			//createLine(west);
+			//createTimeSeries(west);
+			linkedList threeSeries;
+			
+			Graph line = new lineGraph();
+			Graph timeSeries = new timeSeries();
+			Graph scatter = new scatter();
+			Graph text = new report();
+			Graph pie = new pie();
+			Graph bar = new bar();
+			analyses test1 = new CO2EmissionVsGDP(2000, 2004, "can");
+			analyses test2 = new HealthCareVsMortality(2000, 2004, "can");
+			analyses pieTest = new avgGovExpenditureOnEd(2000, 2004, "can");
+			linkedList pieData = pieTest.analyzeData();
+			
+			if(i ==0) {
+				threeSeries = test1.analyzeData();
+			}
+			else if(i==1) {
+				threeSeries = test2.analyzeData();
+			}
+			else {
+			HashMap<Integer,Double> map1=new HashMap<Integer,Double>();
+			HashMap<Integer,Double> map2=new HashMap<Integer,Double>();
+			HashMap<Integer,Double> map3=new HashMap<Integer,Double>();
+			//linkedList twoDataSeries = new linkedList();
+			linkedList firstSeries = new linkedList();
+			linkedList secondSeries = new linkedList();
+			threeSeries = new linkedList();
+			
+			map1.put(2018, 5.6);
+			map1.put(2017, 5.7);
+			map1.put(2016, 5.8);
+			map1.put(2015, 5.8);
+			map1.put(2014, 5.9);
+			map1.put(2013, 6.0);
+			map1.put(2012, 6.1);
+			map1.put(2011, 6.2);
+			map1.put(2010, 6.4);
+			threeSeries.setdata(map1);
+			threeSeries.setNext(secondSeries);
 
-		map2.put(2018, 2.92);
-		map2.put(2017, 2.87);
-		map2.put(2016, 2.77);
-		map2.put(2015, 2.8);
-		map2.put(2014, 2.83);
-		map2.put(2014, 2.83);
-		map2.put(2013, 2.89);
-		map2.put(2011, 2.97);
-		map2.put(2010, 3.05);
-		secondSeries.setdata(map2);
-		secondSeries.setNext(firstSeries);
-		
-		map3.put(2018, 10624.0);
-		map3.put(2017, 10209.0);
-		map3.put(2016, 9877.0);
-		map3.put(2015, 9491.0);
-		map3.put(2014, 9023.0);
-		map3.put(2013, 8599.0);
-		map3.put(2012, 8399.0);
-		map3.put(2011, 8130.0);
-		map3.put(2010, 7930.0);
-		firstSeries.setdata(map3);
-		
-		//line.update(oneDataSeries, west);
-		//line.update(twoDataSeries, west);
-		line.update(threeSeries, west);
-		//timeSeries.update(oneDataSeries, west);
-		//timeSeries.update(twoDataSeries, west);
-		timeSeries.update(threeSeries, west);
-		
-		//createBar(west);
-		//bar.update(oneDataSeries, west);
-		//bar.update(twoDataSeries, west);
-		bar.update(threeSeries, west);
-		
-		//createPie(west);
-		//pie.update(pieData, west);
-		
-		//createScatter(west);
-		//scatter.update(oneDataSeries, west);
-		//scatter.update(twoDataSeries, west);
-		scatter.update(threeSeries, west);
-		
-		//createReport(west);
-		//text.update(oneDataSeries, west);
-		//text.update(twoDataSeries, west);
-		text.update(threeSeries, west);
-		//text.update(pieData, west);
+			map2.put(2018, 2.92);
+			map2.put(2017, 2.87);
+			map2.put(2016, 2.77);
+			map2.put(2015, 2.8);
+			map2.put(2014, 2.83);
+			map2.put(2014, 2.83);
+			map2.put(2013, 2.89);
+			map2.put(2011, 2.97);
+			map2.put(2010, 3.05);
+			secondSeries.setdata(map2);
+			secondSeries.setNext(firstSeries);
+			
+			map3.put(2018, 10624.0);
+			map3.put(2017, 10209.0);
+			map3.put(2016, 9877.0);
+			map3.put(2015, 9491.0);
+			map3.put(2014, 9023.0);
+			map3.put(2013, 8599.0);
+			map3.put(2012, 8399.0);
+			map3.put(2011, 8130.0);
+			map3.put(2010, 7930.0);
+			firstSeries.setdata(map3);
+			}
+			
+			line.update(threeSeries, west);
+			timeSeries.update(threeSeries, west);
+			bar.update(threeSeries, west);
+			pie.update(pieData, west);
+			scatter.update(threeSeries, west);
+			text.update(threeSeries, west);
+			//text.update(pieData, west);
 
 
-	}
+		}
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				this.remove(west);
+				west = new JPanel();
+				west.setLayout(new GridLayout(2, 0));
+				createCharts(west);
+
+		
+				getContentPane().add(west, BorderLayout.WEST);
+				this.repaint();
+				this.revalidate();
+				i++;
+				
+			}
 
 	private void createReport(JPanel west) {
 		JTextArea report = new JTextArea();
@@ -594,6 +608,7 @@ public class MainUI extends JFrame {
 		JFrame frame = MainUI.getInstance();
 		frame.setSize(900, 600);
 		frame.pack();
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		frame.setVisible(true);
 
         

@@ -20,7 +20,6 @@ public class report implements Graph{
 		int i = 0;
 		JTextArea report = new JTextArea();
 		report.setEditable(false);
-		report.setPreferredSize(new Dimension(400, 300));
 		report.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 		report.setBackground(Color.white);
 		String reportMessage = "Default Title\n" + "==============================\n";
