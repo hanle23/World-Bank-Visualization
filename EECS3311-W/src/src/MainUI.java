@@ -50,6 +50,7 @@ import src.analyses.CO2EmissionVsGDP;
 import src.analyses.HealthCareVsMortality;
 import src.analyses.avgGovExpenditureOnEd;
 import src.concrete.linkedList;
+import src.concrete.systemFacade;
 import src.graphs.Graph;
 import src.graphs.bar;
 import src.graphs.graphSubject;
@@ -70,8 +71,8 @@ public class MainUI extends JFrame implements ActionListener{
 	private JButton recalculate, addView, removeView;
 	private JComboBox<String> fromList, toList, countriesList, viewsList, methodsList;
 	private int i, startYear, endYear;
-	private graphSubject publisher;
-	private String countryCode, analysis;
+	private systemFacade facade;
+	private String country, analysis;
 	
 	private static Properties props;
 
@@ -98,7 +99,7 @@ public class MainUI extends JFrame implements ActionListener{
 			e.printStackTrace();
 		}
 		
-		publisher = new graphSubject(); //can move to facade if we don't want mainUI to have access to it
+		facade = new systemFacade();
 
 		// Set top bar
 		JLabel chooseCountryLabel = new JLabel(props.getProperty("CountriesLabel"));
@@ -164,11 +165,11 @@ public class MainUI extends JFrame implements ActionListener{
 		
 		//setting default values to what is currently selected if user never changes options
 		//user will have to select '+" to add a graph. if they don't click plus on any graph but clicks recalculate we need a popup message that they didn't select a graph
-		this.countryCode = (String) countriesList.getSelectedItem();//need to convert to a country code. Will facade do that?
+		this.country = (String) countriesList.getSelectedItem();//need to convert to a country code. Will facade do that?
 		this.startYear = Integer.parseInt((String)fromList.getSelectedItem());
 		this.endYear = Integer.parseInt((String)toList.getSelectedItem());
 		this.analysis = (String) methodsList.getSelectedItem(); //analysis attribute is only a string. Need a factory to create the object
-		System.out.println(countryCode);
+		System.out.println(country);
 		System.out.println(startYear);
 		System.out.println(endYear);
 		System.out.println(analysis);
@@ -188,16 +189,14 @@ public class MainUI extends JFrame implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent evt) {
-		if(evt.getSource() == recalculate) {
-			//need to create analysis object based on user selection when they click 'recalculate' button
-			//requires an analysis factory
-			//this listener should call facade --> facade can interact with analysis factory and subject to update the graphs
-			this.analysis = (String) methodsList.getSelectedItem();
+		if(evt.getSource() == recalculate) {		
+			this.remove(this.west);
+			this.west = new JPanel();
+			this.west.setLayout(new GridLayout(2, 0));
 			
-			this.remove(west);
-			west = new JPanel();
-			west.setLayout(new GridLayout(2, 0));
+			//this listener should call facade --> facade can interact with analysis factory and subject to update the graphs	
 			createCharts(west);
+			facade.recalculate(this.startYear, this.endYear, this.country, this.analysis, this.west);
 	
 	
 			getContentPane().add(west, BorderLayout.WEST);
@@ -207,10 +206,10 @@ public class MainUI extends JFrame implements ActionListener{
 			//clear subject once done since user will have to reset the graphs
 		}
 		else if(evt.getSource() == addView) {
-			publisher.attach((String) viewsList.getSelectedItem());
+			facade.addGraph((String) viewsList.getSelectedItem());
 		}
 		else if(evt.getSource() == removeView) {
-			publisher.detach((String) viewsList.getSelectedItem());
+			facade.removeGraph((String) viewsList.getSelectedItem());
 		}
 		else if(evt.getSource() == fromList) {
 			this.startYear = Integer.parseInt((String)fromList.getSelectedItem());
@@ -221,8 +220,8 @@ public class MainUI extends JFrame implements ActionListener{
 			System.out.println(this.endYear);
 		}
 		else if(evt.getSource() == countriesList) {
-			this.countryCode = (String) countriesList.getSelectedItem(); //need to convert country to country code.
-			System.out.println(this.countryCode);
+			this.country = (String) countriesList.getSelectedItem(); //need to convert country to country code.
+			System.out.println(this.country);
 		}
 		else if(evt.getSource() == methodsList) {
 			this.analysis = (String) methodsList.getSelectedItem(); //need to convert analysis object
