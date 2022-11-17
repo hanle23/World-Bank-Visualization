@@ -22,7 +22,6 @@ public class graphSubject implements Subject{
 			props = new Properties();
 			props.load(new FileInputStream("src/src/config.properties"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -76,6 +75,15 @@ public class graphSubject implements Subject{
 		
 	}
 	
+	@Override
+	public void detachAll() {
+		for(String graphType: graphs.keySet()) {
+			graphs.put(graphType, null);
+		}
+		System.out.println(graphs);
+		
+	}
+	
 	public static void main(String args[]) {
 		graphSubject test = new graphSubject();
 		test.attach("Pie Chart");
@@ -85,8 +93,10 @@ public class graphSubject implements Subject{
 		test.detach("Pie Chart");
 		test.detach("Pie Chart");
 		test.detach("Bar Chart");
+		test.detachAll();
 		
 		
 	}
+
 
 }

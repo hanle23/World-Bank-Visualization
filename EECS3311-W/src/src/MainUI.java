@@ -52,6 +52,7 @@ import src.analyses.avgGovExpenditureOnEd;
 import src.concrete.linkedList;
 import src.graphs.Graph;
 import src.graphs.bar;
+import src.graphs.graphSubject;
 import src.graphs.lineGraph;
 import src.graphs.pie;
 import src.graphs.report;
@@ -65,8 +66,12 @@ public class MainUI extends JFrame implements ActionListener{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public JPanel west;
-	private int i;
+	private JPanel west;
+	private JButton recalculate, addView, removeView;
+	private JComboBox<String> fromList, toList, countriesList, viewsList, methodsList;
+	private int i, startYear, endYear;
+	private graphSubject publisher;
+	private String countryCode, analysis;
 	
 	private static Properties props;
 
@@ -92,22 +97,29 @@ public class MainUI extends JFrame implements ActionListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		publisher = new graphSubject(); //can move to facade if we don't want mainUI to have access to it
 
 		// Set top bar
 		JLabel chooseCountryLabel = new JLabel(props.getProperty("CountriesLabel"));
 		Vector<String> countriesNames = new Vector<String>();
 		countriesNames.addAll(Arrays.asList(props.getProperty("Countries").split(",")));
 		countriesNames.sort(null);
-		JComboBox<String> countriesList = new JComboBox<String>(countriesNames);
+		countriesList = new JComboBox<String>(countriesNames);
+		countriesList.addActionListener(this);
 
 		JLabel from = new JLabel(props.getProperty("fromLabel"));
 		JLabel to = new JLabel(props.getProperty("toLabel"));
+		
 		Vector<String> years = new Vector<String>();
 		for (int i = 2021; i >= 2010; i--) {
 			years.add("" + i);
 		}
-		JComboBox<String> fromList = new JComboBox<String>(years);
-		JComboBox<String> toList = new JComboBox<String>(years);
+		
+		fromList = new JComboBox<String>(years);
+		fromList.addActionListener(this);
+		toList = new JComboBox<String>(years);
+		toList.addActionListener(this);
 
 		JPanel north = new JPanel();
 		north.add(chooseCountryLabel);
@@ -118,24 +130,27 @@ public class MainUI extends JFrame implements ActionListener{
 		north.add(toList);
 
 		// Set bottom bar
-		JButton recalculate = new JButton(props.getProperty("recalculateLabel"));
+		recalculate = new JButton(props.getProperty("recalculateLabel"));
 		recalculate.addActionListener(this);
 
 		JLabel viewsLabel = new JLabel(props.getProperty("viewsLabel"));
 
 		Vector<String> viewsNames = new Vector<String>();
 		viewsNames.addAll(Arrays.asList(props.getProperty("Charts").split(",")));
-		JComboBox<String> viewsList = new JComboBox<String>(viewsNames);
-		JButton addView = new JButton("+");
-		JButton removeView = new JButton("-");
+		viewsList = new JComboBox<String>(viewsNames);
+		//viewsList.addActionListener(this);
+		
+		addView = new JButton("+");
+		addView.addActionListener(this);
+		removeView = new JButton("-");
+		removeView.addActionListener(this);
 
 		JLabel methodLabel = new JLabel(props.getProperty("methodLabel"));
 
 		Vector<String> methodsNames = new Vector<String>();
 		methodsNames.addAll(Arrays.asList(props.getProperty("Methods").split(",")));
-
-
-		JComboBox<String> methodsList = new JComboBox<String>(methodsNames);
+		methodsList = new JComboBox<String>(methodsNames);
+		methodsList.addActionListener(this);
 
 		JPanel south = new JPanel();
 		south.add(viewsLabel);
@@ -146,6 +161,17 @@ public class MainUI extends JFrame implements ActionListener{
 		south.add(methodLabel);
 		south.add(methodsList);
 		south.add(recalculate);
+		
+		//setting default values to what is currently selected if user never changes options
+		//user will have to select '+" to add a graph. if they don't click plus on any graph but clicks recalculate we need a popup message that they didn't select a graph
+		this.countryCode = (String) countriesList.getSelectedItem();//need to convert to a country code. Will facade do that?
+		this.startYear = Integer.parseInt((String)fromList.getSelectedItem());
+		this.endYear = Integer.parseInt((String)toList.getSelectedItem());
+		this.analysis = (String) methodsList.getSelectedItem(); //analysis attribute is only a string. Need a factory to create the object
+		System.out.println(countryCode);
+		System.out.println(startYear);
+		System.out.println(endYear);
+		System.out.println(analysis);
 
 		JPanel east = new JPanel();
 
@@ -158,6 +184,52 @@ public class MainUI extends JFrame implements ActionListener{
 		getContentPane().add(east, BorderLayout.EAST);
 		getContentPane().add(south, BorderLayout.SOUTH);
 		getContentPane().add(west, BorderLayout.WEST);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent evt) {
+		if(evt.getSource() == recalculate) {
+			//need to create analysis object based on user selection when they click 'recalculate' button
+			//requires an analysis factory
+			//this listener should call facade --> facade can interact with analysis factory and subject to update the graphs
+			this.analysis = (String) methodsList.getSelectedItem();
+			
+			this.remove(west);
+			west = new JPanel();
+			west.setLayout(new GridLayout(2, 0));
+			createCharts(west);
+	
+	
+			getContentPane().add(west, BorderLayout.WEST);
+			this.repaint();
+			this.revalidate();
+			i++;
+			//clear subject once done since user will have to reset the graphs
+		}
+		else if(evt.getSource() == addView) {
+			publisher.attach((String) viewsList.getSelectedItem());
+		}
+		else if(evt.getSource() == removeView) {
+			publisher.detach((String) viewsList.getSelectedItem());
+		}
+		else if(evt.getSource() == fromList) {
+			this.startYear = Integer.parseInt((String)fromList.getSelectedItem());
+			System.out.println(this.startYear);
+		}
+		else if(evt.getSource() == toList) {
+			this.endYear = Integer.parseInt((String)toList.getSelectedItem());
+			System.out.println(this.endYear);
+		}
+		else if(evt.getSource() == countriesList) {
+			this.countryCode = (String) countriesList.getSelectedItem(); //need to convert country to country code.
+			System.out.println(this.countryCode);
+		}
+		else if(evt.getSource() == methodsList) {
+			this.analysis = (String) methodsList.getSelectedItem(); //need to convert analysis object
+			System.out.println(this.analysis);
+		}
+		
+		
 	}
 	
 	private void createCharts(JPanel west) {
@@ -188,9 +260,11 @@ public class MainUI extends JFrame implements ActionListener{
 			HashMap<Integer,Double> map1=new HashMap<Integer,Double>();
 			HashMap<Integer,Double> map2=new HashMap<Integer,Double>();
 			HashMap<Integer,Double> map3=new HashMap<Integer,Double>();
+			HashMap<Integer,Double> map4=new HashMap<Integer,Double>();
 			//linkedList twoDataSeries = new linkedList();
 			linkedList firstSeries = new linkedList();
 			linkedList secondSeries = new linkedList();
+			linkedList anotherSeries = new linkedList();
 			threeSeries = new linkedList();
 			
 			map1.put(2018, 5.6);
@@ -227,6 +301,14 @@ public class MainUI extends JFrame implements ActionListener{
 			map3.put(2011, 8130.0);
 			map3.put(2010, 7930.0);
 			firstSeries.setdata(map3);
+			//firstSeries.setNext(anotherSeries);
+			
+			//map4.put(2018, 5.0);
+			//map4.put(2017, 6.5);
+			//map4.put(2016, 7.0);
+			//map4.put(2015, 8.0);
+			//anotherSeries.setdata(map4);
+			
 			}
 			
 			line.update(threeSeries, west);
@@ -240,20 +322,7 @@ public class MainUI extends JFrame implements ActionListener{
 
 		}
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				this.remove(west);
-				west = new JPanel();
-				west.setLayout(new GridLayout(2, 0));
-				createCharts(west);
 
-		
-				getContentPane().add(west, BorderLayout.WEST);
-				this.repaint();
-				this.revalidate();
-				i++;
-				
-			}
 
 	private void createReport(JPanel west) {
 		JTextArea report = new JTextArea();

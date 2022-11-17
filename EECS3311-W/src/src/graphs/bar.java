@@ -3,7 +3,9 @@ package src.graphs;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 
 import javax.swing.BorderFactory;
@@ -39,12 +41,17 @@ public class bar implements Graph{
 			}
 			
 			dataSets = (linkedList) dataIterator.next();
+			plot.setRangeAxis(count, new NumberAxis("")); //insert axis name
 			i++;
 			count++;
 			if(i > 1) {
 				plot.setDataset(pairs, dataSeries);
 				plot.setRenderer(pairs, barrenderer);
-				plot.setRangeAxis(pairs, new NumberAxis("")); //insert axis name
+				List<Integer> axes = Arrays.asList(count-2, count-1);
+				plot.mapDatasetToRangeAxes(pairs, axes);
+				//plot.mapDatasetToRangeAxis(pairs, count-1);
+				//plot.mapDatasetToRangeAxis(pairs, count-2);
+				//plot.setRangeAxis(pairs, new NumberAxis(""));
 				pairs++;
 				dataSeries = new DefaultCategoryDataset();
 				barrenderer = new BarRenderer();
@@ -55,16 +62,17 @@ public class bar implements Graph{
 		if(i == 1) {
 			plot.setDataset(pairs, dataSeries);
 			plot.setRenderer(pairs, barrenderer);
+			plot.mapDatasetToRangeAxis(pairs, count-1);
 			plot.setRangeAxis(pairs, new NumberAxis("")); //insert axis name
 		}
 		
 		CategoryAxis domainAxis = new CategoryAxis("Year"); //can consider an option to change y axis
 		plot.setDomainAxis(domainAxis);
 		
-		for(int j=0; j<=pairs; j++) {
+		/*for(int j=0; j<count; j++) {
 			System.out.println("j: " + j);
 			plot.mapDatasetToRangeAxis(j, j);
-		}
+		}*/
 		
 		JFreeChart barChart = new JFreeChart("Default Title",
 				new Font("Serif", java.awt.Font.BOLD, 18), plot, true);
