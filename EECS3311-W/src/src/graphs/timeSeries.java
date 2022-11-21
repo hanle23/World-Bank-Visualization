@@ -32,11 +32,14 @@ public class timeSeries implements Graph{
 		int i = 0;
 		String year;
 		
+		dataSetDisplay = new TimeSeriesCollection();
+		splinerenderer = new XYSplineRenderer();
+		
 		while (dataSets != null) {
 			Iterator dataIterator = dataSets.getIterator();
 			HashMap<?,?> dataSet = dataSets.getData();
-			dataSetDisplay = new TimeSeriesCollection();
-			splinerenderer = new XYSplineRenderer();
+			//dataSetDisplay = new TimeSeriesCollection();
+			//splinerenderer = new XYSplineRenderer();
 			TimeSeries series = new TimeSeries(i);
 			
 			for (Entry<?, ?> temp : dataSet.entrySet()) {
@@ -45,19 +48,23 @@ public class timeSeries implements Graph{
 			}
 			
 			dataSetDisplay.addSeries(series);
-			plot.setDataset(i, dataSetDisplay);
-			plot.setRenderer(i, splinerenderer);
-			plot.setRangeAxis(i, new NumberAxis("temp label")); //put whatever to match the data
+			//plot.setDataset(i, dataSetDisplay);
+			//plot.setRenderer(i, splinerenderer);
+			//plot.setRangeAxis(i, new NumberAxis("temp label")); //put whatever to match the data
 			i++;
 			dataSets = (linkedList) dataIterator.next();
 			
 		}
 		
+		plot.setDataset(0, dataSetDisplay);
+		plot.setRenderer(0, splinerenderer);
+		plot.setRangeAxis(0, new NumberAxis("temp label")); //put whatever to match the data
+		
 		DateAxis domainAxis = new DateAxis("Year");
 		plot.setDomainAxis(domainAxis);
 		
 		for(int j = 0; j < i ; j++) {
-			plot.mapDatasetToRangeAxis(j, j);
+			plot.mapDatasetToRangeAxis(j, 0);
 		}
 		
 		JFreeChart chart = new JFreeChart(graphTitle,

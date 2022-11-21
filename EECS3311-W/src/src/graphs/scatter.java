@@ -33,12 +33,13 @@ public class scatter implements Graph{
 		XYItemRenderer itemrenderer;
 		int i = 0;
 		String year;
-		
+		dataSetDisplay = new TimeSeriesCollection();
+		itemrenderer =  new XYLineAndShapeRenderer(false, true);
 		while (dataSets != null) {
 			Iterator dataIterator = dataSets.getIterator();
 			HashMap<?,?> dataSet = dataSets.getData();
-			dataSetDisplay = new TimeSeriesCollection();
-			itemrenderer =  new XYLineAndShapeRenderer(false, true);
+		//	dataSetDisplay = new TimeSeriesCollection();
+		//	itemrenderer =  new XYLineAndShapeRenderer(false, true);
 			TimeSeries series = new TimeSeries(i);
 			
 			for (Entry<?, ?> temp : dataSet.entrySet()) {
@@ -47,19 +48,25 @@ public class scatter implements Graph{
 			}
 			
 			dataSetDisplay.addSeries(series);
-			plot.setDataset(i, dataSetDisplay);
-			plot.setRenderer(i, itemrenderer);
-			plot.setRangeAxis(i, new NumberAxis("temp label")); //put whatever to match the data
+		//	plot.setDataset(i, dataSetDisplay);
+		//	plot.setRenderer(i, itemrenderer);
+		//	plot.setRangeAxis(i, new NumberAxis("temp label")); //put whatever to match the data
 			i++;
 			dataSets = (linkedList) dataIterator.next();
 			
 		}
 		
+		//dataSetDisplay.addSeries(series);
+		plot.setDataset(0, dataSetDisplay);
+		plot.setRenderer(0, itemrenderer);
+		plot.setRangeAxis(0, new NumberAxis("temp label")); //put whatever to match the data
+		
 		DateAxis domainAxis = new DateAxis("Year");
 		plot.setDomainAxis(domainAxis);
 		
 		for(int j = 0; j < i ; j++) {
-			plot.mapDatasetToRangeAxis(j, j);
+			//plot.mapDatasetToRangeAxis(j, j);
+			plot.mapDatasetToRangeAxis(j, 0);
 		}
 		
 		JFreeChart scatterChart = new JFreeChart(graphTitle,
