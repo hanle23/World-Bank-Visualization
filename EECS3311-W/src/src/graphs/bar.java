@@ -25,7 +25,7 @@ import src.interfaces.Iterator;
 public class bar implements Graph{
 
 	@Override
-	public void update(linkedList dataSets, JPanel west) {
+	public void update(linkedList dataSets, JPanel west, String graphTitle) {
 		int i = 0, pairs = 0; // every 2 data series we will make a new collection
 		int count =0;
 		DefaultCategoryDataset dataSeries = new DefaultCategoryDataset();
@@ -74,7 +74,7 @@ public class bar implements Graph{
 			plot.mapDatasetToRangeAxis(j, j);
 		}*/
 		
-		JFreeChart barChart = new JFreeChart("Default Title",
+		JFreeChart barChart = new JFreeChart(graphTitle,
 				new Font("Serif", java.awt.Font.BOLD, 18), plot, true);
 		
 		ChartPanel chartPanel = new ChartPanel(barChart);

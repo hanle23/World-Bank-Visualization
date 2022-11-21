@@ -25,7 +25,7 @@ import src.interfaces.Iterator;
 public class timeSeries implements Graph{
 
 	@Override
-	public void update(linkedList dataSets, JPanel west) {
+	public void update(linkedList dataSets, JPanel west, String graphTitle) {
 		XYPlot plot = new XYPlot();
 		TimeSeriesCollection dataSetDisplay;
 		XYSplineRenderer splinerenderer;
@@ -60,7 +60,7 @@ public class timeSeries implements Graph{
 			plot.mapDatasetToRangeAxis(j, j);
 		}
 		
-		JFreeChart chart = new JFreeChart("Default Title",
+		JFreeChart chart = new JFreeChart(graphTitle,
 				new Font("Serif", java.awt.Font.BOLD, 18), plot, true);
 
 		ChartPanel chartPanel = new ChartPanel(chart);

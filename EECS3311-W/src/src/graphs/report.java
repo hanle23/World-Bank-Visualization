@@ -16,13 +16,13 @@ import src.interfaces.Iterator;
 public class report implements Graph{
 
 	@Override
-	public void update(linkedList dataSets, JPanel west) {
+	public void update(linkedList dataSets, JPanel west, String graphTitle) {
 		int i = 0;
 		JTextArea report = new JTextArea();
 		report.setEditable(false);
 		report.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 		report.setBackground(Color.white);
-		String reportMessage = "Default Title\n" + "==============================\n";
+		String reportMessage = graphTitle + "\n" + "==============================\n";
 		
 		while (dataSets != null) {
 			Iterator dataIterator = dataSets.getIterator();

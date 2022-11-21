@@ -44,13 +44,13 @@ public class graphSubject implements Subject{
 	}
 	
 	@Override
-	public void notifyGraphs(linkedList dataSets, JPanel west) {
+	public void notifyGraphs(linkedList dataSets, JPanel west, String graphTitle) {
 		for(Entry<String, Graph> temp : this.graphs.entrySet()) {
 			Graph displayedGraph = temp.getValue();
 			
 			//only display the graph if the user selects it
 			if(displayedGraph != null) {
-				displayedGraph.update(dataSets, west);
+				displayedGraph.update(dataSets, west, graphTitle);
 			}
 		}
 		

@@ -316,12 +316,12 @@ public class MainUI extends JFrame implements ActionListener{
 			
 			}
 			
-			line.update(threeSeries, west);
-			timeSeries.update(threeSeries, west);
-			bar.update(threeSeries, west);
-			pie.update(pieData, west);
-			scatter.update(threeSeries, west);
-			text.update(threeSeries, west);
+			line.update(threeSeries, west, "this is the graph title");
+			timeSeries.update(threeSeries, west, "this is the graph title");
+			bar.update(threeSeries, west, "this is the graph title");
+			pie.update(pieData, west, "this is the graph title");
+			scatter.update(threeSeries, west, "this is the graph title");
+			text.update(threeSeries, west, "this is the graph title");
 			//text.update(pieData, west);
 
 

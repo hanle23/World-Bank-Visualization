@@ -31,7 +31,7 @@ import src.interfaces.Iterator;
 public class lineGraph implements Graph{
 
 	@Override
-	public void update(linkedList dataSets, JPanel west) {
+	public void update(linkedList dataSets, JPanel west, String graphTitle) {
 		
 		int i = 0; //need to consider naming for the data sets
 		XYSeriesCollection datasetDisplay = new XYSeriesCollection();
@@ -69,7 +69,7 @@ public class lineGraph implements Graph{
 		chart.getLegend().setFrame(BlockBorder.NONE);
 
 		chart.setTitle(
-				new TextTitle("Default Title", new Font("Serif", java.awt.Font.BOLD, 18)));
+				new TextTitle(graphTitle, new Font("Serif", java.awt.Font.BOLD, 18)));
 
 		ChartPanel chartPanel = new ChartPanel(chart);
 		chartPanel.setPreferredSize(new Dimension(400, 300));

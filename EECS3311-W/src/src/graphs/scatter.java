@@ -27,7 +27,7 @@ import src.interfaces.Iterator;
 public class scatter implements Graph{
 
 	@Override
-	public void update(linkedList dataSets, JPanel west) {
+	public void update(linkedList dataSets, JPanel west, String graphTitle) {
 		XYPlot plot = new XYPlot();
 		TimeSeriesCollection dataSetDisplay;
 		XYItemRenderer itemrenderer;
@@ -62,7 +62,7 @@ public class scatter implements Graph{
 			plot.mapDatasetToRangeAxis(j, j);
 		}
 		
-		JFreeChart scatterChart = new JFreeChart("Default Title",
+		JFreeChart scatterChart = new JFreeChart(graphTitle,
 				new Font("Serif", java.awt.Font.BOLD, 18), plot, true);
 
 		ChartPanel chartPanel = new ChartPanel(scatterChart);

@@ -20,7 +20,7 @@ import src.interfaces.Iterator;
 public class pie implements Graph{
 
 	@Override
-	public void update(linkedList dataSets, JPanel west) {
+	public void update(linkedList dataSets, JPanel west, String graphTitle) {
 		DefaultCategoryDataset datasetCollection = new DefaultCategoryDataset();
 		
 		while (dataSets != null) {
@@ -32,7 +32,7 @@ public class pie implements Graph{
 			dataSets = (linkedList) dataIterator.next();
 		}
 		
-		JFreeChart pieChart = ChartFactory.createMultiplePieChart("Default Title", datasetCollection,
+		JFreeChart pieChart = ChartFactory.createMultiplePieChart(graphTitle, datasetCollection,
 				TableOrder.BY_COLUMN, true, true, false);
 
 		ChartPanel chartPanel = new ChartPanel(pieChart);
