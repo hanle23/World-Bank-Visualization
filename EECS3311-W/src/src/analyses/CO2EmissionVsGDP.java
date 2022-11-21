@@ -3,6 +3,8 @@ package src.analyses;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import javax.swing.JOptionPane;
+
 import src.dataExtractor;
 import src.util;
 import src.concrete.linkedList;
@@ -22,11 +24,12 @@ public class CO2EmissionVsGDP implements analyses {
 	private boolean isValid(int startYear, int endYear, String countryCode) {
 		boolean result = true;
 		if (endYear < startYear) {
-			System.out.println("Years not valid");
+			JOptionPane.showMessageDialog(null, "Years not Valid", "Years Selction", JOptionPane.INFORMATION_MESSAGE);
 			return false;
 		}
-		if (!util.COUNTRIES.contains(countryCode)) {
-			System.out.println("country excluded");
+		if (!util.COUNTRIES.contains(countryCode) || countryCode == null) {
+			System.out.println("country invalid");
+			JOptionPane.showMessageDialog(null, "Country is Excluded From Data Fetching", "Country Selction", JOptionPane.INFORMATION_MESSAGE);
 			return false;
 		}
 		System.out.println("returning true, proceed");
@@ -40,6 +43,7 @@ public class CO2EmissionVsGDP implements analyses {
 		
 		
 		HashMap<Integer, Double> tempResult = new HashMap<Integer, Double>();
+		HashMap<Integer, Double> sortedResult = new HashMap<>();
 		HashMap<Integer, Double> co2Emissions = dataExtractor.filter(jsonObject.getData("EN.ATM.CO2E.PC"));
 		HashMap<Integer, Double> GDP = dataExtractor.filter(jsonObject.getData("NY.GDP.PCAP.CD"));
 		for (Entry<Integer, Double> temp : co2Emissions.entrySet()) {
@@ -57,7 +61,7 @@ public class CO2EmissionVsGDP implements analyses {
 				  System.out.println("co2/GDP for " + year + " is " + co2Amount/GDPAmount);
 			  }
 			}
-		linkedList result = new linkedList(tempResult, null);
+		linkedList result = new linkedList(sortedResult, null);
 		return result;
 	}
 	public static void main(String args[]) {

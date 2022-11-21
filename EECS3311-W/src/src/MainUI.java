@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -227,6 +228,9 @@ public class MainUI extends JFrame implements ActionListener{
 		}
 		else if(evt.getSource() == countriesList) {
 			this.country = this.countries.get((String) countriesList.getSelectedItem()); //need to convert country to country code.
+			if (this.country == null || !util.COUNTRIES.contains(this.country)) { //checking util to see if country is excluded
+				JOptionPane.showMessageDialog(null, "Country is Excluded From Data Fetching", "Country Selction", JOptionPane.INFORMATION_MESSAGE);
+			}
 			System.out.println(this.country);
 		}
 		else if(evt.getSource() == methodsList) {

@@ -1,5 +1,7 @@
 package src.fetcher;
 
+import javax.swing.JOptionPane;
+
 import src.analyses.CO2EmissionVsGDP;
 import src.analyses.CO2_Energy_PM25;
 import src.analyses.HealthCareVsMortality;
@@ -14,8 +16,10 @@ public class AnalysisFactory {
 	public analyses getAnalysis(int startYear, int endYear, String countryCode, String analysisType) {
 		
 		System.out.println("Start Year: "+ startYear + " end Year: "+ endYear + " Country code: "+ countryCode+ "Analysis type: "+ analysisType);
-		if(analysisType == null || startYear == -1 || endYear == -1 || countryCode == null)
+		if(analysisType == null || startYear == -1 || endYear == -1 || countryCode == null) {
+			JOptionPane.showMessageDialog(null, "One or more fields inputted is invalid", "Invaild Input", JOptionPane.INFORMATION_MESSAGE);
 			return null;
+		}
 		
 		if(analysisType.equalsIgnoreCase("Infant Mortality"))
 			return new infantMortality(startYear, endYear, countryCode);

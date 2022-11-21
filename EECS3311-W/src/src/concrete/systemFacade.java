@@ -2,6 +2,7 @@ package src.concrete;
 
 import java.util.HashMap;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import src.fetcher.Adapter;
@@ -33,8 +34,11 @@ public class systemFacade {
 		//System.out.println("Recieved - startYear:" + startYear + " endYear:" + endYear + " country:"+ country + " analysis:"+analysis);
 		
 		analyses chosenAnalysis = analysisCreator.getAnalysis(startYear, endYear, countryCode, analysisType);
-		chosenAnalysis.analyzeData();
-		graphPublisher.notifyGraphs(chosenAnalysis.analyzeData(), graphPanel, analysisType); //need to handle case when there are no graphs
-		graphPublisher.detachAll();
+		if(chosenAnalysis != null) {
+			linkedList analysisData = chosenAnalysis.analyzeData();
+			if(analysisData != null)
+				graphPublisher.notifyGraphs(analysisData, graphPanel, analysisType);
+		}
+		graphPublisher.detachAll();//should we detachAll everytime or only when analysis is sucessfull?
 	}
 }
