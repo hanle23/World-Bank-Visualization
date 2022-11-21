@@ -19,6 +19,12 @@ import com.google.gson.JsonObject;
 		this.country = country;
 	}
 	
+	public dataFetcher() {
+		this.startDate = - 1;
+		this.endDate = -1;
+		
+	}
+	
 	public void setStartDate(int year) {
 		this.startDate = year;
 	}

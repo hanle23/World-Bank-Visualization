@@ -1,11 +1,13 @@
 package src.fetcher;
 
+
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Scanner;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -42,10 +44,54 @@ public class adapteeDataFetcher {
 		return array;
 	}
 	
+	public HashMap<String, String> specificCountryCodeGetData() {
+		String urlString = "http://api.worldbank.org/v2/country?format=json";
+		JsonArray array = null;
+		HashMap<String, String> result = null;
+		try {
+			URL url = new URL(urlString);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.connect();
+			int responsecode = conn.getResponseCode();
+			// IF THE RESPONSE IS 200 OK GET THE LINE WITH THE RESULTS
+			if (responsecode == 200) {
+				String inline = "";
+				Scanner sc = new Scanner(url.openStream());
+				while (sc.hasNext()) {
+					inline += sc.nextLine();
+				}
+				sc.close();
+
+				array = new JsonParser().parse(inline).getAsJsonArray();
+				array = array.get(1).getAsJsonArray();
+				result = new HashMap<String, String>();
+				for (int i = 0; i < array.size(); i++) {
+					result.put(array.get(i).getAsJsonObject().get("name").toString().strip().trim().replaceAll("\"", ""), array.get(i).getAsJsonObject().get("id").toString().strip().trim().replaceAll("\"", ""));
+				}
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block e.printStackTrace();
+		}
+		return result;
+		
+	}
+	
 	public static void main(String[] args) {
 		Adapter test = new Adapter(2000, 2023, "can");
 		JsonArray test1 = test.getData("AG.LND.AGRI.ZS");
-		System.out.println(test1);
+		String name = "Canada";
+		HashMap<String, String> countries = test.getCountriesCode();
+		for (HashMap.Entry<String, String> entry : countries.entrySet()) {
+			String key = entry.getKey();
+		    System.out.println(key.equals(name));
+		    String value = entry.getValue();
+		    System.out.println(value);
+
+		}
+		
+
 	}
 	
 }

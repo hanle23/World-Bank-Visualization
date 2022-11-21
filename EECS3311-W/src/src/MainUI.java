@@ -51,6 +51,7 @@ import src.analyses.HealthCareVsMortality;
 import src.analyses.avgGovExpenditureOnEd;
 import src.concrete.linkedList;
 import src.concrete.systemFacade;
+import src.fetcher.Adapter;
 import src.graphs.Graph;
 import src.graphs.bar;
 import src.graphs.graphSubject;
@@ -73,6 +74,7 @@ public class MainUI extends JFrame implements ActionListener{
 	private int i, startYear, endYear;
 	private systemFacade facade;
 	private String country, analysis;
+	private HashMap<String, String> countries;
 	
 	private static Properties props;
 
@@ -98,6 +100,10 @@ public class MainUI extends JFrame implements ActionListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		// Get list of countries
+		Adapter fetcher = new Adapter();
+		this.countries = fetcher.getCountriesCode();
 		
 		facade = new systemFacade();
 
@@ -165,7 +171,7 @@ public class MainUI extends JFrame implements ActionListener{
 		
 		//setting default values to what is currently selected if user never changes options
 		//user will have to select '+" to add a graph. if they don't click plus on any graph but clicks recalculate we need a popup message that they didn't select a graph
-		this.country = (String) countriesList.getSelectedItem();//need to convert to a country code. Will facade do that?
+		this.country = this.countries.get((String) countriesList.getSelectedItem());//need to convert to a country code. Will facade do that?
 		this.startYear = Integer.parseInt((String)fromList.getSelectedItem());
 		this.endYear = Integer.parseInt((String)toList.getSelectedItem());
 		this.analysis = (String) methodsList.getSelectedItem(); //analysis attribute is only a string. Need a factory to create the object
@@ -220,7 +226,7 @@ public class MainUI extends JFrame implements ActionListener{
 			System.out.println(this.endYear);
 		}
 		else if(evt.getSource() == countriesList) {
-			this.country = (String) countriesList.getSelectedItem(); //need to convert country to country code.
+			this.country = this.countries.get((String) countriesList.getSelectedItem()); //need to convert country to country code.
 			System.out.println(this.country);
 		}
 		else if(evt.getSource() == methodsList) {

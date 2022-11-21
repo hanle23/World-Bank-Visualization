@@ -20,6 +20,7 @@ public class GraphFactory {
 		if(graphType.equalsIgnoreCase("Report"))
 			return new report();
 		
+		
 		return null;
 		
 	}
