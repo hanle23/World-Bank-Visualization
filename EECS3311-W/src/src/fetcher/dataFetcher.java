@@ -1,5 +1,7 @@
 package src.fetcher;
 
+import java.util.HashMap;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -50,5 +52,6 @@ import com.google.gson.JsonObject;
 	}
 	
 	abstract public JsonArray getData(String dataIndicator);
+	abstract public HashMap<String, String> getCountriesCode();
 	
 }

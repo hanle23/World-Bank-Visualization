@@ -11,7 +11,7 @@ import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
 
 public class util {
-	public static final Set<String> COUNTRIES = Set.of("can");
+	public static final Set<String> COUNTRIES = Set.of("CAN");
 	private util() 
 	{	
 	}

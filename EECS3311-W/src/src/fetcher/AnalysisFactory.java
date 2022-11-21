@@ -11,8 +11,9 @@ import src.analyses.problemsAccessingHealthCare;
 import src.interfaces.analyses;
 
 public class AnalysisFactory {
-	public analyses getGraph(int startYear, int endYear, String countryCode, String analysisType) {
+	public analyses getAnalysis(int startYear, int endYear, String countryCode, String analysisType) {
 		
+		System.out.println("Start Year: "+ startYear + " end Year: "+ endYear + " Country code: "+ countryCode+ "Analysis type: "+ analysisType);
 		if(analysisType == null || startYear == -1 || endYear == -1 || countryCode == null)
 			return null;
 		

@@ -119,7 +119,7 @@ public class MainUI extends JFrame implements ActionListener{
 		JLabel to = new JLabel(props.getProperty("toLabel"));
 		
 		Vector<String> years = new Vector<String>();
-		for (int i = 2021; i >= 2010; i--) {
+		for (int i = 2021; i >= 2000; i--) {
 			years.add("" + i);
 		}
 		
@@ -201,7 +201,7 @@ public class MainUI extends JFrame implements ActionListener{
 			this.west.setLayout(new GridLayout(2, 0));
 			
 			//this listener should call facade --> facade can interact with analysis factory and subject to update the graphs	
-			createCharts(west);
+			//createCharts(west);
 			facade.recalculate(this.startYear, this.endYear, this.country, this.analysis, this.west);
 	
 	

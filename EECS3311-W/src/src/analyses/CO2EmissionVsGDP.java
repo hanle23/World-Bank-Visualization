@@ -22,11 +22,14 @@ public class CO2EmissionVsGDP implements analyses {
 	private boolean isValid(int startYear, int endYear, String countryCode) {
 		boolean result = true;
 		if (endYear < startYear) {
+			System.out.println("Years not valid");
 			return false;
 		}
 		if (!util.COUNTRIES.contains(countryCode)) {
+			System.out.println("country excluded");
 			return false;
 		}
+		System.out.println("returning true, proceed");
 		return result;
 	}
 	

@@ -83,9 +83,11 @@ public class adapteeDataFetcher {
 		JsonArray test1 = test.getData("AG.LND.AGRI.ZS");
 		String name = "Canada";
 		HashMap<String, String> countries = test.getCountriesCode();
+		//System.out.println(countries);
 		for (HashMap.Entry<String, String> entry : countries.entrySet()) {
 			String key = entry.getKey();
-		    System.out.println(key.equals(name));
+			System.out.println(key);
+		   // System.out.println(key.equals(name));
 		    String value = entry.getValue();
 		    System.out.println(value);
 
