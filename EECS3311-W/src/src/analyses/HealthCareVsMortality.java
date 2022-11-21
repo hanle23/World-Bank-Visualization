@@ -40,6 +40,10 @@ public class HealthCareVsMortality implements analyses{
 		HashMap<Integer, Double> problemsAccessingHealthCare = dataExtractor.filter(jsonObject.getData("SH.ACS.MONY.Q1.ZS"));
 		HashMap<Integer, Double> infantMortality = dataExtractor.filter(jsonObject.getData("SP.DYN.IMRT.IN"));
 		
+		if(problemsAccessingHealthCare == null || infantMortality == null)
+			return null;
+		//have a popup message that analysis cannot be done since API doesn't have data, it returns null when there is no data for all the years, for 1 or more extractor
+		
 		for (Entry<Integer, Double> temp : problemsAccessingHealthCare.entrySet()) {
 			  Integer year = temp.getKey();
 			  Double healthCareAmount = temp.getValue();

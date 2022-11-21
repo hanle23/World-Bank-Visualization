@@ -36,6 +36,10 @@ public class adapteeDataFetcher {
 				sc.close();
 				JsonArray jsonArray = new 
 						JsonParser().parse(inline).getAsJsonArray();
+				
+				if(jsonArray.get(1).isJsonNull())
+					return null;
+				
 				array = (JsonArray) jsonArray.get(1);
 			}
 		} catch (IOException e) {
