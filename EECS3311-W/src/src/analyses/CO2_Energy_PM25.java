@@ -8,10 +8,11 @@ import src.dataExtractor;
 import src.util;
 import src.concrete.linkedList;
 import src.fetcher.Adapter;
+import src.fetcher.dataFetcher;
 import src.interfaces.analyses;
 
 public class CO2_Energy_PM25 implements analyses {
-	private Adapter jsonObject;
+	private dataFetcher jsonObject;
 	private int startYear;
 	public CO2_Energy_PM25(int startYear, int endYear, String countryCode) {
 		if (isValid(startYear, endYear, countryCode)) {

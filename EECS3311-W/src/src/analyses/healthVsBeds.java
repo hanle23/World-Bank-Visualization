@@ -8,11 +8,12 @@ import src.dataExtractor;
 import src.util;
 import src.concrete.linkedList;
 import src.fetcher.Adapter;
+import src.fetcher.dataFetcher;
 import src.interfaces.analyses;
 import src.interfaces.Iterator;
 
 public class healthVsBeds implements analyses {
-	private Adapter jsonObject;
+	private dataFetcher jsonObject;
 	public healthVsBeds(int startYear, int endYear, String countryCode) {
 		if (isValid(startYear, endYear, countryCode)) {
 			this.jsonObject = new Adapter(startYear, endYear, countryCode);

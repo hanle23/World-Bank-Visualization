@@ -7,10 +7,11 @@ import src.concrete.linkedList;
 import src.dataExtractor;
 import src.util;
 import src.fetcher.Adapter;
+import src.fetcher.dataFetcher;
 import src.interfaces.analyses;
 
 public class problemsAccessingHealthCare implements analyses {
-	private Adapter jsonObject;
+	private dataFetcher jsonObject;
 	
 	public problemsAccessingHealthCare(int startYear, int endYear, String countryCode) {
 		if (isValid(startYear, endYear, countryCode)) {

@@ -7,10 +7,11 @@ import src.concrete.linkedList;
 import src.dataExtractor;
 import src.util;
 import src.fetcher.Adapter;
+import src.fetcher.dataFetcher;
 import src.interfaces.analyses;
 
 public class forestArea implements analyses {
-	private Adapter jsonObject;
+	private dataFetcher jsonObject;
 	
 	public forestArea(int startYear, int endYear, String countryCode) {
 		if (isValid(startYear, endYear, countryCode)) {

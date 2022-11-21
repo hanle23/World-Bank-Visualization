@@ -8,9 +8,10 @@ import src.util;
 import src.concrete.linkedList;
 import src.interfaces.analyses;
 import src.fetcher.Adapter;
+import src.fetcher.dataFetcher;
 
 public class infantMortality implements analyses {
-	private Adapter jsonObject;
+	private dataFetcher jsonObject;
 	
 	public infantMortality(int startYear, int endYear, String countryCode) {
 		if (isValid(startYear, endYear, countryCode)) {
