@@ -3,6 +3,8 @@ package src.analyses;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import javax.swing.JOptionPane;
+
 import src.dataExtractor;
 import src.util;
 import src.concrete.linkedList;
@@ -40,8 +42,10 @@ public class HealthCareVsMortality implements analyses{
 		HashMap<Integer, Double> problemsAccessingHealthCare = dataExtractor.filter(jsonObject.getData("SH.ACS.MONY.Q1.ZS"));
 		HashMap<Integer, Double> infantMortality = dataExtractor.filter(jsonObject.getData("SP.DYN.IMRT.IN"));
 		
-		if(problemsAccessingHealthCare == null || infantMortality == null)
+		if(problemsAccessingHealthCare == null || infantMortality == null) {
+			JOptionPane.showMessageDialog(null, "World Bank Does Not Have Data For The Selected Year(s)", "Data Not Available", JOptionPane.INFORMATION_MESSAGE);
 			return null;
+		}
 		//have a popup message that analysis cannot be done since API doesn't have data, it returns null when there is no data for all the years, for 1 or more extractor
 		
 		for (Entry<Integer, Double> temp : problemsAccessingHealthCare.entrySet()) {

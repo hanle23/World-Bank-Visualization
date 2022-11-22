@@ -3,6 +3,8 @@ package src.analyses;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import javax.swing.JOptionPane;
+
 import src.dataExtractor;
 import src.util;
 import src.concrete.linkedList;
@@ -36,6 +38,12 @@ public class infantMortality implements analyses {
 		}
 		HashMap<Integer, Double> tmp = new HashMap<Integer, Double>();
 		HashMap<Integer, Double> mortalityData = dataExtractor.filter(jsonObject.getData("SP.DYN.IMRT.IN"));
+		
+		if(mortalityData == null) {
+			JOptionPane.showMessageDialog(null, "World Bank Does Not Have Data For The Selected Year(s)", "Data Not Available", JOptionPane.INFORMATION_MESSAGE);
+			return null;
+		}
+		
 		for (Entry<Integer, Double> temp : mortalityData.entrySet()) {
 			  Integer year = temp.getKey();
 			  Double infantMortality = temp.getValue();

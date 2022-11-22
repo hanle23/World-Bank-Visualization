@@ -3,6 +3,8 @@ package src.analyses;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import javax.swing.JOptionPane;
+
 import src.dataExtractor;
 import src.util;
 import src.concrete.linkedList;
@@ -43,6 +45,11 @@ public class avgGovExpenditureOnEd implements analyses{
 		linkedList result = new linkedList(null, null);
 		HashMap<String, Double> tempResult = new HashMap<String, Double>();
 		HashMap<Integer, Double> govExpenditure = dataExtractor.filter(jsonObject.getData("SE.XPD.TOTL.GD.ZS"));
+		
+		if(govExpenditure == null) {
+			JOptionPane.showMessageDialog(null, "World Bank Does Not Have Data For The Selected Year(s)", "Data Not Available", JOptionPane.INFORMATION_MESSAGE);
+			return null;
+		}
 		
 		for (Entry<Integer, Double> temp : govExpenditure.entrySet()) {
 			Integer year = temp.getKey();

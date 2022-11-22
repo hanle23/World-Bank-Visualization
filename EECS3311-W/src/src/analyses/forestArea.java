@@ -2,6 +2,9 @@ package src.analyses;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
+
+import javax.swing.JOptionPane;
+
 import src.concrete.linkedList;
 
 import src.dataExtractor;
@@ -36,6 +39,12 @@ public class forestArea implements analyses {
 		}
 		HashMap<Integer, Double> series1 = new HashMap<Integer, Double>();
 		HashMap<Integer, Double> forestArea = dataExtractor.filter(jsonObject.getData("AG.LND.FRST.ZS"));
+		
+		if(forestArea == null) {
+			JOptionPane.showMessageDialog(null, "World Bank Does Not Have Data For The Selected Year(s)", "Data Not Available", JOptionPane.INFORMATION_MESSAGE);
+			return null;
+		}
+		
 		for (Entry<Integer, Double> temp : forestArea.entrySet()) {
 			  Integer year = temp.getKey();
 			  Double forestPercent = temp.getValue();

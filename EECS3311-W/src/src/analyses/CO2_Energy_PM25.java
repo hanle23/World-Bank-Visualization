@@ -2,6 +2,9 @@ package src.analyses;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
+
+import javax.swing.JOptionPane;
+
 import java.util.TreeMap;
 
 import src.dataExtractor;
@@ -25,6 +28,12 @@ public class CO2_Energy_PM25 implements analyses {
 		HashMap<Integer, Double> co2 = CO2_emmision();
 		HashMap<Integer, Double> energy = energy_use();
 		HashMap<Integer, Double> pm25 = pm25();
+		
+		if(co2 == null || energy == null || pm25 == null) {
+			JOptionPane.showMessageDialog(null, "World Bank Does Not Have Data For The Selected Year(s)", "Data Not Available", JOptionPane.INFORMATION_MESSAGE);
+			return null;
+		}
+		
 		linkedList result = new linkedList(pm25, new linkedList(energy, new linkedList(co2, null)));
 		return result;
 	}
@@ -47,6 +56,11 @@ public class CO2_Energy_PM25 implements analyses {
 			return null;
 		}
 		HashMap<Integer, Double> fetchedData = dataExtractor.filter(jsonObject.getData("EN.ATM.PM25.MC.M3"));
+		
+		if(fetchedData == null) {
+			return null;
+		}
+		
 		for (int endYear : fetchedData.keySet()) {
 			  if (endYear == this.startYear) {
 				  continue;
@@ -72,6 +86,11 @@ public class CO2_Energy_PM25 implements analyses {
 			return null;
 		}
 		HashMap<Integer, Double> fetchedData = dataExtractor.filter(jsonObject.getData("EG.USE.PCAP.KG.OE"));
+		
+		if(fetchedData == null) {
+			return null;
+		}
+		
 		for (int endYear : fetchedData.keySet()) {
 			  if (endYear == this.startYear) {
 				  continue;
@@ -97,6 +116,11 @@ public class CO2_Energy_PM25 implements analyses {
 			return null;
 		}
 		HashMap<Integer, Double> fetchedData = dataExtractor.filter(jsonObject.getData("EN.ATM.CO2E.PC"));
+		
+		if(fetchedData == null) {
+			return null;
+		}
+		
 		for (int endYear : fetchedData.keySet()) {
 			  if (endYear == this.startYear) {
 				  continue;

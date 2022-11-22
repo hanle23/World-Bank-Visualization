@@ -3,6 +3,7 @@ package src.analyses;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import javax.swing.JOptionPane;
 
 import src.dataExtractor;
 import src.util;
@@ -27,6 +28,12 @@ public class healthVsBeds implements analyses {
 		HashMap<Integer, Double> unsorted = new HashMap<Integer, Double>();
 		HashMap<Integer, Double> bedData = dataExtractor.filter(jsonObject.getData("SH.MED.BEDS.ZS"));
 		HashMap<Integer, Double> expendData = dataExtractor.filter(jsonObject.getData("SH.XPD.CHEX.PC.CD"));
+		
+		if(bedData == null || expendData == null) {
+			JOptionPane.showMessageDialog(null, "World Bank Does Not Have Data For The Selected Year(s)", "Data Not Available", JOptionPane.INFORMATION_MESSAGE);
+			return null;
+		}
+		
 		for (Entry<Integer, Double> temp : bedData.entrySet()) {
 			  Integer year = temp.getKey();
 			  Double bedAmount = temp.getValue();

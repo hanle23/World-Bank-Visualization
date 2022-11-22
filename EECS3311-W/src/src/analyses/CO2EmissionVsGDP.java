@@ -45,6 +45,12 @@ public class CO2EmissionVsGDP implements analyses {
 		HashMap<Integer, Double> tempResult = new HashMap<Integer, Double>();
 		HashMap<Integer, Double> co2Emissions = dataExtractor.filter(jsonObject.getData("EN.ATM.CO2E.PC"));
 		HashMap<Integer, Double> GDP = dataExtractor.filter(jsonObject.getData("NY.GDP.PCAP.CD"));
+		
+		if(co2Emissions == null || GDP == null) {
+			JOptionPane.showMessageDialog(null, "World Bank Does Not Have Data For The Selected Year(s)", "Data Not Available", JOptionPane.INFORMATION_MESSAGE);
+			return null;
+		}
+		
 		for (Entry<Integer, Double> temp : co2Emissions.entrySet()) {
 			  Integer year = temp.getKey();
 			  Double co2Amount = temp.getValue();
