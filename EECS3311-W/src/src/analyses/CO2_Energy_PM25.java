@@ -12,6 +12,7 @@ import src.util;
 import src.concrete.linkedList;
 import src.fetcher.Adapter;
 import src.fetcher.dataFetcher;
+import src.interfaces.Iterator;
 import src.interfaces.analyses;
 
 public class CO2_Energy_PM25 implements analyses {
@@ -137,6 +138,19 @@ public class CO2_Energy_PM25 implements analyses {
 			}
 		result.putAll(unsorted);
 		return result;
+	}
+	
+	public static void main(String args[]) {
+		CO2_Energy_PM25 test = new CO2_Energy_PM25(2014, 2021, "CAN");
+		linkedList data = test.analyzeData();
+		while (data != null) {
+			Iterator dataIterator = data.getIterator();
+			HashMap<?,?> dataSet = data.getData();
+			for (Entry<?, ?> temp : dataSet.entrySet()) {
+				System.out.println("Year:  " + temp.getKey()+ " Value: " + temp.getValue());
+			}
+			data = (linkedList) dataIterator.next();
+		}
 	}
 	
 
