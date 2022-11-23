@@ -1,6 +1,7 @@
 package src.analyses;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
@@ -26,9 +27,9 @@ public class CO2_Energy_PM25 implements analyses {
 	}
 	@Override
 	public linkedList analyzeData() {
-		HashMap<Integer, Double> co2 = CO2_emmision();
-		HashMap<Integer, Double> energy = energy_use();
-		HashMap<Integer, Double> pm25 = pm25();
+		LinkedHashMap<Integer, Double> co2 = CO2_emmision();
+		LinkedHashMap<Integer, Double> energy = energy_use();
+		LinkedHashMap<Integer, Double> pm25 = pm25();
 		
 		if(co2 == null || energy == null || pm25 == null) {
 			JOptionPane.showMessageDialog(null, "World Bank Does Not Have Data For The Selected Year(s)", "Data Not Available", JOptionPane.INFORMATION_MESSAGE);
@@ -50,13 +51,13 @@ public class CO2_Energy_PM25 implements analyses {
 		return result;
 	}
 	
-	private HashMap<Integer, Double> pm25() {
-		HashMap<Integer, Double> unsorted = new HashMap<Integer, Double>();
-		HashMap<Integer, Double> result = new HashMap<>();
+	private LinkedHashMap<Integer, Double> pm25() {
+		LinkedHashMap<Integer, Double> unsorted = new LinkedHashMap<Integer, Double>();
+		LinkedHashMap<Integer, Double> result = new LinkedHashMap<>();
 		if (jsonObject == null) {
 			return null;
 		}
-		HashMap<Integer, Double> fetchedData = dataExtractor.filter(jsonObject.getData("EN.ATM.PM25.MC.M3"));
+		LinkedHashMap<Integer, Double> fetchedData = dataExtractor.filter(jsonObject.getData("EN.ATM.PM25.MC.M3"));
 		
 		if(fetchedData == null) {
 			return null;
@@ -80,13 +81,13 @@ public class CO2_Energy_PM25 implements analyses {
 		return result;
 	}
 	
-	private HashMap<Integer, Double> energy_use() {
-		HashMap<Integer, Double> unsorted = new HashMap<Integer, Double>();
-		HashMap<Integer, Double> result = new HashMap<>();
+	private LinkedHashMap<Integer, Double> energy_use() {
+		LinkedHashMap<Integer, Double> unsorted = new LinkedHashMap<Integer, Double>();
+		LinkedHashMap<Integer, Double> result = new LinkedHashMap<>();
 		if (jsonObject == null) {
 			return null;
 		}
-		HashMap<Integer, Double> fetchedData = dataExtractor.filter(jsonObject.getData("EG.USE.PCAP.KG.OE"));
+		LinkedHashMap<Integer, Double> fetchedData = dataExtractor.filter(jsonObject.getData("EG.USE.PCAP.KG.OE"));
 		
 		if(fetchedData == null) {
 			return null;
@@ -110,13 +111,13 @@ public class CO2_Energy_PM25 implements analyses {
 		return result;
 	}
 	
-	private HashMap<Integer, Double> CO2_emmision() {
-		HashMap<Integer, Double> unsorted = new HashMap<Integer, Double>();
-		HashMap<Integer, Double> result = new HashMap<>();
+	private LinkedHashMap<Integer, Double> CO2_emmision() {
+		LinkedHashMap<Integer, Double> unsorted = new LinkedHashMap<Integer, Double>();
+		LinkedHashMap<Integer, Double> result = new LinkedHashMap<>();
 		if (jsonObject == null) {
 			return null;
 		}
-		HashMap<Integer, Double> fetchedData = dataExtractor.filter(jsonObject.getData("EN.ATM.CO2E.PC"));
+		LinkedHashMap<Integer, Double> fetchedData = dataExtractor.filter(jsonObject.getData("EN.ATM.CO2E.PC"));
 		
 		if(fetchedData == null) {
 			return null;
@@ -144,8 +145,9 @@ public class CO2_Energy_PM25 implements analyses {
 		CO2_Energy_PM25 test = new CO2_Energy_PM25(2014, 2021, "CAN");
 		linkedList data = test.analyzeData();
 		while (data != null) {
+			System.out.println("");
 			Iterator dataIterator = data.getIterator();
-			HashMap<?,?> dataSet = data.getData();
+			LinkedHashMap<?,?> dataSet = data.getData();
 			for (Entry<?, ?> temp : dataSet.entrySet()) {
 				System.out.println("Year:  " + temp.getKey()+ " Value: " + temp.getValue());
 			}

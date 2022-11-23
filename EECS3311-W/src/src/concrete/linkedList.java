@@ -1,15 +1,16 @@
 package src.concrete;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import src.interfaces.Container;
 import src.interfaces.Iterator;
 
 public class linkedList implements Container {
-	private HashMap<?,?> data;
+	private LinkedHashMap<?,?> data;
 	private linkedList next;
 	
-	public linkedList(HashMap<?,?> data, linkedList next) {
+	public linkedList(LinkedHashMap<?,?> data, linkedList next) {
 		this.data = data;
 		this.next = next;
 	}
@@ -24,11 +25,11 @@ public class linkedList implements Container {
 		return new linkedListIterator();
 	}
 	
-	public HashMap<?,?> getData() {
+	public LinkedHashMap<?,?> getData() {
 		return data;
 	}
 	
-	public void setdata(HashMap<?,?> data) {
+	public void setdata(LinkedHashMap<?,?> data) {
 		this.data = data;
 
 	}
