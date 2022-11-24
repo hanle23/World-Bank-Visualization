@@ -3,6 +3,7 @@ package src.graphs;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
 import javax.swing.BorderFactory;
@@ -25,7 +26,7 @@ public class pie implements Graph{
 		
 		while (dataSets != null) {
 			Iterator dataIterator = dataSets.getIterator();
-			HashMap<?,?> dataSet = dataSets.getData();
+			LinkedHashMap<?,?> dataSet = dataSets.getData();
 			for (Entry<?, ?> temp : dataSet.entrySet()) {
 				datasetCollection.addValue((double)temp.getValue(), (String) temp.getKey(), ""); //third sting is name for the graph
 			}

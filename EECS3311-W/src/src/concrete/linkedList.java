@@ -64,7 +64,7 @@ public class linkedList implements Container {
 		}
 		
 		@Override
-		public HashMap<?,?> current() {
+		public LinkedHashMap<?,?> current() {
 			if (this.hasCurrent()) {
 				return data;
 			}

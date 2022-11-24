@@ -3,6 +3,7 @@ package src.graphs;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
 import javax.swing.BorderFactory;
@@ -26,7 +27,7 @@ public class report implements Graph{
 		
 		while (dataSets != null) {
 			Iterator dataIterator = dataSets.getIterator();
-			HashMap<?,?> dataSet = dataSets.getData();
+			LinkedHashMap<?,?> dataSet = dataSets.getData();
 			reportMessage = reportMessage + i + ":\n"; // i is just a place holder for the name of the data set
 			for (Entry<?, ?> temp : dataSet.entrySet()) {
 				reportMessage = reportMessage + "\t" + temp.getKey() + " => " + temp.getValue() + " insert measurement metric\n";

@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -35,7 +36,7 @@ public class bar implements Graph{
 		while (dataSets != null) {
 			Iterator dataIterator = dataSets.getIterator();
 			
-			HashMap<?,?> dataSet = dataSets.getData();
+			LinkedHashMap<?,?> dataSet = dataSets.getData();
 			for (Entry<?, ?> temp : dataSet.entrySet()) {
 				dataSeries.setValue((double)temp.getValue(), Integer.toString(count), temp.getKey().toString()); // count is a place holder for the data set name
 			}

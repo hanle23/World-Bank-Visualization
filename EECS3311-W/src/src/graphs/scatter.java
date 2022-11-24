@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
 import javax.swing.BorderFactory;
@@ -37,7 +38,7 @@ public class scatter implements Graph{
 		itemrenderer =  new XYLineAndShapeRenderer(false, true);
 		while (dataSets != null) {
 			Iterator dataIterator = dataSets.getIterator();
-			HashMap<?,?> dataSet = dataSets.getData();
+			LinkedHashMap<?,?> dataSet = dataSets.getData();
 		//	dataSetDisplay = new TimeSeriesCollection();
 		//	itemrenderer =  new XYLineAndShapeRenderer(false, true);
 			TimeSeries series = new TimeSeries(i);

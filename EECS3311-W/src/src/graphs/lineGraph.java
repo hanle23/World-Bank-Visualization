@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
 import javax.swing.BorderFactory;
@@ -39,7 +40,7 @@ public class lineGraph implements Graph{
 		
 		while (dataSets != null) {
 			Iterator dataIterator = dataSets.getIterator();
-			HashMap<?,?> dataSet = dataSets.getData();
+			LinkedHashMap<?,?> dataSet = dataSets.getData();
 			series = new XYSeries(i++); //replace with a proper name for the data se
 			for (Entry<?, ?> temp : dataSet.entrySet()) {
 				series.add((int) temp.getKey(), (double)temp.getValue());
