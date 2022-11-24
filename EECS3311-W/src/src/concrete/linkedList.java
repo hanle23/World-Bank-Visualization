@@ -9,10 +9,12 @@ import src.interfaces.Iterator;
 public class linkedList implements Container {
 	private LinkedHashMap<?,?> data;
 	private linkedList next;
+	private String name;
 	
-	public linkedList(LinkedHashMap<?,?> data, linkedList next) {
+	public linkedList(LinkedHashMap<?,?> data, linkedList next, String name) {
 		this.data = data;
 		this.next = next;
+		this.name = name;
 	}
 	
 	public linkedList() {
@@ -35,6 +37,15 @@ public class linkedList implements Container {
 	}
 	public void setNext(linkedList next) {
 		this.next = next;
+
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 
 	}
 	
