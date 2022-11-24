@@ -6,10 +6,8 @@ import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
-import java.util.TreeMap;
 
 import src.dataExtractor;
-import src.util;
 import src.concrete.linkedList;
 import src.fetcher.Adapter;
 import src.fetcher.dataFetcher;
@@ -45,14 +43,13 @@ public class CO2_Energy_PM25 implements analyses {
 		if (endYear < startYear) {
 			return false;
 		}
-		if (!util.COUNTRIES.contains(countryCode)) {
-			return false;
-		}
+//		if (!util.COUNTRIES.contains(countryCode)) {
+//			return false;
+//		}
 		return result;
 	}
 	
 	private LinkedHashMap<Integer, Double> pm25() {
-		LinkedHashMap<Integer, Double> unsorted = new LinkedHashMap<Integer, Double>();
 		LinkedHashMap<Integer, Double> result = new LinkedHashMap<>();
 		if (jsonObject == null) {
 			return null;
@@ -71,19 +68,17 @@ public class CO2_Energy_PM25 implements analyses {
 			  double CO2_initial = fetchedData.get(startYear);
 			  double CO2_end = fetchedData.get(endYear);
 			  if (CO2_initial == 0) {
-				  unsorted.put(endYear, 0.00);
+				  result.put(endYear, 0.00);
 				  continue;
 			  }
 			  double pc_rate = ((CO2_end - CO2_initial) / CO2_initial) * 100;
-			  unsorted.put(endYear, pc_rate);
+			  result.put(endYear, pc_rate);
 			}
-		result.putAll(unsorted);
 		return result;
 	}
 	
 	private LinkedHashMap<Integer, Double> energy_use() {
-		LinkedHashMap<Integer, Double> unsorted = new LinkedHashMap<Integer, Double>();
-		LinkedHashMap<Integer, Double> result = new LinkedHashMap<>();
+		LinkedHashMap<Integer, Double> result = new LinkedHashMap<Integer, Double>();
 		if (jsonObject == null) {
 			return null;
 		}
@@ -101,23 +96,21 @@ public class CO2_Energy_PM25 implements analyses {
 			  double CO2_initial = fetchedData.get(startYear);
 			  double CO2_end = fetchedData.get(endYear);
 			  if (CO2_initial == 0) {
-				  unsorted.put(endYear, 0.00);
+				  result.put(endYear, 0.00);
 				  continue;
 			  }
 			  double pc_rate = ((CO2_end - CO2_initial) / CO2_initial) * 100;
-			  unsorted.put(endYear, pc_rate);
+			  result.put(endYear, pc_rate);
 			}
-		result.putAll(unsorted);
 		return result;
 	}
 	
 	private LinkedHashMap<Integer, Double> CO2_emmision() {
-		LinkedHashMap<Integer, Double> unsorted = new LinkedHashMap<Integer, Double>();
 		LinkedHashMap<Integer, Double> result = new LinkedHashMap<>();
 		if (jsonObject == null) {
 			return null;
 		}
-		LinkedHashMap<Integer, Double> fetchedData = dataExtractor.filter(jsonObject.getData("EN.ATM.CO2E.PC"));
+		HashMap<Integer, Double> fetchedData = dataExtractor.filter(jsonObject.getData("EN.ATM.CO2E.PC"));
 		
 		if(fetchedData == null) {
 			return null;
@@ -131,13 +124,12 @@ public class CO2_Energy_PM25 implements analyses {
 			  double CO2_initial = fetchedData.get(startYear);
 			  double CO2_end = fetchedData.get(endYear);
 			  if (CO2_initial == 0) {
-				  unsorted.put(endYear, 0.00);
+				  result.put(endYear, 0.00);
 				  continue;
 			  }
 			  double pc_rate = ((CO2_end - CO2_initial) / CO2_initial) * 100;
-			  unsorted.put(endYear, pc_rate);
+			  result.put(endYear, pc_rate);
 			}
-		result.putAll(unsorted);
 		return result;
 	}
 	
@@ -145,9 +137,8 @@ public class CO2_Energy_PM25 implements analyses {
 		CO2_Energy_PM25 test = new CO2_Energy_PM25(2014, 2021, "CAN");
 		linkedList data = test.analyzeData();
 		while (data != null) {
-			System.out.println("");
 			Iterator dataIterator = data.getIterator();
-			LinkedHashMap<?,?> dataSet = data.getData();
+			HashMap<?,?> dataSet = data.getData();
 			for (Entry<?, ?> temp : dataSet.entrySet()) {
 				System.out.println("Year:  " + temp.getKey()+ " Value: " + temp.getValue());
 			}
