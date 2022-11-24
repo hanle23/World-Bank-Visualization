@@ -21,7 +21,6 @@ public class dataExtractor {
 		for (int i = 0; i < object.size(); i++) {
 			JsonObject test2 = (JsonObject) object.get(i);
 			int date = test2.get("date").getAsInt();
-			System.out.println(date);
 			if (test2.get("value").isJsonNull()) {
 				tempResult.put(date, (double) 0);
 			} else {
