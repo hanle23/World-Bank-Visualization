@@ -1,6 +1,7 @@
 package src.analyses;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
@@ -27,9 +28,9 @@ public class avgGovExpenditureOnEd implements analyses{
 		if (endYear < startYear) {
 			return false;
 		}
-		if (!util.COUNTRIES.contains(countryCode)) {
+		/*if (!util.COUNTRIES.contains(countryCode)) {
 			return false;
-		}
+		}*/
 		return result;
 	}
 
@@ -42,9 +43,9 @@ public class avgGovExpenditureOnEd implements analyses{
 			return null;
 		}
 		
-		linkedList result = new linkedList(null, null);
-		HashMap<String, Double> tempResult = new HashMap<String, Double>();
-		HashMap<Integer, Double> govExpenditure = dataExtractor.filter(jsonObject.getData("SE.XPD.TOTL.GD.ZS"));
+		linkedList result = new linkedList();
+		LinkedHashMap<String, Double> tempResult = new LinkedHashMap<String, Double>();
+		LinkedHashMap<Integer, Double> govExpenditure = dataExtractor.filter(jsonObject.getData("SE.XPD.TOTL.GD.ZS"));
 		
 		if(govExpenditure == null) {
 			JOptionPane.showMessageDialog(null, "World Bank Does Not Have Data For The Selected Year(s)", "Data Not Available", JOptionPane.INFORMATION_MESSAGE);
@@ -72,6 +73,7 @@ public class avgGovExpenditureOnEd implements analyses{
 		tempResult.put("Avg government expenditure on education", average);
 		tempResult.put("Expenditures for all other", 100 - average);
 		result.setdata(tempResult);
+		result.setName("Government Expenditure");
 		//result.setNext(null);
 		
 		return result; //need discussion of how to store data for average/pie charts
