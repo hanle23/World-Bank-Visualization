@@ -26,9 +26,9 @@ public class HealthCareVsMortality implements analyses{
 		if (endYear < startYear) {
 			return false;
 		}
-		if (!util.COUNTRIES.contains(countryCode)) {
+		/*if (!util.COUNTRIES.contains(countryCode)) {
 			return false;
-		}
+		}*/
 		return result;
 	}
 	
@@ -56,7 +56,9 @@ public class HealthCareVsMortality implements analyses{
 			  System.out.println("infantMortalityAmount for " + year + " is "+ infantMortalityAmount);
 			}
 		dataSet1.setdata(problemsAccessingHealthCare);
+		dataSet1.setName("Problems in accessing health care (% of women)");
 		dataSet2.setdata(infantMortality);
+		dataSet2.setName("Mortality rate, infant (per 1,000 live births)");
 		dataSet1.setNext(dataSet2);
 		//result.setNext(null);
 		return dataSet1;

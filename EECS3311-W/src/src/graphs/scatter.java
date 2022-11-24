@@ -41,7 +41,7 @@ public class scatter implements Graph{
 			LinkedHashMap<?,?> dataSet = dataSets.getData();
 		//	dataSetDisplay = new TimeSeriesCollection();
 		//	itemrenderer =  new XYLineAndShapeRenderer(false, true);
-			TimeSeries series = new TimeSeries(i);
+			TimeSeries series = new TimeSeries(dataSets.getName());
 			
 			for (Entry<?, ?> temp : dataSet.entrySet()) {
 				
@@ -60,7 +60,7 @@ public class scatter implements Graph{
 		//dataSetDisplay.addSeries(series);
 		plot.setDataset(0, dataSetDisplay);
 		plot.setRenderer(0, itemrenderer);
-		plot.setRangeAxis(0, new NumberAxis("temp label")); //put whatever to match the data
+		plot.setRangeAxis(0, new NumberAxis(""));
 		
 		DateAxis domainAxis = new DateAxis("Year");
 		plot.setDomainAxis(domainAxis);

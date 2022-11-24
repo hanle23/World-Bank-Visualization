@@ -52,7 +52,7 @@ public class problemsAccessingHealthCare implements analyses {
 			  System.out.println("percentage of woman without problems for " + year + " is "+ (100-problemPercent));
 			  series1.put(year, problemPercent);
 		}
-		linkedList result = new linkedList(series1, null);
+		linkedList result = new linkedList(series1, "Percent of Woman with Insuffiient Funds for Healthcare", null);
 		
 		return result;
 }

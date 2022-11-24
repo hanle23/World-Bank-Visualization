@@ -42,7 +42,7 @@ public class healthVsBeds implements analyses {
 			}
 		HashMap<Integer, Double> series1 = new HashMap<>();
 		series1.putAll(unsorted);
-		linkedList result = new linkedList(series1, null);
+		linkedList result = new linkedList(series1, "Current Health Expenditure (per 1,000 people)/Hospital Beds(per 1,000 people)",null);
 		return result;
 	}
 	

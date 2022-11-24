@@ -28,9 +28,9 @@ public class report implements Graph{
 		while (dataSets != null) {
 			Iterator dataIterator = dataSets.getIterator();
 			LinkedHashMap<?,?> dataSet = dataSets.getData();
-			reportMessage = reportMessage + i + ":\n"; // i is just a place holder for the name of the data set
+			reportMessage = reportMessage + dataSets.getName() + ":\n";
 			for (Entry<?, ?> temp : dataSet.entrySet()) {
-				reportMessage = reportMessage + "\t" + temp.getKey() + " => " + temp.getValue() + " insert measurement metric\n";
+				reportMessage = reportMessage + "\t" + temp.getKey() + " => " + temp.getValue() + "\n";
 			}
 			reportMessage = reportMessage + "\n";
 			i++;

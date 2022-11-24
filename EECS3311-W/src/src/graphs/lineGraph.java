@@ -41,7 +41,7 @@ public class lineGraph implements Graph{
 		while (dataSets != null) {
 			Iterator dataIterator = dataSets.getIterator();
 			LinkedHashMap<?,?> dataSet = dataSets.getData();
-			series = new XYSeries(i++); //replace with a proper name for the data se
+			series = new XYSeries(dataSets.getName()); 
 			for (Entry<?, ?> temp : dataSet.entrySet()) {
 				series.add((int) temp.getKey(), (double)temp.getValue());
 			}
@@ -49,7 +49,7 @@ public class lineGraph implements Graph{
 			dataSets = (linkedList) dataIterator.next();
 		}
 		
-		JFreeChart chart = ChartFactory.createXYLineChart("Default Title", "Year", "", datasetDisplay,
+		JFreeChart chart = ChartFactory.createXYLineChart(graphTitle, "Year", "", datasetDisplay,
 				PlotOrientation.VERTICAL, true, true, false); //need to consider how to name the graphs, year is the x axis
 
 		XYPlot plot = chart.getXYPlot();

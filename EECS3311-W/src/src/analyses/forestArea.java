@@ -27,9 +27,9 @@ public class forestArea implements analyses {
 		if (endYear < startYear) {
 			return false;
 		}
-		if (!util.COUNTRIES.contains(countryCode)) {
+		/*if (!util.COUNTRIES.contains(countryCode)) {
 			return false;
-		}
+		}*/
 		return result;
 	}
 	
@@ -52,7 +52,7 @@ public class forestArea implements analyses {
 			  System.out.println("percentage of the rest of the land used " + year + " is "+ (100-forestPercent));
 			  series1.put(year, forestPercent);
 		}
-		linkedList result = new linkedList(series1, null);
+		linkedList result = new linkedList(series1, "Forest Area", null);
 		
 		return result;
 }

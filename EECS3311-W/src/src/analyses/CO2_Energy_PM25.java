@@ -34,7 +34,7 @@ public class CO2_Energy_PM25 implements analyses {
 			return null;
 		}
 		
-		linkedList result = new linkedList(pm25, new linkedList(energy, new linkedList(co2, null)));
+		linkedList result = new linkedList(pm25, "PM25",new linkedList(energy, "Energy",new linkedList(co2, "CO2",null)));
 		return result;
 	}
 	

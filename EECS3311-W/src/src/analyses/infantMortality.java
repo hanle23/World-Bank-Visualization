@@ -50,7 +50,7 @@ public class infantMortality implements analyses {
 			  System.out.println("Infant mortality rate per 1000 people for " + year + " is "+ infantMortality);
 			  tmp.put(year, infantMortality);
 		}
-		linkedList result = new linkedList(tmp, null);
+		linkedList result = new linkedList(tmp, "Infant Mortality Rate (per 1,000 live births)", null);
 		
 		return result;
 		

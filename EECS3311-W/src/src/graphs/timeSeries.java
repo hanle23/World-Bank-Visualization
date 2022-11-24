@@ -41,7 +41,7 @@ public class timeSeries implements Graph{
 			LinkedHashMap<?,?> dataSet = dataSets.getData();
 			//dataSetDisplay = new TimeSeriesCollection();
 			//splinerenderer = new XYSplineRenderer();
-			TimeSeries series = new TimeSeries(i);
+			TimeSeries series = new TimeSeries(dataSets.getName());
 			
 			for (Entry<?, ?> temp : dataSet.entrySet()) {
 				

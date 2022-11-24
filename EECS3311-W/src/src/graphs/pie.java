@@ -28,7 +28,7 @@ public class pie implements Graph{
 			Iterator dataIterator = dataSets.getIterator();
 			LinkedHashMap<?,?> dataSet = dataSets.getData();
 			for (Entry<?, ?> temp : dataSet.entrySet()) {
-				datasetCollection.addValue((double)temp.getValue(), (String) temp.getKey(), ""); //third sting is name for the graph
+				datasetCollection.addValue((double)temp.getValue(), (String) temp.getKey(), ""); 
 			}
 			dataSets = (linkedList) dataIterator.next();
 		}

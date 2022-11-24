@@ -11,7 +11,7 @@ public class linkedList implements Container {
 	private linkedList next;
 	private String name;
 	
-	public linkedList(LinkedHashMap<?,?> data, linkedList next, String name) {
+	public linkedList(LinkedHashMap<?,?> data, String name, linkedList next) {
 		this.data = data;
 		this.next = next;
 		this.name = name;

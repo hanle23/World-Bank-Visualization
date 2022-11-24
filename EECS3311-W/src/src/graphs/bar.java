@@ -38,7 +38,7 @@ public class bar implements Graph{
 			
 			LinkedHashMap<?,?> dataSet = dataSets.getData();
 			for (Entry<?, ?> temp : dataSet.entrySet()) {
-				dataSeries.setValue((double)temp.getValue(), Integer.toString(count), temp.getKey().toString()); // count is a place holder for the data set name
+				dataSeries.setValue((double)temp.getValue(), dataSets.getName(), temp.getKey().toString());
 			}
 			
 			dataSets = (linkedList) dataIterator.next();
@@ -65,10 +65,10 @@ public class bar implements Graph{
 			plot.setDataset(pairs, dataSeries);
 			plot.setRenderer(pairs, barrenderer);
 		//	plot.mapDatasetToRangeAxis(pairs, count-1);
-			plot.setRangeAxis(pairs, new NumberAxis("")); //insert axis name
+			plot.setRangeAxis(pairs, new NumberAxis("")); 
 		}
 		
-		CategoryAxis domainAxis = new CategoryAxis("Year"); //can consider an option to change y axis
+		CategoryAxis domainAxis = new CategoryAxis("");
 		plot.setDomainAxis(domainAxis);
 		
 		for(int j=0; j<count; j++) {

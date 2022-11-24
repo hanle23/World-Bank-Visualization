@@ -27,11 +27,11 @@ public class CO2EmissionVsGDP implements analyses {
 			JOptionPane.showMessageDialog(null, "Years not Valid", "Years Selction", JOptionPane.INFORMATION_MESSAGE);
 			return false;
 		}
-		if (!util.COUNTRIES.contains(countryCode) || countryCode == null) {
+	/*	if (!util.COUNTRIES.contains(countryCode) || countryCode == null) {
 			System.out.println("country invalid");
 			JOptionPane.showMessageDialog(null, "Country is Excluded From Data Fetching", "Country Selction", JOptionPane.INFORMATION_MESSAGE);
 			return false;
-		}
+		}*/
 		System.out.println("returning true, proceed");
 		return result;
 	}
@@ -66,7 +66,7 @@ public class CO2EmissionVsGDP implements analyses {
 				  System.out.println("co2/GDP for " + year + " is " + co2Amount/GDPAmount);
 			  }
 			}
-		linkedList result = new linkedList(tempResult, null);
+		linkedList result = new linkedList(tempResult, "CO2/GDP",null);
 		return result;
 	}
 	public static void main(String args[]) {
