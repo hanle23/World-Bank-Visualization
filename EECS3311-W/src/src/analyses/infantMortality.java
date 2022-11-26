@@ -1,12 +1,11 @@
 package src.analyses;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
 import src.dataExtractor;
-import src.util;
 import src.concrete.linkedList;
 import src.interfaces.analyses;
 import src.fetcher.Adapter;
@@ -26,9 +25,9 @@ public class infantMortality implements analyses {
 		if (endYear < startYear) {
 			return false;
 		}
-		if (!util.COUNTRIES.contains(countryCode)) {
-			return false;
-		}
+//		if (!util.COUNTRIES.contains(countryCode)) {
+//			return false;
+//		}
 		return result;
 	}
 	
@@ -36,8 +35,8 @@ public class infantMortality implements analyses {
 		if (jsonObject == null) {
 			return null;
 		}
-		HashMap<Integer, Double> tmp = new HashMap<Integer, Double>();
-		HashMap<Integer, Double> mortalityData = dataExtractor.filter(jsonObject.getData("SP.DYN.IMRT.IN"));
+		LinkedHashMap<Integer, Double> tmp = new LinkedHashMap<Integer, Double>();
+		LinkedHashMap<Integer, Double> mortalityData = dataExtractor.filter(jsonObject.getData("SP.DYN.IMRT.IN"));
 		
 		if(mortalityData == null) {
 			JOptionPane.showMessageDialog(null, "World Bank Does Not Have Data For The Selected Year(s)", "Data Not Available", JOptionPane.INFORMATION_MESSAGE);

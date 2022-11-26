@@ -2,14 +2,15 @@ package src.fetcher;
 
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
+
+import java.util.LinkedHashMap;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+
 import com.google.gson.JsonParser;
 
 public class adapteeDataFetcher {
@@ -48,10 +49,10 @@ public class adapteeDataFetcher {
 		return array;
 	}
 	
-	public HashMap<String, String> specificCountryCodeGetData() {
+	public LinkedHashMap<String, String> specificCountryCodeGetData() {
 		String urlString = "http://api.worldbank.org/v2/country?format=json";
 		JsonArray array = null;
-		HashMap<String, String> result = null;
+		LinkedHashMap<String, String> result = null;
 		try {
 			URL url = new URL(urlString);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -69,7 +70,7 @@ public class adapteeDataFetcher {
 
 				array = new JsonParser().parse(inline).getAsJsonArray();
 				array = array.get(1).getAsJsonArray();
-				result = new HashMap<String, String>();
+				result = new LinkedHashMap<String, String>();
 				for (int i = 0; i < array.size(); i++) {
 					result.put(array.get(i).getAsJsonObject().get("name").toString().strip().trim().replaceAll("\"", ""), array.get(i).getAsJsonObject().get("id").toString().strip().trim().replaceAll("\"", ""));
 				}
@@ -86,9 +87,9 @@ public class adapteeDataFetcher {
 		Adapter test = new Adapter(2000, 2023, "can");
 		JsonArray test1 = test.getData("AG.LND.AGRI.ZS");
 		String name = "Canada";
-		HashMap<String, String> countries = test.getCountriesCode();
+		LinkedHashMap<String, String> countries = test.getCountriesCode();
 		//System.out.println(countries);
-		for (HashMap.Entry<String, String> entry : countries.entrySet()) {
+		for (Entry<String, String> entry : countries.entrySet()) {
 			String key = entry.getKey();
 			System.out.println(key);
 		   // System.out.println(key.equals(name));

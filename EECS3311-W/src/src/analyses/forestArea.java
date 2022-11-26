@@ -1,6 +1,6 @@
 package src.analyses;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
@@ -37,8 +37,8 @@ public class forestArea implements analyses {
 		if (jsonObject == null) {
 			return null;
 		}
-		HashMap<Integer, Double> series1 = new HashMap<Integer, Double>();
-		HashMap<Integer, Double> forestArea = dataExtractor.filter(jsonObject.getData("AG.LND.FRST.ZS"));
+		LinkedHashMap<Integer, Double> series1 = new LinkedHashMap<Integer, Double>();
+		LinkedHashMap<Integer, Double> forestArea = dataExtractor.filter(jsonObject.getData("AG.LND.FRST.ZS"));
 		
 		if(forestArea == null) {
 			JOptionPane.showMessageDialog(null, "World Bank Does Not Have Data For The Selected Year(s)", "Data Not Available", JOptionPane.INFORMATION_MESSAGE);

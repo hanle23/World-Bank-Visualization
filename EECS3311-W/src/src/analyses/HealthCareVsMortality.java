@@ -1,12 +1,11 @@
 package src.analyses;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
 import src.dataExtractor;
-import src.util;
 import src.concrete.linkedList;
 import src.fetcher.Adapter;
 import src.fetcher.dataFetcher;
@@ -39,8 +38,8 @@ public class HealthCareVsMortality implements analyses{
 		
 		linkedList dataSet1 = new linkedList();
 		linkedList dataSet2 = new linkedList();
-		HashMap<Integer, Double> problemsAccessingHealthCare = dataExtractor.filter(jsonObject.getData("SH.ACS.MONY.Q1.ZS"));
-		HashMap<Integer, Double> infantMortality = dataExtractor.filter(jsonObject.getData("SP.DYN.IMRT.IN"));
+		LinkedHashMap<Integer, Double> problemsAccessingHealthCare = dataExtractor.filter(jsonObject.getData("SH.ACS.MONY.Q1.ZS"));
+		LinkedHashMap<Integer, Double> infantMortality = dataExtractor.filter(jsonObject.getData("SP.DYN.IMRT.IN"));
 		
 		if(problemsAccessingHealthCare == null || infantMortality == null) {
 			JOptionPane.showMessageDialog(null, "World Bank Does Not Have Data For The Selected Year(s)", "Data Not Available", JOptionPane.INFORMATION_MESSAGE);
@@ -51,16 +50,15 @@ public class HealthCareVsMortality implements analyses{
 		for (Entry<Integer, Double> temp : problemsAccessingHealthCare.entrySet()) {
 			  Integer year = temp.getKey();
 			  Double healthCareAmount = temp.getValue();
-			  System.out.println("healthCareAmount for " + year + " is "+ healthCareAmount);
 			  Double infantMortalityAmount = infantMortality.get(year); 
-			  System.out.println("infantMortalityAmount for " + year + " is "+ infantMortalityAmount);
+
 			}
 		dataSet1.setdata(problemsAccessingHealthCare);
 		dataSet1.setName("Problems in accessing health care (% of women)");
 		dataSet2.setdata(infantMortality);
 		dataSet2.setName("Mortality rate, infant (per 1,000 live births)");
 		dataSet1.setNext(dataSet2);
-		//result.setNext(null);
+
 		return dataSet1;
 	}
 	
@@ -70,10 +68,12 @@ public class HealthCareVsMortality implements analyses{
 		linkedList data = test.analyzeData();
 		while (data != null) {
 			Iterator dataIterator = data.getIterator();
-			HashMap<?,?> dataSet = data.getData();
+			LinkedHashMap<?,?> dataSet = data.getData();
+			System.out.println(data.getName());
 			for (Entry<?, ?> temp : dataSet.entrySet()) {
 				System.out.println("In result: co2/GDP for " + temp.getKey()+ " is " + temp.getValue());
 			}
+			System.out.println("\n");
 			data = (linkedList) dataIterator.next();
 			
 		}

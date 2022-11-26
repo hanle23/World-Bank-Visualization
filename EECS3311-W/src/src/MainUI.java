@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -75,7 +75,7 @@ public class MainUI extends JFrame implements ActionListener{
 	private int i, startYear, endYear;
 	private systemFacade facade;
 	private String country, analysis;
-	private HashMap<String, String> countries;
+	private LinkedHashMap<String, String> countries;
 	
 	private static Properties props;
 
@@ -266,10 +266,10 @@ public class MainUI extends JFrame implements ActionListener{
 				threeSeries = test2.analyzeData();
 			}
 			else {
-			HashMap<Integer,Double> map1=new HashMap<Integer,Double>();
-			HashMap<Integer,Double> map2=new HashMap<Integer,Double>();
-			HashMap<Integer,Double> map3=new HashMap<Integer,Double>();
-			HashMap<Integer,Double> map4=new HashMap<Integer,Double>();
+			LinkedHashMap<Integer,Double> map1=new LinkedHashMap<Integer,Double>();
+			LinkedHashMap<Integer,Double> map2=new LinkedHashMap<Integer,Double>();
+			LinkedHashMap<Integer,Double> map3=new LinkedHashMap<Integer,Double>();
+			LinkedHashMap<Integer,Double> map4=new LinkedHashMap<Integer,Double>();
 			//linkedList twoDataSeries = new linkedList();
 			linkedList firstSeries = new linkedList();
 			linkedList secondSeries = new linkedList();

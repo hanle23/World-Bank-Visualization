@@ -1,12 +1,11 @@
 package src.analyses;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
 import src.dataExtractor;
-import src.util;
 import src.concrete.linkedList;
 import src.fetcher.Adapter;
 import src.fetcher.dataFetcher;
@@ -25,9 +24,9 @@ public class healthVsBeds implements analyses {
 		if (jsonObject == null) {
 			return null;
 		}
-		HashMap<Integer, Double> unsorted = new HashMap<Integer, Double>();
-		HashMap<Integer, Double> bedData = dataExtractor.filter(jsonObject.getData("SH.MED.BEDS.ZS"));
-		HashMap<Integer, Double> expendData = dataExtractor.filter(jsonObject.getData("SH.XPD.CHEX.PC.CD"));
+		LinkedHashMap<Integer, Double> unsorted = new LinkedHashMap<Integer, Double>();
+		LinkedHashMap<Integer, Double> bedData = dataExtractor.filter(jsonObject.getData("SH.MED.BEDS.ZS"));
+		LinkedHashMap<Integer, Double> expendData = dataExtractor.filter(jsonObject.getData("SH.XPD.CHEX.PC.CD"));
 		
 		if(bedData == null || expendData == null) {
 			JOptionPane.showMessageDialog(null, "World Bank Does Not Have Data For The Selected Year(s)", "Data Not Available", JOptionPane.INFORMATION_MESSAGE);
@@ -40,20 +39,20 @@ public class healthVsBeds implements analyses {
 			  Double expend = expendData.get(year) * 1000; 
 			  unsorted.put(year, expend/bedAmount);
 			}
-		HashMap<Integer, Double> series1 = new HashMap<>();
+		LinkedHashMap<Integer, Double> series1 = new LinkedHashMap<>();
 		series1.putAll(unsorted);
 		linkedList result = new linkedList(series1, "Current Health Expenditure (per 1,000 people)/Hospital Beds(per 1,000 people)",null);
 		return result;
 	}
 	
-	public HashMap<Integer, Double> getBedData() {
+	public LinkedHashMap<Integer, Double> getBedData() {
 		if (jsonObject == null) {
 			return null;
 		}
 		return dataExtractor.filter(jsonObject.getData("SH.MED.BEDS.ZS"));
 	}
 	
-	public HashMap<Integer, Double> getExpend() {
+	public LinkedHashMap<Integer, Double> getExpend() {
 		// This expend from API is per capital, we need to multiply to 1000
 		if (jsonObject == null) {
 			return null;
@@ -66,9 +65,9 @@ public class healthVsBeds implements analyses {
 		if (endYear < startYear) {
 			return false;
 		}
-		if (!util.COUNTRIES.contains(countryCode)) {
-			return false;
-		}
+//		if (!util.COUNTRIES.contains(countryCode)) {
+//			return false;
+//		}
 		return result;
 	}
 	public static void main(String args[]) {

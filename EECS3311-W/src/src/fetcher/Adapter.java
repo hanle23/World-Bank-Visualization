@@ -1,6 +1,7 @@
 package src.fetcher;
 
-import java.util.HashMap;
+
+import java.util.LinkedHashMap;
 
 import com.google.gson.JsonArray;
 
@@ -22,7 +23,7 @@ public class Adapter extends dataFetcher{
 		return adaptee.specificGetData(this.getCountry(), dataIndicator, this.getStartDate(), this.getEndDate());
 	}
 	
-	public HashMap<String, String> getCountriesCode() {
+	public LinkedHashMap<String, String> getCountriesCode() {
 		return adaptee.specificCountryCodeGetData();
 	}
 }

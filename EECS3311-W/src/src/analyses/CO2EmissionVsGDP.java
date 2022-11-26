@@ -1,6 +1,7 @@
 package src.analyses;
 
-import java.util.HashMap;
+
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
@@ -40,11 +41,10 @@ public class CO2EmissionVsGDP implements analyses {
 		if (jsonObject == null) {
 			return null;
 		}
-		
-		
-		HashMap<Integer, Double> tempResult = new HashMap<Integer, Double>();
-		HashMap<Integer, Double> co2Emissions = dataExtractor.filter(jsonObject.getData("EN.ATM.CO2E.PC"));
-		HashMap<Integer, Double> GDP = dataExtractor.filter(jsonObject.getData("NY.GDP.PCAP.CD"));
+
+		LinkedHashMap<Integer, Double> tempResult = new LinkedHashMap<Integer, Double>();
+		LinkedHashMap<Integer, Double> co2Emissions = dataExtractor.filter(jsonObject.getData("EN.ATM.CO2E.PC"));
+		LinkedHashMap<Integer, Double> GDP = dataExtractor.filter(jsonObject.getData("NY.GDP.PCAP.CD"));
 		
 		if(co2Emissions == null || GDP == null) {
 			JOptionPane.showMessageDialog(null, "World Bank Does Not Have Data For The Selected Year(s)", "Data Not Available", JOptionPane.INFORMATION_MESSAGE);
@@ -74,7 +74,7 @@ public class CO2EmissionVsGDP implements analyses {
 		linkedList data = test.analyzeData();
 		Iterator dataIterator = data.getIterator();
 		while (data != null) {
-			HashMap<?,?> dataSet = data.getData();
+			LinkedHashMap<?,?> dataSet = data.getData();
 			for (Entry<?, ?> temp : dataSet.entrySet()) {
 				System.out.println("In result: co2/GDP for " + temp.getKey()+ " is " + temp.getValue());
 			}
