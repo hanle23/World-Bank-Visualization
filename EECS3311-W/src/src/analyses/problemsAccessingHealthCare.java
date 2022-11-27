@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 import javax.swing.JOptionPane;
 
 import src.concrete.linkedList;
-
+import src.GenerateGraphTemplate;
 import src.dataExtractor;
 import src.fetcher.Adapter;
 import src.fetcher.dataFetcher;
@@ -14,11 +14,15 @@ import src.interfaces.analyses;
 
 public class problemsAccessingHealthCare implements analyses {
 	private dataFetcher jsonObject;
-	
+	private String[] acceptGraph;
 	public problemsAccessingHealthCare(int startYear, int endYear, String countryCode) {
 		if (isValid(startYear, endYear, countryCode)) {
 			this.jsonObject = new Adapter(startYear, endYear, countryCode);
 		}
+		this.acceptGraph = (new GenerateGraphTemplate()).template2();
+	}
+	public String[] getAcceptGraph() {
+		return acceptGraph;
 	}
 	
 	private boolean isValid(int startYear, int endYear, String countryCode) {

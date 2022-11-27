@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
-
+import src.GenerateGraphTemplate;
 import src.dataExtractor;
 import src.concrete.linkedList;
 import src.fetcher.Adapter;
@@ -15,6 +15,7 @@ import src.interfaces.Iterator;
 import src.interfaces.analyses;
 
 public class CO2_Energy_PM25 implements analyses {
+	private String[] acceptGraph;
 	private dataFetcher jsonObject;
 	private int startYear;
 	public CO2_Energy_PM25(int startYear, int endYear, String countryCode) {
@@ -22,6 +23,7 @@ public class CO2_Energy_PM25 implements analyses {
 			this.jsonObject = new Adapter(startYear-1, endYear, countryCode);
 		}
 		this.startYear = startYear - 1;
+		this.acceptGraph = (new GenerateGraphTemplate()).template2();
 	}
 	@Override
 	public linkedList analyzeData() {
@@ -36,6 +38,9 @@ public class CO2_Energy_PM25 implements analyses {
 		
 		linkedList result = new linkedList(pm25, "PM25",new linkedList(energy, "Energy",new linkedList(co2, "CO2",null)));
 		return result;
+	}
+	public String[] getAcceptGraph() {
+		return acceptGraph;
 	}
 	
 	private boolean isValid(int startYear, int endYear, String countryCode) {

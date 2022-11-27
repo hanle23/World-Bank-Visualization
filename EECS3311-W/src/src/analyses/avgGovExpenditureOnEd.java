@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
+import src.GenerateGraphTemplate;
 import src.dataExtractor;
 import src.util;
 import src.concrete.linkedList;
@@ -15,12 +16,13 @@ import src.interfaces.Iterator;
 import src.interfaces.analyses;
 
 public class avgGovExpenditureOnEd implements analyses{
-	
+	private String[] acceptGraph;
 	private dataFetcher jsonObject;
 	public avgGovExpenditureOnEd(int startYear, int endYear, String countryCode) {
 		if (isValid(startYear, endYear, countryCode)) {
 			this.jsonObject = new Adapter(startYear, endYear, countryCode);
 		}
+		this.acceptGraph = (new GenerateGraphTemplate()).template1();
 	}
 	
 	private boolean isValid(int startYear, int endYear, String countryCode) {
@@ -32,6 +34,10 @@ public class avgGovExpenditureOnEd implements analyses{
 			return false;
 		}*/
 		return result;
+	}
+	
+	public String[] getAcceptGraph() {
+		return acceptGraph;
 	}
 
 	@Override

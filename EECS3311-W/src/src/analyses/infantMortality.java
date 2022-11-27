@@ -5,6 +5,7 @@ import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
+import src.GenerateGraphTemplate;
 import src.dataExtractor;
 import src.concrete.linkedList;
 import src.interfaces.analyses;
@@ -13,11 +14,15 @@ import src.fetcher.dataFetcher;
 
 public class infantMortality implements analyses {
 	private dataFetcher jsonObject;
-	
+	private String[] acceptGraph;
 	public infantMortality(int startYear, int endYear, String countryCode) {
 		if (isValid(startYear, endYear, countryCode)) {
 			this.jsonObject = new Adapter(startYear, endYear, countryCode);
 		}
+		this.acceptGraph = (new GenerateGraphTemplate()).template2();
+	}
+	public String[] getAcceptGraph() {
+		return acceptGraph;
 	}
 	
 	private boolean isValid(int startYear, int endYear, String countryCode) {

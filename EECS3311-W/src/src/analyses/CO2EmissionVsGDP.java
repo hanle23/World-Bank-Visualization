@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
+import src.GenerateGraphTemplate;
 import src.dataExtractor;
 import src.util;
 import src.concrete.linkedList;
@@ -15,11 +16,13 @@ import src.interfaces.Iterator;
 import src.interfaces.analyses;
 
 public class CO2EmissionVsGDP implements analyses {
+	private String[] acceptGraph;
 	private dataFetcher jsonObject;
 	public CO2EmissionVsGDP(int startYear, int endYear, String countryCode) {
 		if (isValid(startYear, endYear, countryCode)) {
 			this.jsonObject = new Adapter(startYear, endYear, countryCode);
 		}
+		this.acceptGraph = (new GenerateGraphTemplate()).template2();
 	}
 	
 	private boolean isValid(int startYear, int endYear, String countryCode) {
@@ -35,6 +38,9 @@ public class CO2EmissionVsGDP implements analyses {
 		}*/
 		System.out.println("returning true, proceed");
 		return result;
+	}
+	public String[] getAcceptGraph() {
+		return acceptGraph;
 	}
 	
 	public linkedList analyzeData() {

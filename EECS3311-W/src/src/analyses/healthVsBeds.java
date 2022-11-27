@@ -5,6 +5,7 @@ import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
+import src.GenerateGraphTemplate;
 import src.dataExtractor;
 import src.concrete.linkedList;
 import src.fetcher.Adapter;
@@ -14,10 +15,15 @@ import src.interfaces.Iterator;
 
 public class healthVsBeds implements analyses {
 	private dataFetcher jsonObject;
+	private String[] acceptGraph;
 	public healthVsBeds(int startYear, int endYear, String countryCode) {
 		if (isValid(startYear, endYear, countryCode)) {
 			this.jsonObject = new Adapter(startYear, endYear, countryCode);
 		}
+		this.acceptGraph = (new GenerateGraphTemplate()).template2();
+	}
+	public String[] getAcceptGraph() {
+		return acceptGraph;
 	}
 	
 	public linkedList analyzeData() {

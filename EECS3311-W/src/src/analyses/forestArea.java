@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 import javax.swing.JOptionPane;
 
 import src.concrete.linkedList;
-
+import src.GenerateGraphTemplate;
 import src.dataExtractor;
 import src.util;
 import src.fetcher.Adapter;
@@ -15,11 +15,12 @@ import src.interfaces.analyses;
 
 public class forestArea implements analyses {
 	private dataFetcher jsonObject;
-	
+	private String[] acceptGraph;
 	public forestArea(int startYear, int endYear, String countryCode) {
 		if (isValid(startYear, endYear, countryCode)) {
 			this.jsonObject = new Adapter(startYear, endYear, countryCode);
 		}
+		this.acceptGraph = (new GenerateGraphTemplate()).template2();
 	}
 	
 	private boolean isValid(int startYear, int endYear, String countryCode) {
@@ -31,6 +32,9 @@ public class forestArea implements analyses {
 			return false;
 		}*/
 		return result;
+	}
+	public String[] getAcceptGraph() {
+		return acceptGraph;
 	}
 	
 	public linkedList analyzeData() {
