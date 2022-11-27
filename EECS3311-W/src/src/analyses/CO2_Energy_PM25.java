@@ -2,6 +2,7 @@ package src.analyses;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
@@ -15,7 +16,7 @@ import src.interfaces.Iterator;
 import src.interfaces.analyses;
 
 public class CO2_Energy_PM25 implements analyses {
-	private String[] acceptGraph;
+	private Set<String> acceptGraph;
 	private dataFetcher jsonObject;
 	private int startYear;
 	public CO2_Energy_PM25(int startYear, int endYear, String countryCode) {
@@ -39,7 +40,7 @@ public class CO2_Energy_PM25 implements analyses {
 		linkedList result = new linkedList(pm25, "PM25",new linkedList(energy, "Energy",new linkedList(co2, "CO2",null)));
 		return result;
 	}
-	public String[] getAcceptGraph() {
+	public Set<String> getAcceptGraph() {
 		return acceptGraph;
 	}
 	

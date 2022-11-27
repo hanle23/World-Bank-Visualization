@@ -2,13 +2,13 @@ package src.analyses;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
 import src.GenerateGraphTemplate;
 import src.dataExtractor;
-import src.util;
 import src.concrete.linkedList;
 import src.fetcher.Adapter;
 import src.fetcher.dataFetcher;
@@ -16,7 +16,7 @@ import src.interfaces.Iterator;
 import src.interfaces.analyses;
 
 public class avgGovExpenditureOnEd implements analyses{
-	private String[] acceptGraph;
+	private Set<String> acceptGraph;
 	private dataFetcher jsonObject;
 	public avgGovExpenditureOnEd(int startYear, int endYear, String countryCode) {
 		if (isValid(startYear, endYear, countryCode)) {
@@ -36,8 +36,8 @@ public class avgGovExpenditureOnEd implements analyses{
 		return result;
 	}
 	
-	public String[] getAcceptGraph() {
-		return acceptGraph;
+	public Set<String> getAcceptGraph() {
+		return this.acceptGraph;
 	}
 
 	@Override

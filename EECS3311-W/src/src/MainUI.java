@@ -8,11 +8,15 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Properties;
 import java.util.Vector;
+
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -41,11 +45,16 @@ import org.jfree.chart.renderer.xy.XYSplineRenderer;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.util.TableOrder;
 import org.jfree.data.category.DefaultCategoryDataset;
+
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.time.Year;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import src.analyses.CO2EmissionVsGDP;
 import src.analyses.HealthCareVsMortality;
@@ -76,6 +85,7 @@ public class MainUI extends JFrame implements ActionListener{
 	private systemFacade facade;
 	private String country, analysis;
 	private LinkedHashMap<String, String> countries;
+	private String[] excludedCountries;
 	
 	private static Properties props;
 
@@ -98,6 +108,20 @@ public class MainUI extends JFrame implements ActionListener{
 			props = new Properties();
 			props.load(new FileInputStream("src/src/config.properties"));
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			BufferedReader bufferedReader = new BufferedReader(new FileReader("src/src/excludedCountries.json"));
+			Gson gson = new Gson();
+	        JsonArray js = (gson.fromJson(bufferedReader, JsonObject.class)).get("Countries").getAsJsonArray();
+	        this.excludedCountries = new String[js.size()];
+	        for (int i = 0; i < js.size(); i++) {
+	        	this.excludedCountries[i] = js.get(i).toString().strip().trim().replaceAll("\"", "");
+	        }
+	        
+		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -228,9 +252,9 @@ public class MainUI extends JFrame implements ActionListener{
 		}
 		else if(evt.getSource() == countriesList) {
 			this.country = this.countries.get((String) countriesList.getSelectedItem()); //need to convert country to country code.
-			//if (this.country == null || !util.COUNTRIES.contains(this.country)) { //checking util to see if country is excluded
-			//	JOptionPane.showMessageDialog(null, "Country is Excluded From Data Fetching", "Country Selction", JOptionPane.INFORMATION_MESSAGE);
-			//}
+			if (this.country == null || !Arrays.stream(this.excludedCountries).anyMatch(this.country::equals)) { //checking util to see if country is excluded
+				JOptionPane.showMessageDialog(null, "Country is Excluded From Data Fetching", "Country Selction", JOptionPane.INFORMATION_MESSAGE);
+			}
 			System.out.println(this.country);
 		}
 		else if(evt.getSource() == methodsList) {

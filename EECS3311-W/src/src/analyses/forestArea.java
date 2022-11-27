@@ -1,6 +1,7 @@
 package src.analyses;
 
 import java.util.LinkedHashMap;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
@@ -15,7 +16,7 @@ import src.interfaces.analyses;
 
 public class forestArea implements analyses {
 	private dataFetcher jsonObject;
-	private String[] acceptGraph;
+	private Set<String> acceptGraph;
 	public forestArea(int startYear, int endYear, String countryCode) {
 		if (isValid(startYear, endYear, countryCode)) {
 			this.jsonObject = new Adapter(startYear, endYear, countryCode);
@@ -33,7 +34,7 @@ public class forestArea implements analyses {
 		}*/
 		return result;
 	}
-	public String[] getAcceptGraph() {
+	public Set<String> getAcceptGraph() {
 		return acceptGraph;
 	}
 	

@@ -2,6 +2,7 @@ package src.analyses;
 
 
 import java.util.LinkedHashMap;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
@@ -16,7 +17,7 @@ import src.interfaces.Iterator;
 import src.interfaces.analyses;
 
 public class CO2EmissionVsGDP implements analyses {
-	private String[] acceptGraph;
+	private Set<String> acceptGraph;
 	private dataFetcher jsonObject;
 	public CO2EmissionVsGDP(int startYear, int endYear, String countryCode) {
 		if (isValid(startYear, endYear, countryCode)) {
@@ -39,7 +40,7 @@ public class CO2EmissionVsGDP implements analyses {
 		System.out.println("returning true, proceed");
 		return result;
 	}
-	public String[] getAcceptGraph() {
+	public Set<String> getAcceptGraph() {
 		return acceptGraph;
 	}
 	

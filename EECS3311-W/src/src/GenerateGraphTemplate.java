@@ -1,14 +1,25 @@
 package src;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class GenerateGraphTemplate {
 	public GenerateGraphTemplate() {}
-	public String[] template1() {
-		String[] result ={"Pie Chart","Bar Chart","Report"};
+	public Set<String> template1() {
+		Set<String> result =new HashSet<String>();
+		result.add("Pie Chart");
+		result.add("Bar Chart");
+		result.add("Report");
 		return result;
 	}
 	
-	public String[] template2() {
-		String[] result ={"Line Chart","Bar Chart","Scatter Chart","Time Series","Report"};
+	public Set<String> template2() {
+		Set<String> result = new HashSet<String>();
+		result.add("Line Chart");
+		result.add("Bar Chart");
+		result.add("Scatter Chart");
+		result.add("Time Series");
+		result.add("Report");
 		return result;
 	}
 }

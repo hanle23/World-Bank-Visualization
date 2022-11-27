@@ -2,6 +2,7 @@ package src.analyses;
 
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.swing.JOptionPane;
 
@@ -14,14 +15,14 @@ import src.fetcher.dataFetcher;
 
 public class infantMortality implements analyses {
 	private dataFetcher jsonObject;
-	private String[] acceptGraph;
+	private Set<String> acceptGraph;
 	public infantMortality(int startYear, int endYear, String countryCode) {
 		if (isValid(startYear, endYear, countryCode)) {
 			this.jsonObject = new Adapter(startYear, endYear, countryCode);
 		}
 		this.acceptGraph = (new GenerateGraphTemplate()).template2();
 	}
-	public String[] getAcceptGraph() {
+	public Set<String> getAcceptGraph() {
 		return acceptGraph;
 	}
 	

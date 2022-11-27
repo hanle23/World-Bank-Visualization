@@ -1,6 +1,7 @@
 package src.analyses;
 
 import java.util.LinkedHashMap;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
@@ -15,14 +16,14 @@ import src.interfaces.Iterator;
 
 public class healthVsBeds implements analyses {
 	private dataFetcher jsonObject;
-	private String[] acceptGraph;
+	private Set<String> acceptGraph;
 	public healthVsBeds(int startYear, int endYear, String countryCode) {
 		if (isValid(startYear, endYear, countryCode)) {
 			this.jsonObject = new Adapter(startYear, endYear, countryCode);
 		}
 		this.acceptGraph = (new GenerateGraphTemplate()).template2();
 	}
-	public String[] getAcceptGraph() {
+	public Set<String> getAcceptGraph() {
 		return acceptGraph;
 	}
 	

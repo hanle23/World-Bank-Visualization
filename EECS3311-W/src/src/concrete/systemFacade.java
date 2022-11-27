@@ -1,13 +1,11 @@
 package src.concrete;
 
-import java.util.HashMap;
 
-import javax.swing.JOptionPane;
+import java.util.Set;
+
 import javax.swing.JPanel;
 
-import src.fetcher.Adapter;
 import src.fetcher.AnalysisFactory;
-import src.fetcher.dataFetcher;
 import src.graphs.graphSubject;
 import src.interfaces.Subject;
 import src.interfaces.analyses;
@@ -34,6 +32,12 @@ public class systemFacade {
 		//System.out.println("Recieved - startYear:" + startYear + " endYear:" + endYear + " country:"+ country + " analysis:"+analysis);
 		
 		analyses chosenAnalysis = analysisCreator.getAnalysis(startYear, endYear, countryCode, analysisType);
+		Set<String> AcceptedGraphs = chosenAnalysis.getAcceptGraph();
+		for (String key : graphPublisher.getGraphs().keySet()) {
+		    if (!AcceptedGraphs.contains(key)) {
+		    	graphPublisher.detach(key);
+		    }
+		}
 		if(chosenAnalysis != null) {
 			linkedList analysisData = chosenAnalysis.analyzeData();
 			if(analysisData != null)
