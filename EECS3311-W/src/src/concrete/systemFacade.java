@@ -18,6 +18,7 @@ public class systemFacade {
 	
 	private Subject graphPublisher;
 	private AnalysisFactory analysisCreator;
+	private analyses analysis;
 	
 	public systemFacade() {
 		graphPublisher = new graphSubject();
@@ -34,18 +35,22 @@ public class systemFacade {
 		JOptionPane.showMessageDialog(null, "Graphs Selected: " + graphPublisher.getGraphsAsString(), "Graph Selction", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
+	private void setAnalysis(int startYear, int endYear, String countryCode, String analysisType) {
+		this.analysis = analysisCreator.getAnalysis(startYear, endYear, countryCode, analysisType);
+	}
+	
 	public void recalculate(int startYear, int endYear, String countryCode, String analysisType, JPanel graphPanel) {
 		//System.out.println("Recieved - startYear:" + startYear + " endYear:" + endYear + " country:"+ country + " analysis:"+analysis);
 		
-		analyses chosenAnalysis = analysisCreator.getAnalysis(startYear, endYear, countryCode, analysisType);
-		if(chosenAnalysis != null) {
-		Set<String> AcceptedGraphs = chosenAnalysis.getAcceptGraph();
+		setAnalysis(startYear, endYear, countryCode, analysisType);
+		if(this.analysis != null) {
+		Set<String> AcceptedGraphs = this.analysis.getAcceptGraph();
 		for (String key : graphPublisher.getGraphs().keySet()) {
 		    if (!AcceptedGraphs.contains(key)) {
 		    	graphPublisher.detach(key);
 		    }
 		}
-			linkedList analysisData = chosenAnalysis.analyzeData();
+			linkedList analysisData = this.analysis.analyzeData();
 			if(analysisData != null)
 				graphPublisher.notifyGraphs(analysisData, graphPanel, analysisType);
 		}
