@@ -6,8 +6,8 @@ import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
+import src.concrete.GeneralGraphTemplate;
 import src.concrete.linkedList;
-import src.GenerateGraphTemplate;
 import src.dataExtractor;
 import src.fetcher.Adapter;
 import src.fetcher.dataFetcher;
@@ -20,7 +20,7 @@ public class problemsAccessingHealthCare implements analyses {
 		if (isValid(startYear, endYear, countryCode)) {
 			this.jsonObject = new Adapter(startYear, endYear, countryCode);
 		}
-		this.acceptGraph = (new GenerateGraphTemplate()).template2();
+		this.acceptGraph = (new GeneralGraphTemplate()).getTemplate();
 	}
 	public Set<String> getAcceptGraph() {
 		return acceptGraph;

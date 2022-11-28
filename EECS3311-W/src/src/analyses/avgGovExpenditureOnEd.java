@@ -7,8 +7,8 @@ import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
-import src.GenerateGraphTemplate;
 import src.dataExtractor;
+import src.concrete.ScaleTo100GraphTemplate;
 import src.concrete.linkedList;
 import src.fetcher.Adapter;
 import src.fetcher.dataFetcher;
@@ -22,7 +22,7 @@ public class avgGovExpenditureOnEd implements analyses{
 		if (isValid(startYear, endYear, countryCode)) {
 			this.jsonObject = new Adapter(startYear, endYear, countryCode);
 		}
-		this.acceptGraph = (new GenerateGraphTemplate()).template1();
+		this.acceptGraph = (new ScaleTo100GraphTemplate()).getTemplate();
 	}
 	
 	private boolean isValid(int startYear, int endYear, String countryCode) {

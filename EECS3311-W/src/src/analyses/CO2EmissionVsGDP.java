@@ -7,9 +7,9 @@ import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
-import src.GenerateGraphTemplate;
 import src.dataExtractor;
 import src.util;
+import src.concrete.GeneralGraphTemplate;
 import src.concrete.linkedList;
 import src.fetcher.Adapter;
 import src.fetcher.dataFetcher;
@@ -23,7 +23,7 @@ public class CO2EmissionVsGDP implements analyses {
 		if (isValid(startYear, endYear, countryCode)) {
 			this.jsonObject = new Adapter(startYear, endYear, countryCode);
 		}
-		this.acceptGraph = (new GenerateGraphTemplate()).template2();
+		this.acceptGraph = (new GeneralGraphTemplate()).getTemplate();
 	}
 	
 	private boolean isValid(int startYear, int endYear, String countryCode) {

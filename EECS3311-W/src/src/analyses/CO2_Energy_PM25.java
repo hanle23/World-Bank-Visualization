@@ -7,8 +7,8 @@ import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
-import src.GenerateGraphTemplate;
 import src.dataExtractor;
+import src.concrete.GeneralGraphTemplate;
 import src.concrete.linkedList;
 import src.fetcher.Adapter;
 import src.fetcher.dataFetcher;
@@ -24,7 +24,7 @@ public class CO2_Energy_PM25 implements analyses {
 			this.jsonObject = new Adapter(startYear-1, endYear, countryCode);
 		}
 		this.startYear = startYear - 1;
-		this.acceptGraph = (new GenerateGraphTemplate()).template2();
+		this.acceptGraph = (new GeneralGraphTemplate()).getTemplate();
 	}
 	@Override
 	public linkedList analyzeData() {
