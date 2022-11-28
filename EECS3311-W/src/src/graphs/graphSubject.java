@@ -38,6 +38,15 @@ public class graphSubject implements Subject{
 	public HashMap<String, Graph> getGraphs() {
 		return this.graphs;
 	}
+	
+	public String getGraphsAsString() {
+		String selectedGraphs = "";
+		for(Entry<String, Graph> temp : graphs.entrySet()) {
+			if(temp.getValue() != null)
+				selectedGraphs = selectedGraphs + temp.getKey() + ", ";
+		}
+		return selectedGraphs;
+	}
 
 	public void setGraphs(HashMap<String, Graph> graphs) {
 		this.graphs = graphs;
