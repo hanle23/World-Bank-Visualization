@@ -27,6 +27,7 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 import src.concrete.linkedList;
+import src.interfaces.Graph;
 import src.interfaces.Iterator;
 
 public class lineGraph implements Graph{

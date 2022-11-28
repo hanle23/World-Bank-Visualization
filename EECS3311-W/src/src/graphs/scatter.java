@@ -23,6 +23,7 @@ import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.time.Year;
 
 import src.concrete.linkedList;
+import src.interfaces.Graph;
 import src.interfaces.Iterator;
 
 public class scatter implements Graph{

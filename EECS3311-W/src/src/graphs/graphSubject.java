@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import javax.swing.JPanel;
 
 import src.concrete.linkedList;
+import src.interfaces.Graph;
 import src.interfaces.Subject;
 
 public class graphSubject implements Subject{

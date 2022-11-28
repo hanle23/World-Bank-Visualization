@@ -1,5 +1,7 @@
 package src.graphs;
 
+import src.interfaces.Graph;
+
 public class GraphFactory {
 	
 	public Graph getGraph(String graphType) {

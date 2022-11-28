@@ -62,7 +62,6 @@ import src.analyses.avgGovExpenditureOnEd;
 import src.concrete.linkedList;
 import src.concrete.systemFacade;
 import src.fetcher.Adapter;
-import src.graphs.Graph;
 import src.graphs.bar;
 import src.graphs.graphSubject;
 import src.graphs.lineGraph;
@@ -70,6 +69,7 @@ import src.graphs.pie;
 import src.graphs.report;
 import src.graphs.scatter;
 import src.graphs.timeSeries;
+import src.interfaces.Graph;
 import src.interfaces.analyses;
 
 public class MainUI extends JFrame implements ActionListener{

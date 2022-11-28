@@ -21,6 +21,7 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import src.concrete.linkedList;
+import src.interfaces.Graph;
 import src.interfaces.Iterator;
 
 public class bar implements Graph{

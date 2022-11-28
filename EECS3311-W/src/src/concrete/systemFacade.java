@@ -9,8 +9,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import src.fetcher.AnalysisFactory;
-import src.graphs.Graph;
 import src.graphs.graphSubject;
+import src.interfaces.Graph;
 import src.interfaces.Subject;
 import src.interfaces.analyses;
 
