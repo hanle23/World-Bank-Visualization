@@ -12,6 +12,7 @@ public class login extends JFrame implements ActionListener {
 	JTextField userName_text;
 	JPasswordField password_text;
 	JButton submit, cancel;
+	private MainUI userInterface;
 	private boolean isAuthenticated;
 	public login() {
 		this.isAuthenticated = false;
@@ -54,8 +55,13 @@ public class login extends JFrame implements ActionListener {
 		} finally {
 			if (credentials.containsKey(userName)) {
 				if (credentials.get(userName).equals(password)) {
-					message.setText(" Hello " + userName + "");
 					this.isAuthenticated = true;
+					this.setVisible(false);
+					userInterface = MainUI.getInstance();
+					userInterface.setSize(900, 600);
+					userInterface.pack();
+					userInterface.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					userInterface.setVisible(true);
 					
 				} else {
 					message.setText("Invalid username/password");
@@ -68,6 +74,12 @@ public class login extends JFrame implements ActionListener {
 	
 	public boolean isAuthenticated() {
 		return this.isAuthenticated;
+	}
+	
+	public static void main(String[] args) {
+		login test = new login();
+
+        
 	}
 
 }

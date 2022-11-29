@@ -214,7 +214,7 @@ public class MainUI extends JFrame implements ActionListener{
 	}
 
 	public static void main(String[] args) {
-    	new JFrame();
+    	//new JFrame();
 		JFrame frame = MainUI.getInstance();
 		frame.setSize(900, 600);
 		frame.pack();
