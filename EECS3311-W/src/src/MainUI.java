@@ -1,6 +1,10 @@
 package src;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,18 +18,58 @@ import java.util.Properties;
 import java.util.Vector;
 
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.DateAxis;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.block.BlockBorder;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.chart.renderer.xy.XYSplineRenderer;
+import org.jfree.chart.title.TextTitle;
+import org.jfree.chart.util.TableOrder;
+import org.jfree.data.category.DefaultCategoryDataset;
+
+import org.jfree.data.time.TimeSeries;
+import org.jfree.data.time.TimeSeriesCollection;
+import org.jfree.data.time.Year;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import src.analyses.CO2EmissionVsGDP;
+import src.analyses.HealthCareVsMortality;
+import src.analyses.avgGovExpenditureOnEd;
+import src.concrete.linkedList;
 import src.concrete.systemFacade;
-import src.fetcher.Adapter;
+import src.concrete.Adapter;
+import src.graphs.bar;
+import src.graphs.lineGraph;
+import src.graphs.pie;
+import src.graphs.report;
+import src.graphs.scatter;
+import src.graphs.timeSeries;
+import src.interfaces.Graph;
+import src.interfaces.analyses;
 
 public class MainUI extends JFrame implements ActionListener{
 	/**
@@ -36,7 +80,7 @@ public class MainUI extends JFrame implements ActionListener{
 	private JPanel west;
 	private JButton recalculate, addView, removeView;
 	private JComboBox<String> fromList, toList, countriesList, viewsList, methodsList;
-	private int startYear, endYear;
+	private int i, startYear, endYear;
 	private systemFacade facade;
 	private String country, analysis;
 	private LinkedHashMap<String, String> countries;
@@ -56,17 +100,19 @@ public class MainUI extends JFrame implements ActionListener{
 	private MainUI() {
 		// Set window title
 		super("Country Statistics");
+		this.i=0;
 		
 		// Get properties
 		try {
 			props = new Properties();
 			props.load(new FileInputStream("src/src/config.properties"));
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		try {
-			BufferedReader bufferedReader = new BufferedReader(new FileReader("src/src/excludedCountries.json"));
+			BufferedReader bufferedReader = new BufferedReader(new FileReader("src/src/excludedList.json"));
 			Gson gson = new Gson();
 	        JsonArray js = (gson.fromJson(bufferedReader, JsonObject.class)).get("Countries").getAsJsonArray();
 	        this.excludedCountries = new String[js.size()];
@@ -75,6 +121,7 @@ public class MainUI extends JFrame implements ActionListener{
 	        }
 	        
 		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -162,6 +209,7 @@ public class MainUI extends JFrame implements ActionListener{
 		// Set charts region
 		west = new JPanel();
 		west.setLayout(new GridLayout(2, 0));
+		//createCharts(west);
 
 		getContentPane().add(north, BorderLayout.NORTH);
 		getContentPane().add(east, BorderLayout.EAST);
@@ -177,12 +225,15 @@ public class MainUI extends JFrame implements ActionListener{
 			this.west.setLayout(new GridLayout(2, 0));
 			
 			//this listener should call facade --> facade can interact with analysis factory and subject to update the graphs	
+			//createCharts(west);
 			facade.recalculate(this.startYear, this.endYear, this.country, this.analysis, this.west);
 	
 	
 			getContentPane().add(west, BorderLayout.WEST);
 			this.repaint();
 			this.revalidate();
+			i++;
+			//clear subject once done since user will have to reset the graphs
 		}
 		else if(evt.getSource() == addView) {
 			facade.addGraph((String) viewsList.getSelectedItem());
@@ -200,8 +251,9 @@ public class MainUI extends JFrame implements ActionListener{
 		}
 		else if(evt.getSource() == countriesList) {
 			this.country = this.countries.get((String) countriesList.getSelectedItem()); //need to convert country to country code.
-			if (this.country == null || !Arrays.stream(this.excludedCountries).anyMatch(this.country::equals)) { //checking util to see if country is excluded
+			if (this.country == null || Arrays.stream(this.excludedCountries).anyMatch(this.country::equals)) { //checking util to see if country is excluded
 				JOptionPane.showMessageDialog(null, "Country is Excluded From Data Fetching", "Country Selction", JOptionPane.INFORMATION_MESSAGE);
+				this.country = null;
 			}
 			System.out.println(this.country);
 		}
@@ -209,12 +261,13 @@ public class MainUI extends JFrame implements ActionListener{
 			this.analysis = (String) methodsList.getSelectedItem(); //need to convert analysis object
 			System.out.println(this.analysis);
 		}
-		
-		
 	}
 
+
+
+
 	public static void main(String[] args) {
-    	//new JFrame();
+    	new JFrame();
 		JFrame frame = MainUI.getInstance();
 		frame.setSize(900, 600);
 		frame.pack();
@@ -223,5 +276,6 @@ public class MainUI extends JFrame implements ActionListener{
 
         
 	}
+	// TODO Auto-generated method stub
 
 }

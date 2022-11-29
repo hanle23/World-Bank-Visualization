@@ -3,8 +3,8 @@ package src;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import src.fetcher.Adapter;
-import src.fetcher.dataFetcher;
+import src.concrete.Adapter;
+import src.concrete.dataFetcher;
 
 import java.util.Arrays;
 import java.util.HashMap;

@@ -11,8 +11,8 @@ import src.dataExtractor;
 import src.util;
 import src.concrete.GeneralGraphTemplate;
 import src.concrete.linkedList;
-import src.fetcher.Adapter;
-import src.fetcher.dataFetcher;
+import src.concrete.Adapter;
+import src.concrete.dataFetcher;
 import src.interfaces.Iterator;
 import src.interfaces.analyses;
 

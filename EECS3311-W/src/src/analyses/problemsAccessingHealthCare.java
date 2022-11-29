@@ -9,8 +9,8 @@ import javax.swing.JOptionPane;
 import src.concrete.GeneralGraphTemplate;
 import src.concrete.linkedList;
 import src.dataExtractor;
-import src.fetcher.Adapter;
-import src.fetcher.dataFetcher;
+import src.concrete.Adapter;
+import src.concrete.dataFetcher;
 import src.interfaces.analyses;
 
 public class problemsAccessingHealthCare implements analyses {

@@ -1,16 +1,9 @@
-package src.fetcher;
+package src.concrete;
 
 import javax.swing.JOptionPane;
 
-import src.analyses.CO2EmissionVsGDP;
-import src.analyses.CO2_Energy_PM25;
-import src.analyses.HealthCareVsMortality;
-import src.analyses.avgGovExpenditureOnEd;
-import src.analyses.forestArea;
-import src.analyses.healthVsBeds;
-import src.analyses.infantMortality;
-import src.analyses.problemsAccessingHealthCare;
 import src.interfaces.analyses;
+import src.analyses.*;
 
 public class AnalysisFactory {
 	public analyses getAnalysis(int startYear, int endYear, String countryCode, String analysisType) {

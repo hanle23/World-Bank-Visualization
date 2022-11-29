@@ -1,16 +1,12 @@
 package src.concrete;
 
-
-import java.util.HashMap;
 import java.util.Set;
-import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import src.fetcher.AnalysisFactory;
+
 import src.graphs.graphSubject;
-import src.interfaces.Graph;
 import src.interfaces.Subject;
 import src.interfaces.analyses;
 
@@ -18,7 +14,6 @@ public class systemFacade {
 	
 	private Subject graphPublisher;
 	private AnalysisFactory analysisCreator;
-	private analyses analysis;
 	
 	public systemFacade() {
 		graphPublisher = new graphSubject();
@@ -35,22 +30,18 @@ public class systemFacade {
 		JOptionPane.showMessageDialog(null, "Graphs Selected: " + graphPublisher.getGraphsAsString(), "Graph Selction", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
-	private void setAnalysis(int startYear, int endYear, String countryCode, String analysisType) {
-		this.analysis = analysisCreator.getAnalysis(startYear, endYear, countryCode, analysisType);
-	}
-	
 	public void recalculate(int startYear, int endYear, String countryCode, String analysisType, JPanel graphPanel) {
 		//System.out.println("Recieved - startYear:" + startYear + " endYear:" + endYear + " country:"+ country + " analysis:"+analysis);
 		
-		setAnalysis(startYear, endYear, countryCode, analysisType);
-		if(this.analysis != null) {
-		Set<String> AcceptedGraphs = this.analysis.getAcceptGraph();
+		analyses chosenAnalysis = analysisCreator.getAnalysis(startYear, endYear, countryCode, analysisType);
+		if(chosenAnalysis != null) {
+		Set<String> AcceptedGraphs = chosenAnalysis.getAcceptGraph();
 		for (String key : graphPublisher.getGraphs().keySet()) {
 		    if (!AcceptedGraphs.contains(key)) {
 		    	graphPublisher.detach(key);
 		    }
 		}
-			linkedList analysisData = this.analysis.analyzeData();
+			linkedList analysisData = chosenAnalysis.analyzeData();
 			if(analysisData != null)
 				graphPublisher.notifyGraphs(analysisData, graphPanel, analysisType);
 		}

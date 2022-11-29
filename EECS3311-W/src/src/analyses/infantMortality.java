@@ -10,8 +10,8 @@ import src.dataExtractor;
 import src.concrete.GeneralGraphTemplate;
 import src.concrete.linkedList;
 import src.interfaces.analyses;
-import src.fetcher.Adapter;
-import src.fetcher.dataFetcher;
+import src.concrete.Adapter;
+import src.concrete.dataFetcher;
 
 public class infantMortality implements analyses {
 	private dataFetcher jsonObject;

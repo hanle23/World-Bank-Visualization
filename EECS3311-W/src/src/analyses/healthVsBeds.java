@@ -9,8 +9,8 @@ import javax.swing.JOptionPane;
 import src.dataExtractor;
 import src.concrete.GeneralGraphTemplate;
 import src.concrete.linkedList;
-import src.fetcher.Adapter;
-import src.fetcher.dataFetcher;
+import src.concrete.Adapter;
+import src.concrete.dataFetcher;
 import src.interfaces.analyses;
 import src.interfaces.Iterator;
 
@@ -31,7 +31,7 @@ public class healthVsBeds implements analyses {
 		if (jsonObject == null) {
 			return null;
 		}
-		LinkedHashMap<Integer, Double> unsorted = new LinkedHashMap<Integer, Double>();
+		LinkedHashMap<Integer, Double> series1 = new LinkedHashMap<Integer, Double>();
 		LinkedHashMap<Integer, Double> bedData = dataExtractor.filter(jsonObject.getData("SH.MED.BEDS.ZS"));
 		LinkedHashMap<Integer, Double> expendData = dataExtractor.filter(jsonObject.getData("SH.XPD.CHEX.PC.CD"));
 		
@@ -44,10 +44,10 @@ public class healthVsBeds implements analyses {
 			  Integer year = temp.getKey();
 			  Double bedAmount = temp.getValue();
 			  Double expend = expendData.get(year) * 1000; 
-			  unsorted.put(year, expend/bedAmount);
+			  System.out.println(bedAmount);
+			  System.out.println(year);
+			  series1.put(year, expend/bedAmount);
 			}
-		LinkedHashMap<Integer, Double> series1 = new LinkedHashMap<>();
-		series1.putAll(unsorted);
 		linkedList result = new linkedList(series1, "Current Health Expenditure (per 1,000 people)/Hospital Beds(per 1,000 people)",null);
 		return result;
 	}
@@ -78,7 +78,7 @@ public class healthVsBeds implements analyses {
 		return result;
 	}
 	public static void main(String args[]) {
-		healthVsBeds test = new healthVsBeds(2000, 2004, "can");
+		healthVsBeds test = new healthVsBeds(1999, 2004, "can");
 		linkedList result = test.analyzeData();
 		while (result != null) {
 			Iterator print = result.getIterator();
