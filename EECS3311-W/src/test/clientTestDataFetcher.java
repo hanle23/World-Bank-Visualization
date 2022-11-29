@@ -2,8 +2,8 @@ package test;
 
 import com.google.gson.JsonArray;
 
-import src.concrete.Adapter;
-import src.concrete.dataFetcher;
+import src.backend.concrete.Adapter;
+import src.backend.concrete.dataFetcher;
 
 public class clientTestDataFetcher {
 	public static void main(String[] args) {

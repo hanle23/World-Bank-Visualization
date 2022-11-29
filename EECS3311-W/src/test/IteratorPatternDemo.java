@@ -3,9 +3,9 @@ package test;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import src.analyses.CO2EmissionVsGDP;
-import src.concrete.linkedList;
-import src.interfaces.Iterator;
+import src.backend.analyses.CO2EmissionVsGDP;
+import src.backend.concrete.linkedList;
+import src.backend.interfaces.Iterator;
 
 public class IteratorPatternDemo {
 	public static void main(String[] args) {
