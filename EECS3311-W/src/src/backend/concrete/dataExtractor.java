@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -29,22 +30,27 @@ public class dataExtractor {
 	        }
 	        
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		HashMap<Integer, Double> tempResult = new HashMap<Integer, Double>();
 		LinkedHashMap<Integer, Double> result = new LinkedHashMap<Integer, Double>();
 		for (int i = 0; i < object.size(); i++) {
 			JsonObject test2 = (JsonObject) object.get(i);
 //			System.out.println(test2.get("date") + ": " + test2.get("value"));
 			int year = test2.get("date").getAsInt();
 			if (test2.get("value").isJsonNull() || excludedYear.contains(year)) {
-				result.put(year, (double) 0);
+				tempResult.put(year, (double) 0);
 			} else {
 				double value = test2.get("value").getAsDouble();
-				result.put(year, value);
+				tempResult.put(year, value);
 			}
 			
 		}
+		Object[] keys = tempResult.keySet().toArray();
+		Arrays.sort(keys);
+		for(Object key : keys)
+			result.put((Integer) key, tempResult.get(key));
+		
 		return result;
 	}
 	
