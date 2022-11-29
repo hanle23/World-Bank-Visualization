@@ -42,9 +42,17 @@ public class graphSubject implements Subject{
 	
 	public String getGraphsAsString() {
 		String selectedGraphs = "";
+		int i = 0;
 		for(Entry<String, Graph> temp : graphs.entrySet()) {
-			if(temp.getValue() != null)
-				selectedGraphs = selectedGraphs + temp.getKey() + ", ";
+			if(temp.getValue() != null) {
+				if (i >= 1) {
+					selectedGraphs += ", ";
+				}
+				selectedGraphs += temp.getKey();
+				i++;
+			}
+
+			
 		}
 		return selectedGraphs;
 	}
@@ -65,6 +73,14 @@ public class graphSubject implements Subject{
 		}
 		
 	}
+	
+	public boolean isExist(String graphType) {
+		if (graphs.get(graphType) != null) {
+			return true;
+		}
+		return false;
+		
+	}
 
 	@Override
 	public void attach(String graphType) {
@@ -73,13 +89,11 @@ public class graphSubject implements Subject{
 		if(graphs.get(graphType) == null) {
 			graphs.put(graphType, factory.getGraph(graphType));
 		}
-		System.out.println(graphs);
 		
 	}
 
 	@Override
 	public void detach(String graphType) {
-		
 		graphs.put(graphType, null);
 		System.out.println(graphs);
 		
@@ -100,10 +114,10 @@ public class graphSubject implements Subject{
 		test.attach("Scatter Chart");
 		test.attach("Report");
 		test.attach("Scatter Chart");
-		test.detach("Pie Chart");
-		test.detach("Pie Chart");
-		test.detach("Bar Chart");
+		test.attach("Time Series");
+		System.out.println(test.getGraphsAsString());
 		test.detachAll();
+		System.out.println(test.getGraphsAsString());
 		
 		
 	}

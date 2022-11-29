@@ -2,9 +2,7 @@ package src.concrete;
 
 import java.util.HashMap;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
 	abstract public class dataFetcher {
 	private int startDate;

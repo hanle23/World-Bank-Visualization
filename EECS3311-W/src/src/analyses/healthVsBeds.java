@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
-import src.dataExtractor;
+import src.concrete.dataExtractor;
 import src.concrete.GeneralGraphTemplate;
 import src.concrete.linkedList;
 import src.concrete.Adapter;
@@ -44,9 +44,12 @@ public class healthVsBeds implements analyses {
 			  Integer year = temp.getKey();
 			  Double bedAmount = temp.getValue();
 			  Double expend = expendData.get(year) * 1000; 
-			  System.out.println(bedAmount);
-			  System.out.println(year);
-			  series1.put(year, expend/bedAmount);
+			  if (bedAmount == 0) {
+				  series1.put(year, (double) 0);
+			  } else {
+				  series1.put(year, expend/bedAmount);
+			  }
+			  
 			}
 		linkedList result = new linkedList(series1, "Current Health Expenditure (per 1,000 people)/Hospital Beds(per 1,000 people)",null);
 		return result;
@@ -72,9 +75,6 @@ public class healthVsBeds implements analyses {
 		if (endYear < startYear) {
 			return false;
 		}
-//		if (!util.COUNTRIES.contains(countryCode)) {
-//			return false;
-//		}
 		return result;
 	}
 	public static void main(String args[]) {

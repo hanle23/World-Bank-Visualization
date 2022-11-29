@@ -6,7 +6,7 @@ import java.util.Set;
 
 import javax.swing.JOptionPane;
 
-import src.dataExtractor;
+import src.concrete.dataExtractor;
 import src.concrete.GeneralGraphTemplate;
 import src.concrete.linkedList;
 import src.interfaces.analyses;
@@ -31,9 +31,6 @@ public class infantMortality implements analyses {
 		if (endYear < startYear) {
 			return false;
 		}
-//		if (!util.COUNTRIES.contains(countryCode)) {
-//			return false;
-//		}
 		return result;
 	}
 	
@@ -41,7 +38,7 @@ public class infantMortality implements analyses {
 		if (jsonObject == null) {
 			return null;
 		}
-		LinkedHashMap<Integer, Double> tmp = new LinkedHashMap<Integer, Double>();
+		LinkedHashMap<Integer, Double> series1 = new LinkedHashMap<Integer, Double>();
 		LinkedHashMap<Integer, Double> mortalityData = dataExtractor.filter(jsonObject.getData("SP.DYN.IMRT.IN"));
 		
 		if(mortalityData == null) {
@@ -52,10 +49,9 @@ public class infantMortality implements analyses {
 		for (Entry<Integer, Double> temp : mortalityData.entrySet()) {
 			  Integer year = temp.getKey();
 			  Double infantMortality = temp.getValue();
-			  System.out.println("Infant mortality rate per 1000 people for " + year + " is "+ infantMortality);
-			  tmp.put(year, infantMortality);
+			  series1.put(year, infantMortality);
 		}
-		linkedList result = new linkedList(tmp, "Infant Mortality Rate (per 1,000 live births)", null);
+		linkedList result = new linkedList(series1, "Infant Mortality Rate (per 1,000 live births)", null);
 		
 		return result;
 		

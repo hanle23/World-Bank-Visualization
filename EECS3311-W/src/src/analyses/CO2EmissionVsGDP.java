@@ -7,8 +7,7 @@ import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
-import src.dataExtractor;
-import src.util;
+import src.concrete.dataExtractor;
 import src.concrete.GeneralGraphTemplate;
 import src.concrete.linkedList;
 import src.concrete.Adapter;

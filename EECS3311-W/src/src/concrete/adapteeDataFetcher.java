@@ -85,14 +85,10 @@ public class adapteeDataFetcher {
 	
 	public static void main(String[] args) {
 		Adapter test = new Adapter(2000, 2023, "can");
-		JsonArray test1 = test.getData("AG.LND.AGRI.ZS");
-		String name = "Canada";
 		LinkedHashMap<String, String> countries = test.getCountriesCode();
-		//System.out.println(countries);
 		for (Entry<String, String> entry : countries.entrySet()) {
 			String key = entry.getKey();
 			System.out.println(key);
-		   // System.out.println(key.equals(name));
 		    String value = entry.getValue();
 		    System.out.println(value);
 

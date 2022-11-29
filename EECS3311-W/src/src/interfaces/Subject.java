@@ -14,5 +14,6 @@ public interface Subject {
 	public void detachAll();
 	public HashMap<String, Graph> getGraphs();
 	public String getGraphsAsString();
+	public boolean isExist(String graphType);
 	
 }

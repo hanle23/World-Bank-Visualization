@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
-import src.dataExtractor;
+import src.concrete.dataExtractor;
 import src.concrete.GeneralGraphTemplate;
 import src.concrete.linkedList;
 import src.concrete.Adapter;
@@ -54,12 +54,6 @@ public class HealthCareVsMortality implements analyses{
 		}
 		//have a popup message that analysis cannot be done since API doesn't have data, it returns null when there is no data for all the years, for 1 or more extractor
 		
-		for (Entry<Integer, Double> temp : problemsAccessingHealthCare.entrySet()) {
-			  Integer year = temp.getKey();
-			  Double healthCareAmount = temp.getValue();
-			  Double infantMortalityAmount = infantMortality.get(year); 
-
-			}
 		dataSet1.setdata(problemsAccessingHealthCare);
 		dataSet1.setName("Problems in accessing health care (% of women)");
 		dataSet2.setdata(infantMortality);
