@@ -1,5 +1,7 @@
 package src.controller.concrete;
 
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.swing.JOptionPane;
@@ -9,6 +11,7 @@ import src.backend.concrete.AnalysisFactory;
 import src.backend.concrete.linkedList;
 import src.backend.interfaces.analyses;
 import src.view.concrete.graphSubject;
+import src.view.interfaces.Graph;
 import src.view.interfaces.Subject;
 
 public class systemFacade {
@@ -50,13 +53,13 @@ public class systemFacade {
 			Set<String> AcceptedGraphs = this.analysis.getAcceptGraph();
 			String detachedGraphs = "";
 			int i = 0;
-			for (String key : graphPublisher.getGraphs().keySet()) {
-			    if (!AcceptedGraphs.contains(key)) {
-			    	graphPublisher.detach(key);
+			for (Entry<String, Graph> entry : graphPublisher.getGraphs().entrySet()) {
+			    if (!AcceptedGraphs.contains(entry.getKey()) && entry.getValue() != null) {
+			    	graphPublisher.detach(entry.getKey());
 					if (i >= 1) {
 						detachedGraphs += ", ";
 					}
-					detachedGraphs += key;
+					detachedGraphs += entry.getKey();
 					i++;
 			    }
 			}
