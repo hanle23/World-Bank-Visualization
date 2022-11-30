@@ -7,6 +7,10 @@ import javax.swing.*;
 
 import src.controller.concrete.MainUI;
 
+/**
+ * Class responsible for displaying the login GUI to the user and handling login verification
+ *
+ */
 public class login extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 7443430018716222992L;
 	JPanel panel;
@@ -44,6 +48,9 @@ public class login extends JFrame implements ActionListener {
 		setSize(450,350);
 		setVisible(true);
 	}
+	/**
+	 * Action listener for when user inputs username and password
+	 */
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		String userName = userName_text.getText().trim();

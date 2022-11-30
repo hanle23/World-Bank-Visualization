@@ -28,7 +28,7 @@ import src.backend.concrete.Adapter;
 
 public class MainUI extends JFrame implements ActionListener{
 	/**
-	 * 
+	 * Class responsible for displaying the main GUI to the user
 	 */
 	private static final long serialVersionUID = 1L;
 	
@@ -61,10 +61,10 @@ public class MainUI extends JFrame implements ActionListener{
 			props = new Properties();
 			props.load(new FileInputStream("src/src/config.properties"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		//Getting countries in excluded list json
 		try {
 			BufferedReader bufferedReader = new BufferedReader(new FileReader("src/src/excludedList.json"));
 			Gson gson = new Gson();
@@ -75,7 +75,6 @@ public class MainUI extends JFrame implements ActionListener{
 	        }
 	        
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -123,7 +122,6 @@ public class MainUI extends JFrame implements ActionListener{
 		Vector<String> viewsNames = new Vector<String>();
 		viewsNames.addAll(Arrays.asList(props.getProperty("Charts").split(",")));
 		viewsList = new JComboBox<String>(viewsNames);
-		//viewsList.addActionListener(this);
 		
 		addView = new JButton("+");
 		addView.addActionListener(this);
@@ -147,12 +145,11 @@ public class MainUI extends JFrame implements ActionListener{
 		south.add(methodsList);
 		south.add(recalculate);
 		
-		//setting default values to what is currently selected if user never changes options
-		//user will have to select '+" to add a graph. if they don't click plus on any graph but clicks recalculate we need a popup message that they didn't select a graph
-		this.country = this.countries.get((String) countriesList.getSelectedItem());//need to convert to a country code. Will facade do that?
+		
+		this.country = this.countries.get((String) countriesList.getSelectedItem());
 		this.startYear = Integer.parseInt((String)fromList.getSelectedItem());
 		this.endYear = Integer.parseInt((String)toList.getSelectedItem());
-		this.analysis = (String) methodsList.getSelectedItem(); //analysis attribute is only a string. Need a factory to create the object
+		this.analysis = (String) methodsList.getSelectedItem();
 		System.out.println(country);
 		System.out.println(startYear);
 		System.out.println(endYear);
@@ -163,7 +160,6 @@ public class MainUI extends JFrame implements ActionListener{
 		// Set charts region
 		west = new JPanel();
 		west.setLayout(new GridLayout(2, 0));
-		//createCharts(west);
 
 		getContentPane().add(north, BorderLayout.NORTH);
 		getContentPane().add(east, BorderLayout.EAST);
@@ -171,6 +167,9 @@ public class MainUI extends JFrame implements ActionListener{
 		getContentPane().add(west, BorderLayout.WEST);
 	}
 	
+	/**
+	 * Action listener for when user chooses a country, year, graph, or analysis
+	 */
 	@Override
 	public void actionPerformed(ActionEvent evt) {
 		if(evt.getSource() == recalculate) {		
@@ -178,15 +177,11 @@ public class MainUI extends JFrame implements ActionListener{
 			this.west = new JPanel();
 			this.west.setLayout(new GridLayout(2, 0));
 			
-			//this listener should call facade --> facade can interact with analysis factory and subject to update the graphs	
-			//createCharts(west);
 			facade.recalculate(this.startYear, this.endYear, this.country, this.analysis, this.west);
-	
 	
 			getContentPane().add(west, BorderLayout.WEST);
 			this.repaint();
 			this.revalidate();
-			//clear subject once done since user will have to reset the graphs
 		}
 		else if(evt.getSource() == addView) {
 			facade.addGraph((String) viewsList.getSelectedItem());
@@ -203,15 +198,15 @@ public class MainUI extends JFrame implements ActionListener{
 			System.out.println(this.endYear);
 		}
 		else if(evt.getSource() == countriesList) {
-			this.country = this.countries.get((String) countriesList.getSelectedItem()); //need to convert country to country code.
-			if (this.country == null || Arrays.stream(this.excludedCountries).anyMatch(countriesList.getSelectedItem()::equals)) { //checking util to see if country is excluded
+			this.country = this.countries.get((String) countriesList.getSelectedItem()); 
+			if (this.country == null || Arrays.stream(this.excludedCountries).anyMatch(countriesList.getSelectedItem()::equals)) { //checking to see if country is excluded
 				JOptionPane.showMessageDialog(null, "Country is Excluded From Data Fetching", "Country Selction", JOptionPane.INFORMATION_MESSAGE);
 				this.country = null;
 			}
 			System.out.println(this.country);
 		}
 		else if(evt.getSource() == methodsList) {
-			this.analysis = (String) methodsList.getSelectedItem(); //need to convert analysis object
+			this.analysis = (String) methodsList.getSelectedItem(); 
 			System.out.println(this.analysis);
 		}
 	}
@@ -229,6 +224,5 @@ public class MainUI extends JFrame implements ActionListener{
 
         
 	}
-	// TODO Auto-generated method stub
 
 }
