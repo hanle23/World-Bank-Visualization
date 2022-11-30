@@ -50,16 +50,15 @@ public class login extends JFrame implements ActionListener {
 		String password = password_text.getText().trim();
 		HashMap<String, String> credentials = null;
 		try {
-			credentials = util.jsonToDict("loginCredentials/credentials.json");
+			credentials = util.jsonToDict("loginCredentials/credentials.json"); //pulling usernames/passwords from json file that stores them
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			if (credentials.containsKey(userName)) {
-				if (credentials.get(userName).equals(password)) {
+			if (credentials.containsKey(userName)) { //checking if username is valid
+				if (credentials.get(userName).equals(password)) { //checking if password matches the username
 					this.isAuthenticated = true;
 					this.setVisible(false);
-					userInterface = MainUI.getInstance();
+					userInterface = MainUI.getInstance(); //if username and password is correct we get an instance of the mainUI, giving the user access to it
 					userInterface.setSize(900, 600);
 					userInterface.pack();
 					userInterface.setExtendedState(JFrame.MAXIMIZED_BOTH);
