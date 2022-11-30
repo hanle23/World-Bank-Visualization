@@ -69,8 +69,8 @@ public class healthVsBeds implements analyses {
 		}
 		return dataExtractor.filter(jsonObject.getData("SH.XPD.CHEX.PC.CD"));
 	}
-	
-	private boolean isValid(int startYear, int endYear, String countryCode) {
+	@Override
+	public boolean isValid(int startYear, int endYear, String countryCode) {
 		boolean result = true;
 		if (endYear < startYear) {
 			JOptionPane.showMessageDialog(null, "Years not Valid", "Years Selction", JOptionPane.INFORMATION_MESSAGE);

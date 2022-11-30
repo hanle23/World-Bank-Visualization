@@ -13,8 +13,21 @@ import com.google.gson.JsonArray;
 
 import com.google.gson.JsonParser;
 
+/**
+ * A specific data fetcher implementation for the original GET method before changes
+ *
+ */
 public class adapteeDataFetcher {
 	
+	/**
+	 * An implementation of a GET and convert from Scanner to JsonArray without filtering
+	 * 
+	 * @param country MainUI country selection
+	 * @param dataIndicator	Type of data to pull from API
+	 * @param startDate MainUI start date selection
+	 * @param endDate	MainUI end date selection
+	 * @return	JsonArray includes the result after fetched from API
+	 */
 	public JsonArray specificGetData(String country, String dataIndicator, int startDate, int endDate) {
 		if (startDate == -1 || endDate == -1) {
 			return null;
@@ -49,6 +62,11 @@ public class adapteeDataFetcher {
 		return array;
 	}
 	
+	/**
+	 * Retrieve a LinkedHashMap of all current available countries and its code from the API for function usages from the API
+	 * 
+	 * @return all the current available countries and its code format
+	 */
 	public LinkedHashMap<String, String> specificCountryCodeGetData() {
 		String urlString = "http://api.worldbank.org/v2/country?format=json";
 		JsonArray array = null;

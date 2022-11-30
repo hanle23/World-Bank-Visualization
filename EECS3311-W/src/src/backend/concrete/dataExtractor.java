@@ -13,8 +13,18 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+/**
+ * An extracting class that takes in JsonArray or any objects, and put necessary data into organized data structure such as LinkedHashMap
+ *
+ */
 public class dataExtractor {
 
+	/**
+	 * A filter that pick data from the JsonArray, clean up by excluding years from the excludedList, organize the rest data into a linkedHashMap that is sorted in an ascending order
+	 * 
+	 * @param object the target object to filter data from
+	 * @return LinkedHashMap with data that is already filtered and sorted key in an ascending order
+	 */
 	public static LinkedHashMap<Integer, Double> filter(JsonArray object) {
 		if (object == null) {
 			return null;
@@ -36,7 +46,6 @@ public class dataExtractor {
 		LinkedHashMap<Integer, Double> result = new LinkedHashMap<Integer, Double>();
 		for (int i = 0; i < object.size(); i++) {
 			JsonObject test2 = (JsonObject) object.get(i);
-//			System.out.println(test2.get("date") + ": " + test2.get("value"));
 			int year = test2.get("date").getAsInt();
 			if (test2.get("value").isJsonNull() || excludedYear.contains(year)) {
 				tempResult.put(year, (double) 0);

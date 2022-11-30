@@ -25,7 +25,8 @@ public class avgGovExpenditureOnEd implements analyses{
 		this.acceptGraph = (new ScaleTo100GraphTemplate()).getTemplate();
 	}
 	
-	private boolean isValid(int startYear, int endYear, String countryCode) {
+	@Override
+	public boolean isValid(int startYear, int endYear, String countryCode) {
 		boolean result = true;
 		if (endYear < startYear) {
 			JOptionPane.showMessageDialog(null, "Years not Valid", "Years Selction", JOptionPane.INFORMATION_MESSAGE);
@@ -36,7 +37,7 @@ public class avgGovExpenditureOnEd implements analyses{
 		}*/
 		return result;
 	}
-	
+	@Override
 	public Set<String> getAcceptGraph() {
 		return this.acceptGraph;
 	}

@@ -12,7 +12,21 @@ import src.backend.analyses.infantMortality;
 import src.backend.analyses.problemsAccessingHealthCare;
 import src.backend.interfaces.analyses;
 
+/**
+ * An Analysis factory that transform analysis type as String to equivalent function, with error checking as pop up message if input is invalid.
+ *
+ */
 public class AnalysisFactory {
+	/**
+	 * Get analysis object from parameter and analysis type as String to its relevant analysis function if exist. 
+	 * Return null if there isn't exist such analysis function
+	 * 
+	 * @param startYear target start year chosen by the user
+	 * @param endYear target end year chosen by the user
+	 * @param countryCode target country in a format of code, chosen by user
+	 * @param analysisType	target analysis chosen by user
+	 * @return	analysis the analysis object contains necessary data to fetch from API
+	 */
 	public analyses getAnalysis(int startYear, int endYear, String countryCode, String analysisType) {
 		
 		System.out.println("Start Year: "+ startYear + " end Year: "+ endYear + " Country code: "+ countryCode+ "Analysis type: "+ analysisType);

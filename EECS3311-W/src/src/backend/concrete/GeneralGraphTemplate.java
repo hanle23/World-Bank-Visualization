@@ -5,8 +5,15 @@ import java.util.Set;
 
 import src.backend.interfaces.GenerateGraphTemplate;
 
+/**
+ * A set of graphs that support general use cases, except for the graphs that only scale up to 100 such as pie graphs that will be used by analysis classes
+ *
+ */
 public class GeneralGraphTemplate implements GenerateGraphTemplate {
 
+	/**
+	 *	Retrieve the Set of graphs as String
+	 */
 	@Override
 	public Set<String> getTemplate() {
 		Set<String> result = new HashSet<String>();

@@ -22,8 +22,8 @@ public class forestArea implements analyses {
 		}
 		this.acceptGraph = (new GeneralGraphTemplate()).getTemplate();
 	}
-	
-	private boolean isValid(int startYear, int endYear, String countryCode) {
+	@Override
+	public boolean isValid(int startYear, int endYear, String countryCode) {
 		boolean result = true;
 		if (endYear < startYear) {
 			JOptionPane.showMessageDialog(null, "Years not Valid", "Years Selction", JOptionPane.INFORMATION_MESSAGE);
