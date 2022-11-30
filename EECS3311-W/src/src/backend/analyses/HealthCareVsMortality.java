@@ -27,6 +27,7 @@ public class HealthCareVsMortality implements analyses{
 	private boolean isValid(int startYear, int endYear, String countryCode) {
 		boolean result = true;
 		if (endYear < startYear) {
+			JOptionPane.showMessageDialog(null, "Years not Valid", "Years Selction", JOptionPane.INFORMATION_MESSAGE);
 			return false;
 		}
 		/*if (!util.COUNTRIES.contains(countryCode)) {
