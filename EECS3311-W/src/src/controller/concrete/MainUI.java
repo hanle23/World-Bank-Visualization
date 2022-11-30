@@ -204,7 +204,7 @@ public class MainUI extends JFrame implements ActionListener{
 		}
 		else if(evt.getSource() == countriesList) {
 			this.country = this.countries.get((String) countriesList.getSelectedItem()); //need to convert country to country code.
-			if (this.country == null || Arrays.stream(this.excludedCountries).anyMatch(this.country::equals)) { //checking util to see if country is excluded
+			if (this.country == null || Arrays.stream(this.excludedCountries).anyMatch(countriesList.getSelectedItem()::equals)) { //checking util to see if country is excluded
 				JOptionPane.showMessageDialog(null, "Country is Excluded From Data Fetching", "Country Selction", JOptionPane.INFORMATION_MESSAGE);
 				this.country = null;
 			}
