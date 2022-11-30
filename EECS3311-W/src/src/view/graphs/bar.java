@@ -24,8 +24,19 @@ import src.backend.concrete.linkedList;
 import src.backend.interfaces.Iterator;
 import src.view.interfaces.Graph;
 
+/**
+ * A class responsible for the creation of a bar graph
+ */
 public class bar implements Graph{
 
+	/**
+	 * Method that creates a graph and populates the data with the analyzed data.
+	 * Contains bar graph creation algorithm
+	 * 
+	 * @param dataSets 	a linkedList that contains the data to be displayed
+	 * @param west		the JPanel where the graphs are displayed
+	 * @param graphTitle	a string for the title of the graph
+	 */
 	@Override
 	public void update(linkedList dataSets, JPanel west, String graphTitle) {
 		int i = 0, pairs = 0; // every 2 data series we will make a new collection
@@ -43,18 +54,12 @@ public class bar implements Graph{
 			}
 			
 			dataSets = (linkedList) dataIterator.next();
-		//	plot.setRangeAxis(count, new NumberAxis("")); //insert axis name
 			i++;
 			count++;
 			if(i > 1) {
 				plot.setDataset(pairs, dataSeries);
 				plot.setRenderer(pairs, barrenderer);
-				plot.setRangeAxis(pairs, new NumberAxis("")); //insert axis name
-				//List<Integer> axes = Arrays.asList(count-2, count-1);
-				//plot.mapDatasetToRangeAxes(pairs, axes);
-				//plot.mapDatasetToRangeAxis(pairs, count-1);
-				//plot.mapDatasetToRangeAxis(pairs, count-2);
-				//plot.setRangeAxis(pairs, new NumberAxis(""));
+				plot.setRangeAxis(pairs, new NumberAxis(""));
 				pairs++;
 				dataSeries = new DefaultCategoryDataset();
 				barrenderer = new BarRenderer();
@@ -65,7 +70,6 @@ public class bar implements Graph{
 		if(i == 1) {
 			plot.setDataset(pairs, dataSeries);
 			plot.setRenderer(pairs, barrenderer);
-		//	plot.mapDatasetToRangeAxis(pairs, count-1);
 			plot.setRangeAxis(pairs, new NumberAxis("")); 
 		}
 		
@@ -73,7 +77,6 @@ public class bar implements Graph{
 		plot.setDomainAxis(domainAxis);
 		
 		for(int j=0; j<count; j++) {
-			//System.out.println("j: " + j);
 			plot.mapDatasetToRangeAxis(j, j);
 		}
 		

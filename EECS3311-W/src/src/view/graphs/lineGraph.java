@@ -30,19 +30,30 @@ import src.backend.concrete.linkedList;
 import src.backend.interfaces.Iterator;
 import src.view.interfaces.Graph;
 
+/**
+ * A class responsible for the creation of a line graph
+ */
 public class lineGraph implements Graph{
-
+	
+	/**
+	 * Method that creates a graph and populates the data with the analyzed data.
+	 * Contains line graph creation algorithm
+	 * 
+	 * @param dataSets 	a linkedList that contains the data to be displayed
+	 * @param west		the JPanel where the graphs are displayed
+	 * @param graphTitle	a string for the title of the graph
+	 */
 	@Override
 	public void update(linkedList dataSets, JPanel west, String graphTitle) {
 		
-		int i = 0; //need to consider naming for the data sets
 		XYSeriesCollection datasetDisplay = new XYSeriesCollection();
 		XYSeries series;
 		
+		//populating graph with data from linkedList
 		while (dataSets != null) {
 			Iterator dataIterator = dataSets.getIterator();
 			LinkedHashMap<?,?> dataSet = dataSets.getData();
-			series = new XYSeries(dataSets.getName()); 
+			series = new XYSeries(dataSets.getName()); //creating a new series for each series of data in the linkedList
 			for (Entry<?, ?> temp : dataSet.entrySet()) {
 				series.add((int) temp.getKey(), (double)temp.getValue());
 			}
@@ -51,7 +62,7 @@ public class lineGraph implements Graph{
 		}
 		
 		JFreeChart chart = ChartFactory.createXYLineChart(graphTitle, "Year", "", datasetDisplay,
-				PlotOrientation.VERTICAL, true, true, false); //need to consider how to name the graphs, year is the x axis
+				PlotOrientation.VERTICAL, true, true, false); 
 
 		XYPlot plot = chart.getXYPlot();
 

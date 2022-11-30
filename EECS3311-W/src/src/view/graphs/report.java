@@ -15,8 +15,19 @@ import src.backend.concrete.linkedList;
 import src.backend.interfaces.Iterator;
 import src.view.interfaces.Graph;
 
+/**
+ * A class responsible for the creation of a report
+ */
 public class report implements Graph{
 
+	/**
+	 * Method that creates a graph and populates the data with the analyzed data.
+	 * Contains report creation algorithm
+	 * 
+	 * @param dataSets 	a linkedList that contains the data to be displayed
+	 * @param west		the JPanel where the graphs are displayed
+	 * @param graphTitle	a string for the title of the graph
+	 */
 	@Override
 	public void update(linkedList dataSets, JPanel west, String graphTitle) {
 		int i = 0;
@@ -25,7 +36,7 @@ public class report implements Graph{
 		report.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 		report.setBackground(Color.white);
 		String reportMessage = graphTitle + "\n" + "==============================\n";
-		
+		//populating the report with data from the linkedList
 		while (dataSets != null) {
 			Iterator dataIterator = dataSets.getIterator();
 			LinkedHashMap<?,?> dataSet = dataSets.getData();

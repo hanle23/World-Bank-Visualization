@@ -19,12 +19,24 @@ import src.backend.concrete.linkedList;
 import src.backend.interfaces.Iterator;
 import src.view.interfaces.Graph;
 
+/**
+ * A class responsible for the creation of a pie graph
+ */
 public class pie implements Graph{
-
+	
+	/**
+	 * Method that creates a graph and populates the data with the analyzed data.
+	 * Contains pie graph creation algorithm
+	 * 
+	 * @param dataSets 	a linkedList that contains the data to be displayed
+	 * @param west		the JPanel where the graphs are displayed
+	 * @param graphTitle	a string for the title of the graph
+	 */
 	@Override
 	public void update(linkedList dataSets, JPanel west, String graphTitle) {
 		DefaultCategoryDataset datasetCollection = new DefaultCategoryDataset();
 		
+		//populating graph with data from linkedList
 		while (dataSets != null) {
 			Iterator dataIterator = dataSets.getIterator();
 			LinkedHashMap<?,?> dataSet = dataSets.getData();

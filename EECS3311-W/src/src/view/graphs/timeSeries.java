@@ -24,24 +24,33 @@ import src.backend.concrete.linkedList;
 import src.backend.interfaces.Iterator;
 import src.view.interfaces.Graph;
 
+/**
+ * A class responsible for the creation of a time series
+ */
 public class timeSeries implements Graph{
 
+	/**
+	 * Method that creates a graph and populates the data with the analyzed data.
+	 * Contains time series creation algorithm
+	 * 
+	 * @param dataSets 	a linkedList that contains the data to be displayed
+	 * @param west		the JPanel where the graphs are displayed
+	 * @param graphTitle	a string for the title of the graph
+	 */
 	@Override
 	public void update(linkedList dataSets, JPanel west, String graphTitle) {
 		XYPlot plot = new XYPlot();
 		TimeSeriesCollection dataSetDisplay;
 		XYSplineRenderer splinerenderer;
 		int i = 0;
-		String year;
 		
 		dataSetDisplay = new TimeSeriesCollection();
 		splinerenderer = new XYSplineRenderer();
 		
+		//populating time series with data from linkedList
 		while (dataSets != null) {
 			Iterator dataIterator = dataSets.getIterator();
 			LinkedHashMap<?,?> dataSet = dataSets.getData();
-			//dataSetDisplay = new TimeSeriesCollection();
-			//splinerenderer = new XYSplineRenderer();
 			TimeSeries series = new TimeSeries(dataSets.getName());
 			
 			for (Entry<?, ?> temp : dataSet.entrySet()) {
@@ -50,9 +59,6 @@ public class timeSeries implements Graph{
 			}
 			
 			dataSetDisplay.addSeries(series);
-			//plot.setDataset(i, dataSetDisplay);
-			//plot.setRenderer(i, splinerenderer);
-			//plot.setRangeAxis(i, new NumberAxis("temp label")); //put whatever to match the data
 			i++;
 			dataSets = (linkedList) dataIterator.next();
 			
@@ -60,7 +66,7 @@ public class timeSeries implements Graph{
 		
 		plot.setDataset(0, dataSetDisplay);
 		plot.setRenderer(0, splinerenderer);
-		plot.setRangeAxis(0, new NumberAxis("temp label")); //put whatever to match the data
+		plot.setRangeAxis(0, new NumberAxis(""));
 		
 		DateAxis domainAxis = new DateAxis("Year");
 		plot.setDomainAxis(domainAxis);

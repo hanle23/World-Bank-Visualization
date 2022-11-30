@@ -26,22 +26,32 @@ import src.backend.concrete.linkedList;
 import src.backend.interfaces.Iterator;
 import src.view.interfaces.Graph;
 
+/**
+ * A class responsible for the creation of a scatter plot
+ */
 public class scatter implements Graph{
-
+	
+	/**
+	 * Method that creates a graph and populates the data with the analyzed data.
+	 * Contains scatter plot creation algorithm
+	 * 
+	 * @param dataSets 	a linkedList that contains the data to be displayed
+	 * @param west		the JPanel where the graphs are displayed
+	 * @param graphTitle	a string for the title of the graph
+	 */
 	@Override
 	public void update(linkedList dataSets, JPanel west, String graphTitle) {
 		XYPlot plot = new XYPlot();
 		TimeSeriesCollection dataSetDisplay;
 		XYItemRenderer itemrenderer;
 		int i = 0;
-		String year;
 		dataSetDisplay = new TimeSeriesCollection();
 		itemrenderer =  new XYLineAndShapeRenderer(false, true);
+		
+		//populating scatter plot with linkedList data
 		while (dataSets != null) {
 			Iterator dataIterator = dataSets.getIterator();
 			LinkedHashMap<?,?> dataSet = dataSets.getData();
-		//	dataSetDisplay = new TimeSeriesCollection();
-		//	itemrenderer =  new XYLineAndShapeRenderer(false, true);
 			TimeSeries series = new TimeSeries(dataSets.getName());
 			
 			for (Entry<?, ?> temp : dataSet.entrySet()) {
@@ -50,15 +60,11 @@ public class scatter implements Graph{
 			}
 			
 			dataSetDisplay.addSeries(series);
-		//	plot.setDataset(i, dataSetDisplay);
-		//	plot.setRenderer(i, itemrenderer);
-		//	plot.setRangeAxis(i, new NumberAxis("temp label")); //put whatever to match the data
 			i++;
 			dataSets = (linkedList) dataIterator.next();
 			
 		}
 		
-		//dataSetDisplay.addSeries(series);
 		plot.setDataset(0, dataSetDisplay);
 		plot.setRenderer(0, itemrenderer);
 		plot.setRangeAxis(0, new NumberAxis(""));
@@ -67,7 +73,6 @@ public class scatter implements Graph{
 		plot.setDomainAxis(domainAxis);
 		
 		for(int j = 0; j < i ; j++) {
-			//plot.mapDatasetToRangeAxis(j, j);
 			plot.mapDatasetToRangeAxis(j, 0);
 		}
 		

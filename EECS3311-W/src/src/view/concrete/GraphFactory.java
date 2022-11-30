@@ -8,8 +8,19 @@ import src.view.graphs.scatter;
 import src.view.graphs.timeSeries;
 import src.view.interfaces.Graph;
 
+/**
+ * A Graph factory that transform graph type as String to equivalent graph object
+ *
+ */
 public class GraphFactory {
 	
+	/**
+	 * Get a graph object from a String. 
+	 * Return null if there isn't exist such graph object
+	 * 
+	 * @param graphType		target graph chosen by user
+	 * @return	Graph 		the graph object
+	 */
 	public Graph getGraph(String graphType) {
 		
 		if(graphType == null)
