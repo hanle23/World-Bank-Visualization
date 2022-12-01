@@ -46,6 +46,9 @@ public class lineGraph implements Graph{
 	@Override
 	public void update(linkedList dataSets, JPanel west, String graphTitle) {
 		
+		if(dataSets == null || west == null || graphTitle == null)
+			return;
+		
 		XYSeriesCollection datasetDisplay = new XYSeriesCollection();
 		XYSeries series;
 		

@@ -41,6 +41,10 @@ public class bar implements Graph{
 	public void update(linkedList dataSets, JPanel west, String graphTitle) {
 		int i = 0, pairs = 0; // every 2 data series we will make a new collection
 		int count =0;
+		
+		if(dataSets == null || west == null || graphTitle == null)
+			return;
+		
 		DefaultCategoryDataset dataSeries = new DefaultCategoryDataset();
 		CategoryPlot plot = new CategoryPlot();
 		BarRenderer barrenderer = new BarRenderer();

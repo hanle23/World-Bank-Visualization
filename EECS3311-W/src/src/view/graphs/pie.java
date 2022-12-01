@@ -34,6 +34,10 @@ public class pie implements Graph{
 	 */
 	@Override
 	public void update(linkedList dataSets, JPanel west, String graphTitle) {
+		
+		if(dataSets == null || west == null || graphTitle == null)
+			return;
+		
 		DefaultCategoryDataset datasetCollection = new DefaultCategoryDataset();
 		
 		//populating graph with data from linkedList

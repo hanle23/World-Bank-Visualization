@@ -39,6 +39,10 @@ public class timeSeries implements Graph{
 	 */
 	@Override
 	public void update(linkedList dataSets, JPanel west, String graphTitle) {
+		
+		if(dataSets == null || west == null || graphTitle == null)
+			return;
+		
 		XYPlot plot = new XYPlot();
 		TimeSeriesCollection dataSetDisplay;
 		XYSplineRenderer splinerenderer;

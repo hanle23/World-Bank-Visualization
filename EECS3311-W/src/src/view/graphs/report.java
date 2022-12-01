@@ -30,7 +30,10 @@ public class report implements Graph{
 	 */
 	@Override
 	public void update(linkedList dataSets, JPanel west, String graphTitle) {
-		int i = 0;
+		
+		if(dataSets == null || west == null || graphTitle == null)
+			return;
+		
 		JTextArea report = new JTextArea();
 		report.setEditable(false);
 		report.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
@@ -45,7 +48,6 @@ public class report implements Graph{
 				reportMessage = reportMessage + "\t" + temp.getKey() + " => " + temp.getValue() + "\n";
 			}
 			reportMessage = reportMessage + "\n";
-			i++;
 			dataSets = (linkedList) dataIterator.next();
 		}
 		
