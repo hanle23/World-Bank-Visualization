@@ -57,4 +57,28 @@ public class TestLogin extends login{
 		assertEquals(test.isAuthenticated, true);
 		
 	}
+	
+	@Test
+	public void testLogin4(){
+		TestLogin test = new TestLogin();
+		test.loginTest("admin","password");
+		assertEquals(test.isAuthenticated, false);
+		
+	}
+	
+	@Test
+	public void testLogin5(){
+		TestLogin test = new TestLogin();
+		test.loginTest("admin1","adminPassword");
+		assertEquals(test.isAuthenticated, false);
+		
+	}
+	
+	@Test
+	public void testLogin6(){
+		TestLogin test = new TestLogin();
+		test.loginTest("user","adminPassword");
+		assertEquals(test.isAuthenticated, false);
+		
+	}
 }
