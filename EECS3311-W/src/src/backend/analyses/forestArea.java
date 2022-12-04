@@ -43,6 +43,8 @@ public class forestArea implements analyses {
 			JOptionPane.showMessageDialog(null, "Years not Valid", "Years Selction", JOptionPane.INFORMATION_MESSAGE);
 			return false;
 		}
+		if (countryCode == null)
+			return false;
 		/*if (!util.COUNTRIES.contains(countryCode)) {
 			return false;
 		}*/

@@ -35,7 +35,7 @@ public class Adapter extends dataFetcher{
 	 *	Retrieve data from a specific implementation of getData for certain scenarios
 	 */
 	public JsonArray getData(String dataIndicator) {
-		if (this.getCountry() == null || this.getStartDate() == -1 || this.getEndDate() == -1) {
+		if (this.getCountry() == null || this.getStartDate() == -1 || this.getEndDate() == -1 || dataIndicator == null) {
 			return null;
 		}
 		return adaptee.specificGetData(this.getCountry(), dataIndicator, this.getStartDate(), this.getEndDate());

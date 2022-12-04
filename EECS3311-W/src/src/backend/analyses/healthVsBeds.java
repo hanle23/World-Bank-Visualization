@@ -101,6 +101,9 @@ public class healthVsBeds implements analyses {
 			JOptionPane.showMessageDialog(null, "Years not Valid", "Years Selction", JOptionPane.INFORMATION_MESSAGE);
 			return false;
 		}
+		if (countryCode == null)
+			return false;
+		
 		return result;
 	}
 	public static void main(String args[]) {

@@ -44,6 +44,9 @@ public class CO2EmissionVsGDP implements analyses {
 			JOptionPane.showMessageDialog(null, "Years not Valid", "Years Selction", JOptionPane.INFORMATION_MESSAGE);
 			return false;
 		}
+		if (countryCode == null)
+			return false;
+		
 	/*	if (!util.COUNTRIES.contains(countryCode) || countryCode == null) {
 			System.out.println("country invalid");
 			JOptionPane.showMessageDialog(null, "Country is Excluded From Data Fetching", "Country Selction", JOptionPane.INFORMATION_MESSAGE);
