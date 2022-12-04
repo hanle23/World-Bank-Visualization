@@ -3,6 +3,7 @@ package src.view.concrete;
 import java.io.FileInputStream;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Properties;
 import java.util.Vector;
 import java.util.Map.Entry;
@@ -23,7 +24,7 @@ import src.view.interfaces.Subject;
  *  - props: a Properties object that will be used to pull the graph names
  */
 public class graphSubject implements Subject{
-	private HashMap<String, Graph> graphs;
+	private LinkedHashMap<String, Graph> graphs;
 	private static Properties props;
 	private GraphFactory factory;
 	
@@ -39,7 +40,7 @@ public class graphSubject implements Subject{
 		//getting the list of graph names from the config file, this is so we can correlate the Graph object with a name as see in the menu 
 		Vector<String> graphNames = new Vector<String>();
 		graphNames.addAll(Arrays.asList(props.getProperty("Charts").split(",")));
-		graphs = new HashMap<String, Graph>();
+		graphs = new LinkedHashMap<String, Graph>();
 		factory = new GraphFactory();
 		
 		//each entry in the hashmap will start with null value (no graph created for that type)
@@ -84,7 +85,7 @@ public class graphSubject implements Subject{
 	 * 
 	 * @param graphs 	the list of graphs the user wants to add/be displayed
 	 */
-	public void setGraphs(HashMap<String, Graph> graphs) {
+	public void setGraphs(LinkedHashMap<String, Graph> graphs) {
 		this.graphs = graphs;
 	}
 	
@@ -163,20 +164,6 @@ public class graphSubject implements Subject{
 			graphs.put(graphType, null);
 		}
 		System.out.println(graphs);
-		
-	}
-	
-	public static void main(String args[]) {
-		graphSubject test = new graphSubject();
-		test.attach("Pie Chart");
-		test.attach("Scatter Chart");
-		test.attach("Report");
-		test.attach("Scatter Chart");
-		test.attach("Time Series");
-		System.out.println(test.getGraphsAsString());
-		test.detachAll();
-		System.out.println(test.getGraphsAsString());
-		
 		
 	}
 

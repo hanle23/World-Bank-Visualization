@@ -62,8 +62,10 @@ import com.google.gson.JsonArray;
 	 * 
 	 * @param year year to be replaced current end year
 	 */
-	public void setendDate(int year) {
-		this.endDate = year;
+	public void setEndDate(int year) {
+		if (year > this.startDate) {
+			this.endDate = year;
+		}
 	}
 	
 	/**

@@ -62,11 +62,6 @@ public class dataExtractor {
 		
 		return result;
 	}
-	
-	public static void main(String[] args) {
-		dataFetcher test = new Adapter(2000, 2023, "can");
-		HashMap<Integer, Double> test1 = filter(test.getData("AG.LND.AGRI.ZS"));
-		System.out.println(test1);
-	}
+
 	
 }

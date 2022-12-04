@@ -113,18 +113,5 @@ public class avgGovExpenditureOnEd implements analyses{
 		return result;
 	}
 	
-	public static void main(String args[]) {
-		avgGovExpenditureOnEd test = new avgGovExpenditureOnEd(2000, 2004, "can");
-		//System.out.println(test.analyzeData());
-		linkedList data = test.analyzeData();
-		Iterator dataIterator = data.getIterator();
-		while (data != null) {
-			HashMap<?,?> dataSet = data.getData();
-			for (Entry<?, ?> temp : dataSet.entrySet()) {
-				System.out.println(temp.getKey()+ " is " + temp.getValue());
-			}
-			data = (linkedList) dataIterator.next();
-		}
-	}
 
 }

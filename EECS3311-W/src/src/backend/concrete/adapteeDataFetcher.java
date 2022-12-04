@@ -56,8 +56,8 @@ public class adapteeDataFetcher {
 				
 				array = (JsonArray) jsonArray.get(1);
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block e.printStackTrace();
+		} catch (Exception e) {
+			return null;
 		}
 		return array;
 	}
@@ -94,25 +94,12 @@ public class adapteeDataFetcher {
 				}
 			}
 			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block e.printStackTrace();
+		} catch (Exception e) {
+			return null;
 		}
 		return result;
 		
 	}
 	
-	public static void main(String[] args) {
-		Adapter test = new Adapter(2000, 2023, "can");
-		LinkedHashMap<String, String> countries = test.getCountriesCode();
-		for (Entry<String, String> entry : countries.entrySet()) {
-			String key = entry.getKey();
-			System.out.println(key);
-		    String value = entry.getValue();
-		    System.out.println(value);
-
-		}
-		
-
-	}
 	
 }
