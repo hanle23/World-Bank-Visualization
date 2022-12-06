@@ -8,6 +8,9 @@ import src.controller.concrete.MainUI;
 
 public class TestMainUI {
 	
+	//PLEASE NOTE: Many tests will cause a popup message to be displayed. This is to notify the user that a function was given an invalid input
+	//PLEASE CLOSE these messages in order for the unit tests to proceed. When a message appears it pauses the tests until it is closed.
+	
 	@Test
 	public void test_mainUI_1() {
 		//testing singleton principal on mainUI

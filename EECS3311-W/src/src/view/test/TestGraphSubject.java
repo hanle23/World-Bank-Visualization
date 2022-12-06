@@ -14,17 +14,20 @@ public class TestGraphSubject {
 	
 	@Test
 	public void test_Graph_Subject_0() {
+		//testing the creation of graphSubject
 		graphSubject test = new graphSubject();
 		assertNotEquals(test, null);
 	}
 	@Test
 	public void test_Graph_Subject_1() {
+		//testing the inital size of the graph hashmap is 6
 		graphSubject test = new graphSubject();
 		assertEquals(test.getGraphs().size(), 6);
 	}
 	
 	@Test
 	public void test_Graph_Subject_2() {
+		//testing the attach method given a string. Checks if the object was created of that type
 		graphSubject test = new graphSubject();
 		test.attach("Pie Chart");
 		assertEquals(test.getGraphs().get("Pie Chart").getClass(), pie.class);
@@ -32,6 +35,7 @@ public class TestGraphSubject {
 	
 	@Test
 	public void test_Graph_Subject_3() {
+		//testing the attach method given a string. Then testing detachAll which removes all graph objects
 		graphSubject test = new graphSubject();
 		test.attach("Pie Chart");
 		test.detachAll();
@@ -40,6 +44,7 @@ public class TestGraphSubject {
 	
 	@Test
 	public void test_Graph_Subject_4() {
+		//testing that 2 graphs have been creates=d of different type
 		graphSubject test = new graphSubject();
 		test.attach("Pie Chart");
 		test.attach("Report");
@@ -48,6 +53,7 @@ public class TestGraphSubject {
 	
 	@Test
 	public void test_Graph_Subject_5() {
+		//testing a series of attaches and detaches to see if it is creating and removing graph objects properly
 		graphSubject test = new graphSubject();
 		test.attach("Pie Chart");
 		test.attach("Report");
@@ -70,6 +76,7 @@ public class TestGraphSubject {
 	
 	@Test
 	public void test_Graph_Subject_6() {
+		//testing the isExist method
 		graphSubject test = new graphSubject();
 		test.attach("Pie Chart");
 		assertEquals(test.isExist("Pie Chart"), true);
@@ -78,6 +85,7 @@ public class TestGraphSubject {
 	
 	@Test
 	public void test_Graph_Subject_7() {
+		//testing the isExist method when you add then remove the same graph
 		graphSubject test = new graphSubject();
 		test.attach("Pie Chart");
 		assertEquals(test.isExist("Pie Chart"), true);
@@ -87,6 +95,7 @@ public class TestGraphSubject {
 	
 	@Test
 	public void test_Graph_Subject_8() {
+		//testing the setGraphs method
 		graphSubject test = new graphSubject();
 		Graph pie = new pie();
 		Graph line = new lineGraph();
