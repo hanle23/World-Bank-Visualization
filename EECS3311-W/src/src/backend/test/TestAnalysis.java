@@ -2,8 +2,6 @@ package src.backend.test;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.HashSet;
-
 import org.junit.jupiter.api.Test;
 
 import src.backend.analyses.CO2EmissionVsGDP;

@@ -72,8 +72,12 @@ public class systemFacade {
 	 * @param countryCode Target country in code format chosen by the user
 	 * @param analysisType Target analysis type chosen by the user
 	 */
-	private void setAnalysis(int startYear, int endYear, String countryCode, String analysisType) {
+	public void setAnalysis(int startYear, int endYear, String countryCode, String analysisType) {
 		this.analysis = analysisCreator.getAnalysis(startYear, endYear, countryCode, analysisType);
+	}
+	
+	public analyses getAnalysis() {
+		return this.analysis;
 	}
 	
 	/**
@@ -114,5 +118,14 @@ public class systemFacade {
 				graphPublisher.notifyGraphs(analysisData, graphPanel, analysisType);
 		}
 		graphPublisher.detachAll();
+	}
+	
+	/**
+	 * Returns the subject associated with the facade instance.
+	 * 
+	 * @return Subject object
+	 */
+	public Subject getSubject() {
+		return this.graphPublisher;
 	}
 }

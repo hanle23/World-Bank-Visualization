@@ -198,11 +198,12 @@ public class MainUI extends JFrame implements ActionListener{
 			System.out.println(this.endYear);
 		}
 		else if(evt.getSource() == countriesList) {
-			this.country = this.countries.get((String) countriesList.getSelectedItem()); 
+			setCountry((String) countriesList.getSelectedItem());
+			/*this.country = this.countries.get((String) countriesList.getSelectedItem()); 
 			if (this.country == null || Arrays.stream(this.excludedCountries).anyMatch(countriesList.getSelectedItem()::equals)) { //checking to see if country is excluded
 				JOptionPane.showMessageDialog(null, "Country is Excluded From Data Fetching", "Country Selction", JOptionPane.INFORMATION_MESSAGE);
 				this.country = null;
-			}
+			}*/
 			System.out.println(this.country);
 		}
 		else if(evt.getSource() == methodsList) {
@@ -210,9 +211,32 @@ public class MainUI extends JFrame implements ActionListener{
 			System.out.println(this.analysis);
 		}
 	}
-
-
-
+	
+	/**
+	 * method that is called when user chooses a country
+	 * 
+	 * @param the full name of a country
+	 */
+	public void setCountry(String country) {
+		if(country == null)
+			this.country = null;
+		else
+			this.country = this.countries.get(country); 
+		
+		if (this.country == null || Arrays.stream(this.excludedCountries).anyMatch(country::equals)) { //checking to see if country is excluded
+			JOptionPane.showMessageDialog(null, "Country is Excluded From Data Fetching", "Country Selction", JOptionPane.INFORMATION_MESSAGE);
+			this.country = null;
+		}
+	}
+	
+	/**
+	 * Returns the country selected by the user in the form of it's countries code
+	 * 
+	 * @return String	a string that correlates to the country code the user selects
+	 */
+	public String getCountry() {
+		return this.country;
+	}
 
 	public static void main(String[] args) {
     	new JFrame();

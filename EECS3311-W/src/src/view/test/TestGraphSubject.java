@@ -62,6 +62,10 @@ public class TestGraphSubject {
 		assertEquals(test.getGraphsAsString(), "Pie Chart, Line Chart, Bar Chart, Scatter Chart, Time Series, Report");
 		test.attach("Pie Chart");
 		assertEquals(test.getGraphsAsString(), "Pie Chart, Line Chart, Bar Chart, Scatter Chart, Time Series, Report");
+		test.detach("Pie Chart");
+		assertEquals(test.getGraphsAsString(), "Line Chart, Bar Chart, Scatter Chart, Time Series, Report");
+		test.detach("Bar Chart");
+		assertEquals(test.getGraphsAsString(), "Line Chart, Scatter Chart, Time Series, Report");
 	}
 	
 	@Test
