@@ -190,11 +190,13 @@ public class MainUI extends JFrame implements ActionListener{
 			facade.removeGraph((String) viewsList.getSelectedItem());
 		}
 		else if(evt.getSource() == fromList) {
-			this.startYear = Integer.parseInt((String)fromList.getSelectedItem());
+			setStartYear(Integer.parseInt((String)fromList.getSelectedItem()));
+			//this.startYear = Integer.parseInt((String)fromList.getSelectedItem());
 			System.out.println(this.startYear);
 		}
 		else if(evt.getSource() == toList) {
-			this.endYear = Integer.parseInt((String)toList.getSelectedItem());
+			setEndYear(Integer.parseInt((String)toList.getSelectedItem()));
+			//this.endYear = Integer.parseInt((String)toList.getSelectedItem());
 			System.out.println(this.endYear);
 		}
 		else if(evt.getSource() == countriesList) {
@@ -207,7 +209,8 @@ public class MainUI extends JFrame implements ActionListener{
 			System.out.println(this.country);
 		}
 		else if(evt.getSource() == methodsList) {
-			this.analysis = (String) methodsList.getSelectedItem(); 
+			//this.analysis = (String) methodsList.getSelectedItem(); 
+			setAnalysis((String) methodsList.getSelectedItem());
 			System.out.println(this.analysis);
 		}
 	}
@@ -236,6 +239,60 @@ public class MainUI extends JFrame implements ActionListener{
 	 */
 	public String getCountry() {
 		return this.country;
+	}
+	
+	/**
+	 * method that is called when user chooses a analysis
+	 * 
+	 * @param the name of the analysis to be performed
+	 */
+	public void setAnalysis(String analysis) {
+		this.analysis = analysis;
+	}
+	
+	/**
+	 * Returns the analysis chosen by the user
+	 * 
+	 * @return the name of the analysis the user has chosen
+	 */
+	public String getAnalysis() {
+		return this.analysis;
+	}
+	
+	/**
+	 * method that is called when user chooses a start year
+	 * 
+	 * @param startYear the starting year range
+	 */
+	public void setStartYear(int startYear) {
+		this.startYear = startYear;
+	}
+	
+	/**
+	 * Returns the start year selected by the user
+	 * 
+	 * @return	the start year selected by the user
+	 */
+	public int getStartYear() {
+		return this.startYear;
+	}
+	
+	/**
+	 * method that is called when user chooses a end year
+	 * 
+	 * @param endYear the starting year range
+	 */
+	public void setEndYear(int endYear) {
+		this.endYear = endYear;
+	}
+	
+	/**
+	 * Returns the end year selected by the user
+	 * 
+	 * @return	the end year selected by the user
+	 */
+	public int getEndYear() {
+		return this.endYear;
 	}
 
 	public static void main(String[] args) {

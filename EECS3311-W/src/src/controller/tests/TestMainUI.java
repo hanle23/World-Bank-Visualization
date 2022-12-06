@@ -67,4 +67,73 @@ public class TestMainUI {
 		test1.setCountry("Canada");
 		assertEquals(0, test1.getCountry().compareToIgnoreCase("CAN"));
 	}
+	
+	@Test
+	public void test_mainUI_yearSelection_1() {
+		MainUI test1 = MainUI.getInstance();
+		//testing when user selects a start year
+		test1.setStartYear(2000);
+		assertEquals(2000, test1.getStartYear());
+	}
+	
+	@Test
+	public void test_mainUI_yearSelection_2() {
+		MainUI test1 = MainUI.getInstance();
+		//testing when user selects a start year then changes choice
+		test1.setStartYear(2000);
+		test1.setStartYear(2004);
+		assertEquals(2004, test1.getStartYear());
+	}
+	
+	@Test
+	public void test_mainUI_yearSelection_3() {
+		MainUI test1 = MainUI.getInstance();
+		//testing when user selects a end year
+		test1.setEndYear(2010);
+		assertEquals(2010, test1.getEndYear());
+	}
+	
+	@Test
+	public void test_mainUI_yearSelection_4() {
+		MainUI test1 = MainUI.getInstance();
+		//testing when user selects a end year then changes choice
+		test1.setEndYear(2010);
+		test1.setEndYear(2011);
+		assertEquals(2011, test1.getEndYear());
+	}
+	
+	@Test
+	public void test_mainUI_yearSelection_5() {
+		MainUI test1 = MainUI.getInstance();
+		//testing when user selects a start and end year
+		test1.setStartYear(2000);
+		test1.setEndYear(2010);
+		assertEquals(2000, test1.getStartYear());
+		assertEquals(2010, test1.getEndYear());
+	}
+	
+	@Test
+	public void test_mainUI_analysisSelection_1() {
+		MainUI test1 = MainUI.getInstance();
+		//testing when user doesn't change analysis choice (since the option box selects Infant Mortality on initialization)
+		assertEquals(0, test1.getAnalysis().compareToIgnoreCase("Infant Mortality"));
+	}
+	
+	@Test
+	public void test_mainUI_analysisSelection_2() {
+		MainUI test1 = MainUI.getInstance();
+		//testing when user picks an analysis
+		test1.setAnalysis("Percent of Forest Area");
+		assertEquals(0, test1.getAnalysis().compareToIgnoreCase("Percent of Forest Area"));
+	}
+	
+	@Test
+	public void test_mainUI_analysisSelection_3() {
+		MainUI test1 = MainUI.getInstance();
+		//testing when user picks an analysis then changes their choice
+		test1.setAnalysis("Percent of Forest Area");
+		assertEquals(0, test1.getAnalysis().compareToIgnoreCase("Percent of Forest Area"));
+		test1.setAnalysis("Infant Mortality");
+		assertEquals(0, test1.getAnalysis().compareToIgnoreCase("Infant Mortality"));
+	}
 }

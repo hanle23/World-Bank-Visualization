@@ -42,6 +42,12 @@ public class TestAnalysis {
 	}
 	
 	@Test
+	public void test_avgGovExpenditureOnEd_5() {
+		avgGovExpenditureOnEd test = new avgGovExpenditureOnEd(2000, 2004, null);
+		assertEquals(test.analyzeData(), null);
+	}
+	
+	@Test
 	public void test_CO2_Energy_PM25_1() {
 		CO2_Energy_PM25 test = new CO2_Energy_PM25(2014, 2021, "CAN");
 		linkedList data = test.analyzeData();
@@ -75,6 +81,12 @@ public class TestAnalysis {
 	}
 	
 	@Test
+	public void test_CO2_Energy_PM25_6() {
+		CO2_Energy_PM25 test = new CO2_Energy_PM25(2000, 2004, null);
+		assertEquals(test.analyzeData(), null);
+	}
+	
+	@Test
 	public void test_CO2EmissionVsGDP_1() {
 		CO2EmissionVsGDP test = new CO2EmissionVsGDP(2000, 2004, "CAN");
 		linkedList data = test.analyzeData();
@@ -98,6 +110,12 @@ public class TestAnalysis {
 	public void test_CO2EmissionVsGDP_4() {
 		CO2EmissionVsGDP test = new CO2EmissionVsGDP(2000, 2004, "CAN");
 		assertEquals(test.getAcceptGraph().size() > 0, true);
+	}
+	
+	@Test
+	public void test_CO2EmissionVsGDP_5() {
+		CO2EmissionVsGDP test = new CO2EmissionVsGDP(2000, 2004, null);
+		assertEquals(test.analyzeData(), null);
 	}
 	
 	@Test
@@ -128,6 +146,12 @@ public class TestAnalysis {
 	}
 	
 	@Test
+	public void test_forestArea_5() {
+		forestArea test = new forestArea(2000, 2004, null);
+		assertEquals(test.analyzeData(), null);
+	}
+	
+	@Test
 	public void test_HealthCareVsMortality_1() {
 		HealthCareVsMortality test = new HealthCareVsMortality(2000, 2004, "CAN");
 		linkedList data = test.analyzeData();
@@ -154,6 +178,12 @@ public class TestAnalysis {
 	}
 	
 	@Test
+	public void test_HealthCareVsMortality_5() {
+		HealthCareVsMortality test = new HealthCareVsMortality(2000, 2004, null);
+		assertEquals(test.analyzeData(), null);
+	}
+	
+	@Test
 	public void test_healthVsBeds_1() {
 		healthVsBeds test = new healthVsBeds(1999, 2004, "CAN");
 		linkedList data = test.analyzeData();
@@ -177,6 +207,12 @@ public class TestAnalysis {
 	public void test_healthVsBeds_4() {
 		healthVsBeds test = new healthVsBeds(2000, 2004, "CAN");
 		assertEquals(test.getAcceptGraph().size() > 0, true);
+	}
+	
+	@Test
+	public void test_healthVsBeds_5() {
+		healthVsBeds test = new healthVsBeds(2000, 2004, null);
+		assertEquals(test.analyzeData(), null);
 	}
 	
 	@Test
@@ -213,6 +249,12 @@ public class TestAnalysis {
 	}
 	
 	@Test
+	public void test_infantMortality_6() {
+		infantMortality test = new infantMortality(2000, 2004, null);
+		assertEquals(test.analyzeData(), null);
+	}
+	
+	@Test
 	public void test_problemsAccessingHealthCare_1() {
 		problemsAccessingHealthCare test = new problemsAccessingHealthCare(1999, 2004, "CAN");
 		linkedList data = test.analyzeData();
@@ -243,5 +285,11 @@ public class TestAnalysis {
 	public void test_problemsAccessingHealthCare_5() {
 		problemsAccessingHealthCare test = new problemsAccessingHealthCare(2000, 2004, "CAN");
 		assertEquals(test.getAcceptGraph().size() > 0, true);
+	}
+	
+	@Test
+	public void test_problemsAccessingHealthCare_6() {
+		problemsAccessingHealthCare test = new problemsAccessingHealthCare(2000, 2004, null);
+		assertEquals(test.analyzeData(), null);
 	}
 }
