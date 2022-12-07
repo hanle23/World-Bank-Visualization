@@ -13,6 +13,7 @@ import src.backend.interfaces.GenerateGraphTemplate;
 
 
 public class TestGraphTemplate {
+	// Testing result from General Graph Template
 	@Test
 	public void test_Graph_Template_1() {
 		GenerateGraphTemplate template = new GeneralGraphTemplate();
@@ -26,7 +27,7 @@ public class TestGraphTemplate {
 		assertEquals(result.contains("Report"), true);
 		assertNotEquals(result.contains("Pie Chart"), true);
 	}
-	
+	// Testing result from Scale to 100 graph template
 	@Test
 	public void test_Graph_Template_2() {
 		GenerateGraphTemplate template = new ScaleTo100GraphTemplate();
