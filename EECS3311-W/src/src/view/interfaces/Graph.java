@@ -19,4 +19,10 @@ public interface Graph {
 	 * @param graphTitle	a string for the title of the graph
 	 */
 	public void update(linkedList dataSets, JPanel west, String graphTitle);
+	
+	//Getter for the title of a graph, used for testing purposes
+	public String getTitle();
+	
+	//Getter for data set of a graph, used for testing purposes.
+	public linkedList getDataSet();
 }
