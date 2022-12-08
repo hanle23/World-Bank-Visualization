@@ -34,6 +34,8 @@ import src.view.interfaces.Graph;
  * A class responsible for the creation of a line graph
  */
 public class lineGraph implements Graph{
+	private String title;
+	private linkedList dataSet;
 	
 	/**
 	 * Method that creates a graph and populates the data with the analyzed data.
@@ -48,6 +50,9 @@ public class lineGraph implements Graph{
 		
 		if(dataSets == null || west == null || graphTitle == null)
 			return;
+		
+		title = graphTitle;
+		dataSet = dataSets;
 		
 		XYSeriesCollection datasetDisplay = new XYSeriesCollection();
 		XYSeries series;
@@ -94,6 +99,16 @@ public class lineGraph implements Graph{
 		west.add(chartPanel);
 		
 
+	}
+	
+	@Override
+	public String getTitle() {
+		return title;
+	}
+	
+	@Override
+	public linkedList getDataSet() {
+		return dataSet;
 	}
 
 }

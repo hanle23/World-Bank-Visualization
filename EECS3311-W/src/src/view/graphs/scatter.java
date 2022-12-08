@@ -30,6 +30,8 @@ import src.view.interfaces.Graph;
  * A class responsible for the creation of a scatter plot
  */
 public class scatter implements Graph{
+	private String title;
+	private linkedList dataSet;
 	
 	/**
 	 * Method that creates a graph and populates the data with the analyzed data.
@@ -44,6 +46,9 @@ public class scatter implements Graph{
 		
 		if(dataSets == null || west == null || graphTitle == null)
 			return;
+		
+		title = graphTitle;
+		dataSet = dataSets;
 		
 		XYPlot plot = new XYPlot();
 		TimeSeriesCollection dataSetDisplay;
@@ -88,6 +93,16 @@ public class scatter implements Graph{
 		chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 		chartPanel.setBackground(Color.white);
 		west.add(chartPanel);
+	}
+	
+	@Override
+	public String getTitle() {
+		return title;
+	}
+	
+	@Override
+	public linkedList getDataSet() {
+		return dataSet;
 	}
 
 }

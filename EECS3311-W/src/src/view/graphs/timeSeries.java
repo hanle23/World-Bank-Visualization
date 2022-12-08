@@ -28,6 +28,8 @@ import src.view.interfaces.Graph;
  * A class responsible for the creation of a time series
  */
 public class timeSeries implements Graph{
+	private String title;
+	private linkedList dataSet;
 
 	/**
 	 * Method that creates a graph and populates the data with the analyzed data.
@@ -42,6 +44,9 @@ public class timeSeries implements Graph{
 		
 		if(dataSets == null || west == null || graphTitle == null)
 			return;
+		
+		title = graphTitle;
+		dataSet = dataSets;
 		
 		XYPlot plot = new XYPlot();
 		TimeSeriesCollection dataSetDisplay;
@@ -87,6 +92,16 @@ public class timeSeries implements Graph{
 		chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 		chartPanel.setBackground(Color.white);
 		west.add(chartPanel);
+	}
+	
+	@Override
+	public String getTitle() {
+		return title;
+	}
+	
+	@Override
+	public linkedList getDataSet() {
+		return dataSet;
 	}
 
 }

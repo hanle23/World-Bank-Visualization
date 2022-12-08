@@ -28,6 +28,8 @@ import src.view.interfaces.Graph;
  * A class responsible for the creation of a bar graph
  */
 public class bar implements Graph{
+	private String title;
+	private linkedList dataSet;
 
 	/**
 	 * Method that creates a graph and populates the data with the analyzed data.
@@ -44,6 +46,9 @@ public class bar implements Graph{
 		
 		if(dataSets == null || west == null || graphTitle == null)
 			return;
+		
+		title = graphTitle;
+		dataSet = dataSets;
 		
 		DefaultCategoryDataset dataSeries = new DefaultCategoryDataset();
 		CategoryPlot plot = new CategoryPlot();
@@ -93,5 +98,16 @@ public class bar implements Graph{
 		chartPanel.setBackground(Color.white);
 		west.add(chartPanel);
 	}
+	
+	@Override
+	public String getTitle() {
+		return title;
+	}
+	
+	@Override
+	public linkedList getDataSet() {
+		return dataSet;
+	}
+
 	
 }

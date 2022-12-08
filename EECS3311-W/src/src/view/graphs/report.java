@@ -19,6 +19,8 @@ import src.view.interfaces.Graph;
  * A class responsible for the creation of a report
  */
 public class report implements Graph{
+	private String title;
+	private linkedList dataSet;
 
 	/**
 	 * Method that creates a graph and populates the data with the analyzed data.
@@ -33,6 +35,9 @@ public class report implements Graph{
 		
 		if(dataSets == null || west == null || graphTitle == null)
 			return;
+		
+		title = graphTitle;
+		dataSet = dataSets;
 		
 		JTextArea report = new JTextArea();
 		report.setEditable(false);
@@ -54,6 +59,16 @@ public class report implements Graph{
 		report.setText(reportMessage);
 		JScrollPane outputScrollPane = new JScrollPane(report);
 		west.add(outputScrollPane);
+	}
+	
+	@Override
+	public String getTitle() {
+		return title;
+	}
+	
+	@Override
+	public linkedList getDataSet() {
+		return dataSet;
 	}
 
 }

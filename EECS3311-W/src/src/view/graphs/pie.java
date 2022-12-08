@@ -23,7 +23,8 @@ import src.view.interfaces.Graph;
  * A class responsible for the creation of a pie graph
  */
 public class pie implements Graph{
-	
+	private String title;
+	private linkedList dataSet;
 	/**
 	 * Method that creates a graph and populates the data with the analyzed data.
 	 * Contains pie graph creation algorithm
@@ -37,6 +38,9 @@ public class pie implements Graph{
 		
 		if(dataSets == null || west == null || graphTitle == null)
 			return;
+		
+		title = graphTitle;
+		dataSet = dataSets;
 		
 		DefaultCategoryDataset datasetCollection = new DefaultCategoryDataset();
 		
@@ -58,6 +62,16 @@ public class pie implements Graph{
 		chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 		chartPanel.setBackground(Color.white);
 		west.add(chartPanel);
+	}
+	
+	@Override
+	public String getTitle() {
+		return title;
+	}
+	
+	@Override
+	public linkedList getDataSet() {
+		return dataSet;
 	}
 
 }
