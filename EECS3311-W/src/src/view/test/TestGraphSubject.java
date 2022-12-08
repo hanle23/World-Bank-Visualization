@@ -1,6 +1,9 @@
 package src.view.test;
 
 import static org.junit.Assert.*;
+import javax.swing.JPanel;
+import src.backend.analyses.*;
+import src.backend.concrete.linkedList;
 
 import java.util.LinkedHashMap;
 
@@ -106,5 +109,34 @@ public class TestGraphSubject {
 		temp.put("Bar Chart", bar);
 		test.setGraphs(temp);
 		assertEquals(test.getGraphs(), temp);
+	}
+	
+	@Test
+	public void test_Graph_Subject_9() {
+		//Testing if graphs will have the correct data and titles when updated
+		graphSubject test = new graphSubject();
+		forestArea f = new forestArea(2000, 2004, "can");
+		linkedList data = f.analyzeData();
+		JPanel j = new JPanel();
+		
+		Graph line = new lineGraph();
+		Graph bar = new bar();
+		
+		LinkedHashMap<String, Graph> temp = new LinkedHashMap<>();
+		temp.put("Line Chart", line);
+		temp.put("Bar Chart", bar);
+		test.setGraphs(temp);
+		
+		test.notifyGraphs(data, j, "Test Graphs");
+		
+		assertEquals(data, line.getDataSet());
+		assertEquals("Test Graphs", bar.getTitle());
+		
+		CO2_Energy_PM25 c = new CO2_Energy_PM25(2014, 2021, "CAN");
+		data = c.analyzeData();
+		test.notifyGraphs(data, j, "Test Graphs2");
+		
+		assertEquals(data, bar.getDataSet());
+		assertEquals("Test Graphs2", line.getTitle());
 	}
 }
